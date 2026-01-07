@@ -1,0 +1,139 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Val Melamed",
+    "classifications": [
+        "vm2",
+        ".NET",
+        "library",
+        "nuget",
+        "package"
+    ],
+    "identity": "vm2.Templates.AddNewPackage",
+    "name": "vm2 Add New NuGet Package Solution",
+    "shortName": "vm2pkg",
+    "sourceName": "MyPackage",
+    "preferNameDirectory": true,
+    "symbols": {
+        "packageVersion": {
+            "type": "parameter",
+            "datatype": "string",
+            "description": "Initial package version",
+            "defaultValue": "0.1.0",
+            "replaces": "{{packageVersion}}"
+        },
+        "license": {
+            "type": "parameter",
+            "datatype": "choice",
+            "description": "License for the project",
+            "defaultValue": "MIT",
+            "replaces": "{{license}}",
+            "choices": [
+                {
+                    "choice": "MIT",
+                    "description": "MIT License"
+                },
+                {
+                    "choice": "Apache-2.0",
+                    "description": "Apache License 2.0"
+                },
+                {
+                    "choice": "BSD-3",
+                    "description": "BSD 3-Clause License"
+                }
+            ]
+        },
+        "includeBenchmarks": {
+            "type": "parameter",
+            "datatype": "bool",
+            "description": "Include benchmarks project",
+            "defaultValue": "true"
+        },
+        "includeExamples": {
+            "type": "parameter",
+            "datatype": "bool",
+            "description": "Include examples folder",
+            "defaultValue": "true"
+        },
+        "includeDocs": {
+            "type": "parameter",
+            "datatype": "bool",
+            "description": "Include docs folder",
+            "defaultValue": "true"
+        },
+        "repositoryOrg": {
+            "type": "parameter",
+            "datatype": "string",
+            "description": "GitHub organization/user",
+            "defaultValue": "vmelamed",
+            "replaces": "{{repositoryOrg}}"
+        }
+    },
+    "sources": [
+        {
+            "modifiers": [
+                {
+                    "exclude": [
+                        "licenses/**"
+                    ]
+                },
+                {
+                    "condition": "license == 'MIT'",
+                    "include": [
+                        "licenses/MIT.txt"
+                    ],
+                    "rename": {
+                        "licenses/MIT.txt": "LICENSE"
+                    }
+                },
+                {
+                    "condition": "license == 'Apache-2.0'",
+                    "include": [
+                        "licenses/Apache-2.0.txt"
+                    ],
+                    "rename": {
+                        "licenses/Apache-2.0.txt": "LICENSE"
+                    }
+                },
+                {
+                    "condition": "license == 'BSD-3'",
+                    "include": [
+                        "licenses/BSD-3-Clause.txt"
+                    ],
+                    "rename": {
+                        "licenses/BSD-3-Clause.txt": "LICENSE"
+                    }
+                },
+                {
+                    "condition": "!(includeBenchmarks)",
+                    "exclude": [
+                        "benchmarks/**"
+                    ]
+                },
+                {
+                    "condition": "!(includeExamples)",
+                    "exclude": [
+                        "examples/**"
+                    ]
+                },
+                {
+                    "condition": "!(includeDocs)",
+                    "exclude": [
+                        "docs/**"
+                    ]
+                }
+            ]
+        }
+    ],
+    "primaryOutputs": [
+        {
+            "path": "src/MyPackage/MyPackage.csproj"
+        },
+        {
+            "path": "test/MyPackage.Tests/MyPackage.Tests.csproj"
+        }
+    ],
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    }
+}

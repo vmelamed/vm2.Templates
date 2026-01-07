@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>vm2.MyPackage</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup Label="NuGet">
+        <PackageId>vm2.MyPackage</PackageId>
+        <Title>vm2 MyPackage</Title>
+        <Description>vm2 MyPackage package skeleton.</Description>
+        <PackageTags>vm2 MyPackage library template</PackageTags>
+        <PackageProjectUrl>https://github.com/{{repositoryOrg}}/vm2.MyPackage</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/{{repositoryOrg}}/vm2.MyPackage</RepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageReleaseNotes>Initial release {{packageVersion}}.</PackageReleaseNotes>
+        <Version>{{packageVersion}}</Version>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath="\">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="../../LICENSE" Pack="true" PackagePath="\">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="../../CHANGELOG.md" Pack="true" PackagePath="\">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,25 @@
+{
+    "xUnit": {
+        // Using testconfig.json is only supported when running tests in Microsoft Testing Platform mode.
+        // See https://xunit.net/docs/config-testconfig-json
+        "culture": "en-US",
+        "diagnosticMessages": false,
+        "internalDiagnostics": false,
+        "longRunningTestSeconds": 5,
+        "maxParallelThreads": -1,
+        "parallelAlgorithm": "conservative",
+        "parallelizeTestCollections": true,
+        "preEnumerateTheories": true,
+        "printMaxObjectDepth": 3,
+        "printMaxObjectMemberCount": 5,
+        "printMaxStringLength": 50,
+        "showLiveOutput": false,
+        "stopOnFail": false,
+        "methodDisplay": "classAndMethod",
+        "methodDisplayOptions": "none",
+        "assertEquivalentMaxDepth": 50,
+        "explicit": "off",
+        "failSkips": false,
+        "failWarns": false
+    }
+}
