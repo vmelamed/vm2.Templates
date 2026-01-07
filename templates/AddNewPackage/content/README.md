@@ -19,7 +19,7 @@ dotnet run --project benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj
 ## Package metadata
 
 - Package ID: `vm2.MyPackage`
-- Version: {{packageVersion}}
+- Version: {{initialVersion}}
 - License: {{license}}
 - Repository: <https://github.com/{{repositoryOrg}}/vm2.MyPackage>
 

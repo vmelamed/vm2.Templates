@@ -10,7 +10,7 @@ source "${SCRIPT_DIR}/_common.sh"
 package_name="MyPackage"
 org="{{repositoryOrg}}"
 repo_name="vm2.${package_name}"
-visibility="private"
+visibility="public"
 
 usage() {
     cat <<'EOF'
@@ -22,7 +22,7 @@ Usage:
 Defaults:
     name: MyPackage
   org:  {{repositoryOrg}}
-  visibility: private
+    visibility: public
 
 This script will:
   - ensure gh is installed and authenticated

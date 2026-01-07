@@ -12,8 +12,6 @@
         <PackageProjectUrl>https://github.com/{{repositoryOrg}}/vm2.MyPackage</PackageProjectUrl>
         <RepositoryUrl>https://github.com/{{repositoryOrg}}/vm2.MyPackage</RepositoryUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageReleaseNotes>Initial release {{packageVersion}}.</PackageReleaseNotes>
-        <Version>{{packageVersion}}</Version>
     </PropertyGroup>
 
     <ItemGroup>

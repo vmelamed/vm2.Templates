@@ -14,12 +14,12 @@
     "sourceName": "MyPackage",
     "preferNameDirectory": true,
     "symbols": {
-        "packageVersion": {
+        "initialVersion": {
             "type": "parameter",
             "datatype": "string",
             "description": "Initial package version",
             "defaultValue": "0.1.0",
-            "replaces": "{{packageVersion}}"
+            "replaces": "{{initialVersion}}"
         },
         "license": {
             "type": "parameter",
