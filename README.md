@@ -123,24 +123,26 @@ Then run the generated `scripts/bootstrap-new-package.sh` to create and push the
 
 ### After generation
 
-1. Set required secrets in the new GitHub repo:
-   - `CODECOV_TOKEN`
-   - `NUGET_API_GITHUB_KEY`
-   - `NUGET_API_NUGET_KEY`
-   - `BENCHER_API_TOKEN`
 1. Set required variables:
    - `DOTNET_VERSION`
    - `CONFIGURATION`
    - `MAX_REGRESSION_PCT`
    - `MIN_COVERAGE_PCT`
    - `MINVERTAGPREFIX`
+   - `NUGET_SERVER`
+1. Set required secrets in the new GitHub repo:
+   - `CODECOV_TOKEN`
+   - `NUGET_API_GITHUB_KEY`
+   - `NUGET_API_NUGET_KEY`
+   - `NUGET_API_KEY` (if NUGET_SERVER is set to a custom server)
+   - `BENCHER_API_TOKEN`
 1. Set debug flags (variables):
     - `ACTIONS_RUNNER_DEBUG` generates detailed logs about how the runner executes jobs
     - `ACTIONS_STEP_DEBUG` more granular details in the step logs
 1. Protect `main` with required checks and require PRs. Suggested check names:
-
-- `get-params` (job id from CI workflow "CI: Build, Test, Benchmark")
-- `call-ci` (job id from CI workflow "CI: Build, Test, Benchmark")
+   - `build` (job id from CI workflow "CI: Build, Test, Benchmark")
+   - `test` (job id from CI workflow "CI: Build, Test, Benchmark")
+   - `benchmark` (job id from CI workflow "CI: Build, Test, Benchmark")
 
 1) Update README/CHANGELOG content and package metadata as needed.
 

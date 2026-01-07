@@ -19,14 +19,11 @@ on:
         default: false
 
 env:
-  # *CP* The projects to build and package as a JSON array of strings - path(s) to the project(s).
-  # An empty string means to build and package the root solution's projects or the root project, marked with <IsPackable>true</IsPackable>.
-  # Hint: to set the value as a valid JSON list of strings, use YAML folded style (>-), and double quotes around the strings, e.g.:
-  # BUILD_PROJECTS: >-
-  #   ["src/Project1/Project1.csproj", "src/Project2/Project2.csproj"]
-  PACKAGE_PROJECTS: ""
-  # CP. 'github' - GitHub Packages; 'nuget' - NuGet.org. Make sure the NUGET_API_KEY secret corresponds to the server selected here.
-  NUGET_SERVER: github
+  PACKAGE_PROJECTS: >-
+    ["src/MyPackage/MyPackage.csproj"]
+
+  # Default NuGet server; can be overridden by repo var NUGET_SERVER or workflow dispatch input.
+  NUGET_SERVER: ${{ vars.NUGET_SERVER || 'github' }}
 
 jobs:
   get-params:
@@ -80,9 +77,13 @@ jobs:
       contents: write
       packages: write
     secrets:
-      # CP. the API key to use for publishing to GitHub NuGet packages or NuGet.org
-      # Make sure it corresponds to the 'nuget-server' below
-      NUGET_API_KEY: ${{ secrets.NUGET_API_GITHUB_KEY }}
+      # Map NuGet server selection to matching API key.
+      NUGET_API_KEY: >-
+        ${{
+        needs.get-params.outputs.nuget-server == 'nuget' && secrets.NUGET_API_NUGET_KEY ||
+        needs.get-params.outputs.nuget-server == 'github' && secrets.NUGET_API_GITHUB_KEY ||
+        secrets.NUGET_API_KEY
+        }}
     with:
       package-projects: ${{ needs.get-params.outputs.package-projects }}
       dotnet-version: ${{ vars.DOTNET_VERSION }}

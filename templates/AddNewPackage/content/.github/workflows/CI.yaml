@@ -1,5 +1,4 @@
 name: "CI: Build, Test, Benchmark"
-# Comments marked with *CP* are "Customization Point"-s to adjust the workflow to your repo needs.
 
 on:
   push:
@@ -15,7 +14,7 @@ on:
       os:
         description: Runner OS (or multiple OS-es separate by comma, e.g. 'ubuntu-latest,windows-latest')
         type: string
-        default: ubuntu-latest  # *CP* Adjust the default runner OS or OS-es as needed.
+        default: ubuntu-latest
         # There is a known GitHub actions issue: the workflow dispatch UI doesn't properly handle JSON strings with quotes.
         # E.g. for the input '["ubuntu-latest"]', the UI removes the inner quotes and it becomes the invalid JSON: '[ubuntu-latest]'.
 
@@ -23,41 +22,22 @@ on:
         description: Define semicolon-separated preprocessor symbols to pass to the compiler
         type: string
         required: false
-        # *CP* semicolon-separated preprocessor symbols to pass to the compiler.
-        # Here it enables benchmarks short run mode for faster execution, but less precise results, acceptable for CI runs.
 
 env:
-  # *CP* The project(s) to build as a JSON array of strings - path(s) to the project(s).
-  # An empty string means to build the root solution and run all test and benchmark projects in it.
-  # Hint: unless your solution/project file has all necessary projects included explicitly or as references,
-  # list all projects that need to be built, including tests and benchmarks to ensure that the artifacts are cached and reused.
-  # Hint: to set the value as a valid JSON list of strings, useYAML folded style (>-), and double quotes around the strings, e.g.:
-  # BUILD_PROJECTS: >-
-  #   ["src/Project1/Project1.csproj", "src/Project2/Project2.csproj"]
-  BUILD_PROJECTS: ""
+  BUILD_PROJECTS: >-
+    ["MyPackage.slnx"]
 
-  # *CP* The test project(s) to run as a JSON array of strings - path(s) to the test project(s).
-  # If not specified, no tests are requested. Not having tests is not typical and not desirable, but possible.
-  # Hint: to set the value as a valid JSON list of strings, useYAML folded style (>-), and double quotes around the strings, e.g.:
-  # TEST_PROJECTS: >-
-  #   ["tests/Project1.Tests/Project1.Tests.csproj", "tests/Project2.Tests/Project2.Tests.csproj"]
-  TEST_PROJECTS: ""
+  TEST_PROJECTS: >-
+    ["test/MyPackage.Tests/MyPackage.Tests.csproj"]
 
-  # *CP* The benchmarks project(s) to run as a JSON array of strings - path(s) to the benchmark project(s).
-  # If not specified, no benchmarks are requested.
-  # Hint: to set the value as a valid JSON list of strings, useYAML folded style (>-), and double quotes around the strings, e.g.:
-  # BENCHMARK_PROJECTS: >-
-  #   ["benchmarks/Project1.Benchmarks/Project1.Benchmarks.csproj"]
-  BENCHMARK_PROJECTS: ""
+  BENCHMARK_PROJECTS: >-
+    ["benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj"]
 
   # *CP* Semicolon-separated preprocessor symbols to pass to the compiler.
   PREPROCESSOR_SYMBOLS: ""
 
-  # *CP* The OS runner(s) to use for building and testing as a JSON array of strings - e.g. "ubuntu-latest", "windows-latest", "macos-latest".
-  # Hint: to set the value as a valid JSON list of strings, useYAML folded style (>-), and double quotes around the strings, e.g.:
-  # OS: >-
-  #   ["ubuntu-latest", "windows-latest", "macos-latest"]
-  OS: ""
+  OS: >-
+    ["ubuntu-latest"]
 
 jobs:
   get-params:
@@ -65,13 +45,10 @@ jobs:
     runs-on: ubuntu-latest # in this workflow the runner doesn't matter - we're just preparing the inputs for the next workload(s).
     if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip ci]') }}
     env:
-      # *CP* The following are invariant - no matter how we trigger the workflow, they should stay the same.
-      # Consider moving them to repo variables and secrets - they can be set at the org., environment, or repository level.
-      # Also you can set permissions on these as well. They'll behave almost like a per-organization or per-repository policy.
-      dotnet-version: ${{ vars.DOTNET_VERSION }}          # e.g. '10.0.x'
-      configuration: ${{ vars.CONFIGURATION }}            # e.g. 'Release'
-      min-coverage-pct: ${{ vars.MIN_COVERAGE_PCT }}      # e.g. '80'
-      max-regression-pct: ${{ vars.MAX_REGRESSION_PCT }}  # e.g. '20'
+      dotnet-version: ${{ vars.DOTNET_VERSION }}
+      configuration: ${{ vars.CONFIGURATION }}
+      min-coverage-pct: ${{ vars.MIN_COVERAGE_PCT }}
+      max-regression-pct: ${{ vars.MAX_REGRESSION_PCT }}
     outputs:
       build-projects: ${{ steps.init-params.outputs.build-projects }}
       test-projects: ${{ steps.init-params.outputs.test-projects }}
@@ -99,7 +76,7 @@ jobs:
           if [ '${{ github.event_name }}' == "push" ]; then
               # Set the values for push events, and add SHORT_RUN to preprocessor_symbols for faster benchmark tests (less precise, yet acceptable for CI runs).
               os='${{ env.OS }}'
-              preprocessor_symbols='SHORT_RUN;${{ env.PREPROCESSOR_SYMBOLS }}' # *CP* Adjust as needed.
+              preprocessor_symbols='SHORT_RUN;${{ env.PREPROCESSOR_SYMBOLS }}'
           elif [ '${{ github.event_name }}' == "pull_request" ]; then
               # Set the values for pull_request events
               os='${{ env.OS }}'
