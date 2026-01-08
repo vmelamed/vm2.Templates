@@ -32,9 +32,12 @@ dotnet run --project benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj
 - examples/MyPackage.Example: minimal console sample (optional)
 - docs/: documentation starter (optional)
 - scripts/: bootstrap helpers
+- changelog/: git-cliff configs for prerelease/release changelog updates
 
 ## Next steps
 
 - Update README, CHANGELOG, and package metadata.
 - Set secrets/variables for workflows (CODECOV_TOKEN, NUGET keys, etc.).
 - Adjust branch protections to require build/tests/benchmarks/prerelease checks.
+- Set `NUGET_SERVER` (github | nuget | custom URI). Workflows map it to `NUGET_API_GITHUB_KEY`, `NUGET_API_NUGET_KEY`, or `NUGET_API_KEY`.
+- Changelog: prerelease workflow appends a prerelease section; release workflow adds a stable header with "See prereleases below." (prerelease sections stay intact).

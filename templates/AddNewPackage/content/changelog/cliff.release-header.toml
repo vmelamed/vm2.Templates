@@ -1,0 +1,14 @@
+[changelog]
+header = """# Changelog\n\n"""
+body = """
+## {{ tag }} - {{ timestamp | date("%Y-%m-%d") }}
+See prereleases below.
+"""
+trim = true
+footer = ""
+
+[git]
+conventional_commits = true
+filter_unconventional = true
+tag_pattern = "v[0-9].*"
+protect_breaking_commits = true
