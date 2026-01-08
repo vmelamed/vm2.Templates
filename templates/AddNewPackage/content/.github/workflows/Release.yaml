@@ -29,7 +29,7 @@ jobs:
   get-params:
     name: Prepare the parameters
     runs-on: ubuntu-latest
-    if: >+
+    if: >-
       ${{
       github.event_name == 'workflow_dispatch' ||
       !contains(github.ref_name,'-') &&

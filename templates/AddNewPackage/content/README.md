@@ -4,17 +4,54 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
 
 ## Getting started
 
-```bash
-dotnet restore
-dotnet build
-dotnet test
-```
+- Build:
 
-To run benchmarks (if included):
+  ```bash
+  dotnet restore
+  dotnet build
+  ```
 
-```bash
-dotnet run --project benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj -c Release
-```
+- Test:
+  - from **CLI**, if it is not built yet (builds on MTP v2):
+
+    ```bash
+    dotnet run --project test/MyPackage.Tests/MyPackage.Tests.csproj`
+    ```
+
+  - from **CLI**, if it is already built in **CLI** or **VSCode**  (MTP v2):
+    - any OS or shell:
+
+      ```bash
+      dotnet test test/MyPackage.Tests/bin/Debug/net10.0/MyPackage.Tests.dll`
+      ```
+
+    - on Windows **CLI** (already built in **CLI** or **VSCode** - on MTP v2):
+
+      ```batch
+      test/MyPackage.Tests/bin/Debug/net10.0/MyPackage.Tests.exe`
+      ```
+
+    - on Linux or MacOS **CLI** (already built in **CLI** or **VSCode** - on MTP v2):
+
+      ```bash
+      test/MyPackage.Tests/bin/Debug/net10.0/MyPackage.Tests`
+      ```
+
+  - from Visual Studio:
+    - use the Test Explorer to build and run tests (builds on MTP v1)
+    - if it is already built in **Visual Studio** (MTP v1), from the **CLI** you can run:
+
+      ```bash
+      dotnet test
+      ```
+
+- Benchmarks (if included):
+
+  ```bash
+  dotnet run --project benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj --configuration Release
+  ```
+
+  > **Hint**: in a personal development environment, you can run benchmarks with defined `SHORT_RUN` preprocessor directive. The run will be faster, although less accurate, but still suitable for quick iterations.
 
 ## Package metadata
 
