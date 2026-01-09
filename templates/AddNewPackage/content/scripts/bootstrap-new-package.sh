@@ -158,11 +158,11 @@ detect_required_checks
 
 # Configure required secrets and variables for Actions
 secrets=(
-    "CODECOV_TOKEN:secret"
+    "CODECOV_TOKEN:codecov-secret"
     "NUGET_API_GITHUB_KEY:github-secret"
     "NUGET_API_NUGET_KEY:nuget-secret"
     "NUGET_API_KEY:custom-secret"
-    "BENCHER_API_TOKEN:secret"
+    "BENCHER_API_TOKEN:bencher-secret"
 )
 
 variables=(
