@@ -22,10 +22,11 @@ on:
         description: Define semicolon-separated preprocessor symbols to pass to the compiler
         type: string
         required: false
+        default: ''
 
 env:
   BUILD_PROJECTS: >-
-    ["MyPackage.slnx"]
+    ["./MyPackage.slnx"]
 
   TEST_PROJECTS: >-
     ["test/MyPackage.Tests/MyPackage.Tests.csproj"]

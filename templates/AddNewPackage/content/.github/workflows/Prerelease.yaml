@@ -85,17 +85,15 @@ jobs:
     needs:
       - get-params
     uses: vmelamed/vm2.DevOps/.github/workflows/_prerelease.yaml@main
-    permissions:
-      contents: write
-      packages: write
     secrets:
-      # Map NuGet server selection to matching API key.
-      NUGET_API_KEY: >-
-        ${{
-        needs.get-params.outputs.nuget-server == 'nuget' && secrets.NUGET_API_NUGET_KEY ||
-        needs.get-params.outputs.nuget-server == 'github' && secrets.NUGET_API_GITHUB_KEY ||
-        secrets.NUGET_API_KEY
-        }}
+      NUGET_API_GITHUB_KEY: ${{ secrets.NUGET_API_GITHUB_KEY }}
+      NUGET_API_NUGET_KEY: ${{ secrets.NUGET_API_NUGET_KEY }}
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+    permissions:
+      contents: write # Required to checkout the code and create releases
+      packages: write # Required to restore and publish GitHub Packages NuGet packages
+      pull-requests: write # Required to comment on PRs
+      checks: write # Required to create GitHub Checks
     with:
       package-projects: ${{ needs.get-params.outputs.package-projects }}
       dotnet-version: ${{ vars.DOTNET_VERSION }}
