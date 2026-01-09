@@ -123,19 +123,20 @@ Then run the generated `scripts/bootstrap-new-package.sh` to create and push the
 
 ### After generation
 
-1. Set required variables:
-   - `DOTNET_VERSION`
-   - `CONFIGURATION`
-   - `MAX_REGRESSION_PCT`
-   - `MIN_COVERAGE_PCT`
-   - `MINVERTAGPREFIX`
-   - `NUGET_SERVER`
 1. Set required secrets in the new GitHub repo:
    - `CODECOV_TOKEN`
-   - `NUGET_API_GITHUB_KEY`
-   - `NUGET_API_NUGET_KEY`
-   - `NUGET_API_KEY` (if NUGET_SERVER is set to a custom server)
    - `BENCHER_API_TOKEN`
+   - NuGet API keys - at least one of them must be defined and it must match the selected `NUGET_SERVER` (below)
+     - `NUGET_API_GITHUB_KEY`
+     - `NUGET_API_NUGET_KEY`
+     - `NUGET_API_KEY` (if NUGET_SERVER is set to a custom server)
+1. Set required variables:
+   - `DOTNET_VERSION` - .NET SDK version to use in workflows, e.g. 10.0.x
+   - `CONFIGURATION` - build configuration, e.g. Debug or Release
+   - `MAX_REGRESSION_PCT` - maximum allowed performance regression percentage for benchmarks, e.g. 20
+   - `MIN_COVERAGE_PCT` - minimum required code coverage percentage, e.g. 80
+   - `MINVERTAGPREFIX` - MinVer version tag prefix, e.g. v
+   - `NUGET_SERVER` - NuGet server to use (github | nuget | custom URI)
 1. Set debug flags (variables):
     - `ACTIONS_RUNNER_DEBUG` generates detailed logs about how the runner executes jobs
     - `ACTIONS_STEP_DEBUG` more granular details in the step logs
