@@ -1,18 +1,20 @@
 [changelog]
 header = """# Changelog\n\n"""
 body = """
-## {{ tag }} - {{ timestamp | date("%Y-%m-%d") }}
-{{#if groups}}
-{{#each groups}}
-### {{ title }}
-{{#each commits}}
-- {{ message | trim }}
-{{/each}}
+{% if tag is defined %}{% set current_tag = tag %}{% elif version is defined %}{% set current_tag = version %}{% else %}{% set current_tag = "Unreleased" %}{% endif %}
+{% if timestamp is defined %}{% set current_date = timestamp | date(format="%Y-%m-%d") %}{% else %}{% set current_date = now() | date(format="%Y-%m-%d") %}{% endif %}
+## {{ current_tag }} - {{ current_date }}
+{% if groups %}
+{% for group in groups %}
+### {{ group.title }}
+{% for commit in group.commits %}
+- {{ commit.message | trim }}
+{% endfor %}
 
-{{/each}}
-{{else}}
+{% endfor %}
+{% else %}
 - No notable changes.
-{{/if}}
+{% endif %}
 """
 trim = true
 footer = ""
