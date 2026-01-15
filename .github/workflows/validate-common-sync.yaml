@@ -38,18 +38,24 @@ jobs:
         run: |
           SOURCE="vm2.DevOps/.github/actions/scripts/_common.sh"
           TARGET="vm2.Templates/templates/AddNewPackage/content/scripts/_common.sh"
+          SOURCE_GH="vm2.DevOps/.github/actions/scripts/_common_github.sh"
+          TARGET_GH="vm2.Templates/templates/AddNewPackage/content/scripts/_common_github.sh"
 
-          if ! diff -u "$SOURCE" "$TARGET"; then
+          if ! diff -u "$SOURCE" "$TARGET" || ! diff -u "$SOURCE_GH" "$TARGET_GH"; then
             echo ""
-            echo "❌ ERROR: _common.sh files are out of sync!"
+            echo "❌ ERROR: _common.sh and/or _common_github.sh files are out of sync!"
             echo ""
-            echo "The source of truth is: vm2.DevOps/.github/actions/scripts/_common.sh"
+            echo "The source of truth are: vm2.DevOps/.github/actions/scripts/_common.sh" and "vm2.DevOps/.github/actions/scripts/_common_github.sh"
             echo ""
-            echo "To fix this, run the sync script:"
+            echo "To fix this, run the following commands:"
             echo "  cd vm2.Templates"
             echo "  ./scripts/sync-common-sh.sh"
+            echo ""
             echo "  git add templates/AddNewPackage/content/scripts/_common.sh"
             echo "  git commit -m 'chore: sync _common.sh from vm2.DevOps'"
+            echo "and/or"
+            echo "  git add templates/AddNewPackage/content/scripts/_common_github.sh"
+            echo "  git commit -m 'chore: sync _common_github.sh from vm2.DevOps'"
             echo ""
             exit 1
           fi

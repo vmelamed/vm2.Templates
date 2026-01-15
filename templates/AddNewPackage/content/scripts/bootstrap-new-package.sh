@@ -4,8 +4,9 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck source=_common.sh
-source "${SCRIPT_DIR}/_common.sh"
+
+# shellcheck source=_common_github.sh
+source "${SCRIPT_DIR}/_common_github.sh"
 
 package_name="MyPackage"
 org="{{repositoryOrg}}"
@@ -159,10 +160,10 @@ detect_required_checks
 # Configure required secrets and variables for Actions
 secrets=(
     "CODECOV_TOKEN:codecov-secret"
+    "BENCHER_API_TOKEN:bencher-secret"
     "NUGET_API_GITHUB_KEY:github-secret"
     "NUGET_API_NUGET_KEY:nuget-secret"
     "NUGET_API_KEY:custom-secret"
-    "BENCHER_API_TOKEN:bencher-secret"
 )
 
 variables=(
@@ -171,9 +172,11 @@ variables=(
     "MAX_REGRESSION_PCT:20"
     "MIN_COVERAGE_PCT:80"
     "MINVERTAGPREFIX:v"
+    "SEMVER_PRERELEASE_PREFIX:preview"
     "NUGET_SERVER:github"
     "ACTIONS_RUNNER_DEBUG:false"
     "ACTIONS_STEP_DEBUG:false"
+    "SAVE_PACKAGE_ARTIFACTS:false"
 )
 
 for entry in "${secrets[@]}"; do
@@ -193,3 +196,4 @@ configure_actions_permissions
 configure_branch_protection
 
 echo "Repository ready: https://github.com/${full_repo}"
+echo "Please review the repository settings and variables. All secrets have some default placeholder values and should be updated accordingly."

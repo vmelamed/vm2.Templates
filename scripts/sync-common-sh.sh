@@ -1,33 +1,38 @@
 #!/bin/bash
-# Syncs _common.sh from vm2.DevOps (source of truth) to vm2.Templates
+# Syncs _common*.sh files from vm2.DevOps (source of truth) to vm2.Templates
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TEMPLATES_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-SOURCE="$TEMPLATES_ROOT/../vm2.DevOps/.github/actions/scripts/_common.sh"
-TARGET="$TEMPLATES_ROOT/templates/AddNewPackage/content/scripts/_common.sh"
+SOURCE_DIR="$TEMPLATES_ROOT/../vm2.DevOps/.github/actions/scripts"
+TARGET_DIR="$TEMPLATES_ROOT/templates/AddNewPackage/content/scripts"
 
-if [[ ! -f "$SOURCE" ]]; then
-    echo "❌ Source file not found: $SOURCE" >&2
+# Check if source directory exists
+if [[ ! -d "$SOURCE_DIR" ]]; then
+    echo "❌  ERROR: Source directory not found: $SOURCE_DIR" >&2
     echo "   Make sure vm2.DevOps and vm2.Templates are in the same parent directory" >&2
     exit 1
 fi
 
-if [[ ! -f "$TARGET" ]]; then
-    echo "❌ Target file not found: $TARGET" >&2
+# Check if target directory exists
+if [[ ! -d "$TARGET_DIR" ]]; then
+    echo "❌  ERROR: Target directory not found: $TARGET_DIR" >&2
     exit 1
 fi
 
-if diff -q "$SOURCE" "$TARGET" >/dev/null 2>&1; then
-    echo "✅ _common.sh is already in sync"
-    exit 0
+# Check if any _common*.sh files exist in source
+if ! compgen -G "$SOURCE_DIR/_common*.sh" > /dev/null; then
+    echo "❌  ERROR: No _common*.sh files found in: $SOURCE_DIR" >&2
+    exit 1
 fi
 
-echo "Syncing _common.sh from vm2.DevOps..."
-cp "$SOURCE" "$TARGET"
-echo "✅ _common.sh synced successfully"
+echo "Syncing _common*.sh files from vm2.DevOps to vm2.Templates..."
+cp -v "$SOURCE_DIR/_common"*.sh "$TARGET_DIR/"
+
 echo ""
-echo "Don't forget to commit the change:"
-echo "  git add templates/AddNewPackage/content/scripts/_common.sh"
-echo "  git commit -m 'chore: sync _common.sh from vm2.DevOps'"
+echo "✅ Sync complete"
+echo ""
+echo "⚠️  Don't forget to commit the changes:"
+echo "  git add templates/AddNewPackage/content/scripts/_common*.sh"
+echo "  git commit -m 'chore: sync _common*.sh files from vm2.DevOps'"

@@ -110,7 +110,7 @@ Then run the generated `scripts/bootstrap-new-package.sh` to create and push the
   - MTP v2 when run via `dotnet run` CLI, or run the test executable, or in Visual Studio Code Test Explorer
 - optional benchmarks under `benchmarks/<name>.Benchmarks/` using BenchmarkDotNet
 - optional console example under `examples/<name>.Example/`
-- scripts folder with bootstrap helper and `_common.sh` utilities
+- scripts folder with bootstrap helper and `_common.sh` and `_common_github.sh` utilities
 - Packaging metadata patterned after vm2.Ulid (packable, SourceLink, MinVer tag prefix `v`, README/CHANGELOG/LICENSE packing entries).
 
 ### Bootstrap script (generated)
@@ -131,15 +131,17 @@ Then run the generated `scripts/bootstrap-new-package.sh` to create and push the
      - `NUGET_API_NUGET_KEY`
      - `NUGET_API_KEY` (if NUGET_SERVER is set to a custom server)
 1. Set required variables:
-   - `DOTNET_VERSION` - .NET SDK version to use in workflows, e.g. 10.0.x
-   - `CONFIGURATION` - build configuration, e.g. Debug or Release
-   - `MAX_REGRESSION_PCT` - maximum allowed performance regression percentage for benchmarks, e.g. 20
-   - `MIN_COVERAGE_PCT` - minimum required code coverage percentage, e.g. 80
-   - `MINVERTAGPREFIX` - MinVer version tag prefix, e.g. v
-   - `NUGET_SERVER` - NuGet server to use (github | nuget | custom URI)
+   - `DOTNET_VERSION`: `10.0.x`: the .NET SDK version to use
+   - `CONFIGURATION`: `Release`: the build configuration to use (e.g., Release or Debug)
+   - `NUGET_SERVER`: `github`: the NuGet server to publish to (supported values: 'github', 'nuget', or custom URI)
+   - `MINVERTAGPREFIX`: `v`: Prefix for git tags to be recognized by MinVer
+   - `SEMVER_PRERELEASE_PREFIX`: `preview`: Prefix for the prerelease tag, e.g. 'preview', 'alpha', 'beta', 'rc', etc.
+   - `SAVE_PACKAGE_ARTIFACTS`: `false`: Whether to save package artifacts after build/publish
+   - `MIN_COVERAGE_PCT`: `80`%: Minimum code coverage percentage required
+   - `MAX_REGRESSION_PCT`: `20`%: Maximum allowed regression percentage
 1. Set debug flags (variables):
-    - `ACTIONS_RUNNER_DEBUG` generates detailed logs about how the runner executes jobs
-    - `ACTIONS_STEP_DEBUG` more granular details in the step logs
+   - `ACTIONS_RUNNER_DEBUG`: `false`: Whether to enable GitHub Actions runner debug logging
+   - `ACTIONS_STEP_DEBUG`: `false`: Whether to enable GitHub Actions step debug logging
 1. Protect `main` with required checks and require PRs. Suggested check names:
    - `build` (job id from CI workflow "CI: Build, Test, Benchmark")
    - `test` (job id from CI workflow "CI: Build, Test, Benchmark")
@@ -157,4 +159,4 @@ Then run the generated `scripts/bootstrap-new-package.sh` to create and push the
 
 - Keep template content minimal and rely on shared props/central package management.
 - Optional folders are conditionally excluded based on include flags.
-- Bootstrap script follows the style of vm2.DevOps `_common.sh` helpers for consistency.
+- Bootstrap script follows the style of vm2.DevOps `_common.sh`/`_common_github.sh` helpers for consistency.

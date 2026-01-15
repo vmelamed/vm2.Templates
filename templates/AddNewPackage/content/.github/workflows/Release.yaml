@@ -13,23 +13,16 @@ on:
         required: true
         type: string
 
-      force-publish:
-        description: "Force publish"
-        type: boolean
-        default: false
-
 env:
   PACKAGE_PROJECTS: >-
     ["src/MyPackage/MyPackage.csproj"]
-
-  # Default NuGet server; can be overridden by repo var NUGET_SERVER or workflow dispatch input.
   NUGET_SERVER: ${{ vars.NUGET_SERVER || 'github' }}
 
 jobs:
   get-params:
     name: Prepare the parameters
     runs-on: ubuntu-latest
-    if: >-
+    if: >+
       ${{
       github.event_name == 'workflow_dispatch' ||
       !contains(github.ref_name,'-') &&
@@ -38,7 +31,6 @@ jobs:
     outputs:
       package-projects: ${{ steps.init-params.outputs.package-projects }}
       nuget-server: ${{ steps.init-params.outputs.nuget-server }}
-      force-publish: ${{ steps.init-params.outputs.force-publish }}
     steps:
       - name: Gather parameters
         id: init-params
@@ -46,17 +38,11 @@ jobs:
         run: |
           package_projects='${{ env.PACKAGE_PROJECTS }}'
           nuget_server='${{ env.NUGET_SERVER }}'
-          force_publish=false
-
-          if [ '${{ github.event_name }}' == "workflow_dispatch" ]; then
-            force_publish='${{ inputs.force-publish }}'
-          fi
 
           # Set the outputs:
           {
-            echo "package-projects=${package_projects}"
-            echo "nuget-server=${nuget_server}"
-            echo "force-publish=${force_publish}"
+              echo "package-projects=${package_projects}"
+              echo "nuget-server=${nuget_server}"
           }  >> $GITHUB_OUTPUT
 
   log-trigger:
@@ -69,7 +55,7 @@ jobs:
           echo "::notice::Reason: ${{ inputs.reason }}"
 
   release:
-    name: Release
+    name: Release - package and publish NuGet stable release
     uses: vmelamed/vm2.DevOps/.github/workflows/_release.yaml@main
     needs:
       - get-params
@@ -83,8 +69,8 @@ jobs:
       pull-requests: write # Required to comment on PRs
       checks: write # Required to create GitHub Checks
     with:
-      package-projects: ${{ needs.get-params.outputs.package-projects }}
       dotnet-version: ${{ vars.DOTNET_VERSION }}
-      force-publish: ${{ fromJSON(needs.get-params.outputs.force-publish) }}
+      package-projects: ${{ needs.get-params.outputs.package-projects }}
       nuget-server: ${{ needs.get-params.outputs.nuget-server }}
-      save-package-artifacts: true
+      reason: ${{ inputs.reason || '' }}
+      save-package-artifacts: false
