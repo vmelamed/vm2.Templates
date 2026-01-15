@@ -1,7 +1,9 @@
 #!/bin/bash
 
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$script_dir/_common.sh"
+common_scripts_dir="$(dirname "${BASH_SOURCE[0]}")"
+
+source "$common_scripts_dir/_common.sh"
+source "$common_scripts_dir/_common_sanitize.sh"
 
 # This script defines a number of DevOps specific constants, variables, and helper functions.
 
