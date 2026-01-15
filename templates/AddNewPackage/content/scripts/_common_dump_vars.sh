@@ -1,25 +1,5 @@
 #!/bin/bash
 
-declare -r default_table_format="graphical"
-
-## table_format determines the format in which dump tables are displayed by the
-## `dump_vars` function(with graphical ASCII characters or with markdown)
-declare -x table_format=${TABLE_FORMAT:-$default_table_format}
-
-
-function set_table_format()
-{
-    shopt -s nocasematch
-    if [[ "$1" =~ ^(graphical|markdown)$ ]]; then
-        table_format=${1,,}
-        [[ $table_format == "graphical" ]] && table=$graphical || table=$markdown
-    else
-        error "Invalid table format: $1"
-    fi
-    shopt -u nocasematch
-    return 0
-}
-
 gth="┌────────────────────────────────────────────────────────────────────────────"
 gbh="├──────────────────────────────────────┬─────────────────────────────────────"
 gmt="├──────────────────────────────────────┴─────────────────────────────────────"
@@ -83,7 +63,7 @@ declare set_tracing_on
 function push_state() {
     save_quiet=$quiet
     save_verbose=$verbose
-    save_table_format=$table_format
+    save_table_format=$(get_table_format)
     save_ignore=$_ignore
     if [[ $- =~ .*x.* ]]; then set_tracing_on=1; else set_tracing_on=0; fi
     return 0
@@ -92,7 +72,7 @@ function push_state() {
 function pop_state() {
     quiet=$save_quiet
     verbose=$save_verbose
-    table_format=$save_table_format
+    set_table_format "$save_table_format"
     _ignore=$save_ignore
     if ((set_tracing_on == 1)); then
         set -x
@@ -113,8 +93,8 @@ function dump_vars() {
         case ${v,,} in
             -q|--quiet) quiet=true ;;
             -f|--force) verbose=true ;;
-            -m|--markdown) table_format="markdown" ;;
-            -g|--graphical) table_format="graphical" ;;
+            -m|--markdown) set_table_format "markdown" ;;
+            -g|--graphical) set_table_format "graphical" ;;
             * ) ;;
         esac
     done
@@ -125,9 +105,8 @@ function dump_vars() {
     fi
 
     # for the proper behavior of this function change some global flags (to be restored before returning from the function)
-    local table_name
-    [[ $table_format == "markdown" ]] && table_name=markdown || table_name=graphical
-    local -n table=$table_name
+    local -n table
+    table=$(get_table_format)
 
     local top=true
     while (( $# > 0 )); do
@@ -171,9 +150,9 @@ function dump_vars() {
 
 ## internal function to write a line for a variable in the variable dump table
 function _write_title() {
-    local table_name
-    [[ $table_format == "markdown" ]] && table_name=markdown || table_name=graphical
-    local -n table=$table_name
+    local -n table
+    table=$(get_table_format)
+
     # shellcheck disable=SC2059 # Don't use variables in the printf format string. Use printf "..%s.." "$foo".
     printf "${table["header_format"]}" "$1"
     return 0
@@ -206,9 +185,8 @@ function _write_line() {
         value="$v"
     fi
 
-    local table_name
-    [[ $table_format == "markdown" ]] && table_name=markdown || table_name=graphical
-    local -n table=$table_name
+    local -n table
+    table=$(get_table_format)
 
     # shellcheck disable=SC2059 # Don't use variables in the printf format string. Use printf "..%s.." "$foo".
     printf "${table["value_format"]}" "$1" "$value"
