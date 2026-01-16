@@ -22,7 +22,7 @@ on:
         description: Define semicolon-separated preprocessor symbols to pass to the compiler
         type: string
         required: false
-        default: ''
+        default: ""
 
 env:
   BUILD_PROJECTS: >-
@@ -34,7 +34,7 @@ env:
   BENCHMARK_PROJECTS: >-
     ["benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj"]
 
-  # *CP* Semicolon-separated preprocessor symbols to pass to the compiler.
+  # *TODO* Semicolon-separated preprocessor symbols to pass to the compiler.
   PREPROCESSOR_SYMBOLS: ""
 
   OS: >-
@@ -42,7 +42,7 @@ env:
 
 jobs:
   get-params:
-    name: Prepare the default and passed in parameters
+    name: Finalize parameters from variables, inputs, secrets and defaults
     runs-on: ubuntu-latest # in this workflow the runner doesn't matter - we're just preparing the inputs for the next workload(s).
     if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip ci]') }}
     env:
@@ -107,10 +107,13 @@ jobs:
           }  >> $GITHUB_OUTPUT
 
   call-ci:
-    uses: vmelamed/vm2.DevOps/.github/workflows/_ci.yaml@main
+    name: Build, Test, Benchmarks
     needs:
       - get-params
-    secrets: inherit
+    uses: vmelamed/vm2.DevOps/.github/workflows/_ci.yaml@main
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      BENCHER_API_TOKEN: ${{ secrets.BENCHER_API_TOKEN }}
     permissions:
       contents: read # Required to checkout the code
       packages: read # Required to restore GitHub Packages NuGet packages
