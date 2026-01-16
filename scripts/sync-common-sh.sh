@@ -29,10 +29,16 @@ fi
 
 echo "Syncing _common*.sh files from vm2.DevOps to vm2.Templates..."
 cp -v "$SOURCE_DIR/_common"*.sh "$TARGET_DIR/"
+chmod u+x "$TARGET_DIR/_common"*.sh
 
+if [[ -n $1 ]]; then
+    git add templates/AddNewPackage/content/scripts/_common*.sh
+    git commit -m 'chore: sync _common*.sh files from vm2.DevOps'
+else
+    echo ""
+    echo "⚠️  Don't forget to commit the changes:"
+    echo "  git add templates/AddNewPackage/content/scripts/_common*.sh"
+    echo "  git commit -m 'chore: sync _common*.sh files from vm2.DevOps'"
+fi
 echo ""
 echo "✅ Sync complete"
-echo ""
-echo "⚠️  Don't forget to commit the changes:"
-echo "  git add templates/AddNewPackage/content/scripts/_common*.sh"
-echo "  git commit -m 'chore: sync _common*.sh files from vm2.DevOps'"
