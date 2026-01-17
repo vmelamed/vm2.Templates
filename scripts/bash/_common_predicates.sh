@@ -2,7 +2,7 @@
 
 if ! declare -pF "error" > /dev/null; then
     semver_dir="$(dirname "${BASH_SOURCE[0]}")"
-    source "$semver_dir/_common_diagnostics.sh"
+    source "$semver_dir/_common.diagnostics.sh"
 fi
 
 ## Shell function to test if a variable is defined.

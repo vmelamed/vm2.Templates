@@ -110,7 +110,7 @@ Then run the generated `scripts/bootstrap-new-package.sh` to create and push the
   - MTP v2 when run via `dotnet run` CLI, or run the test executable, or in Visual Studio Code Test Explorer
 - optional benchmarks under `benchmarks/<name>.Benchmarks/` using BenchmarkDotNet
 - optional console example under `examples/<name>.Example/`
-- scripts folder with bootstrap helper and `_common.sh` and `_common_github.sh` utilities
+- scripts folder with bootstrap helper and `_common.sh` and `_common.github.sh` utilities
 - Packaging metadata patterned after vm2.Ulid (packable, SourceLink, MinVer tag prefix `v`, README/CHANGELOG/LICENSE packing entries).
 
 ### Bootstrap script (generated)
@@ -159,4 +159,4 @@ Then run the generated `scripts/bootstrap-new-package.sh` to create and push the
 
 - Keep template content minimal and rely on shared props/central package management.
 - Optional folders are conditionally excluded based on include flags.
-- Bootstrap script follows the style of vm2.DevOps `_common.sh`/`_common_github.sh` helpers for consistency.
+- Bootstrap script follows the style of vm2.DevOps `_common.sh`/`_common.github.sh` helpers for consistency.

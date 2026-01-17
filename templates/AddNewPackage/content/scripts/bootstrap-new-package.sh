@@ -5,8 +5,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck source=_common_github.sh
-source "${SCRIPT_DIR}/_common_github.sh"
+# shellcheck source=_common.github.sh
+source "${SCRIPT_DIR}/_common.github.sh"
 
 package_name="MyPackage"
 org="{{repositoryOrg}}"
