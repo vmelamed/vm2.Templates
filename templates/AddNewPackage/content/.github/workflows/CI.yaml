@@ -95,15 +95,15 @@ jobs:
 
           # Set the outputs:
           {
-            echo "build-projects=${build_projects}"
-            echo "test-projects=${test_projects}"
-            echo "benchmark-projects=${benchmark_projects}"
-            echo "os=${os}"
-            echo "preprocessor-symbols=${preprocessor_symbols}"
-            echo "dotnet-version=${dotnet_version}"
-            echo "configuration=${configuration}"
-            echo "min-coverage-pct=${min_coverage_pct}"
-            echo "max-regression-pct=${max_regression_pct}"
+              echo "build-projects=${build_projects}"
+              echo "test-projects=${test_projects}"
+              echo "benchmark-projects=${benchmark_projects}"
+              echo "os=${os}"
+              echo "preprocessor-symbols=${preprocessor_symbols}"
+              echo "dotnet-version=${dotnet_version}"
+              echo "configuration=${configuration}"
+              echo "min-coverage-pct=${min_coverage_pct}"
+              echo "max-regression-pct=${max_regression_pct}"
           }  >> $GITHUB_OUTPUT
 
   call-ci:
