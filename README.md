@@ -56,7 +56,7 @@ Then run the generated `scripts/bootstrap-new-package.sh` to create and push the
 ### Template parameters (key ones)
 
 | Parameter             | Default    | Description                                                                |
-|:--------------------- |:-------    |:-------------------------------------------------------------------------- |
+| :-------------------- | :--------- | :------------------------------------------------------------------------- |
 | `--name`              | (required) | Package/project name (PascalCase); repo becomes `vm2.<name>`               |
 | `--initialVersion`    | `0.1.0`    | Initial version used in README/CHANGELOG; MinVer computes build versions   |
 | `--license`           | `MIT`      | One of `MIT`, `Apache-2.0`, `BSD-3`; materializes LICENSE and SPDX headers |
@@ -141,7 +141,7 @@ Then run the generated `scripts/bootstrap-new-package.sh` to create and push the
    - `MIN_COVERAGE_PCT`: `80`%: Minimum code coverage percentage required
    - `NUGET_SERVER`: `github`: the NuGet server to publish to (supported values: 'github', 'nuget', or custom URI)
    - `SAVE_PACKAGE_ARTIFACTS`: `false`: Whether to save package artifacts after build/publish
-   - `SEMVER_PRERELEASE_PREFIX`: `preview`: Prefix for the prerelease tag, e.g. 'preview', 'alpha', 'beta', 'rc', etc.
+   - `MINVERDEFAULTPRERELEASEIDENTIFIERS`: `preview`: Prefix for the prerelease tag, e.g. 'preview.0', 'alpha', 'beta', 'rc', etc.
 1. Protect `main` with required checks and require PRs. Suggested check names:
    - `build` (job id from CI workflow "CI: Build, Test, Benchmark")
    - `test` (job id from CI workflow "CI: Build, Test, Benchmark")

@@ -28,7 +28,7 @@ declare -x semverTagReleaseRegex
 declare -x semverTagPrereleaseRegex
 
 ## Shell function to create the regular expressions above for tags comprising a given prefix with a semantic version.
-## Call once when the tag prefix is known. For example: create_tag_regexes "v". It might be a good idea to declare the resulting
+## Call once when the tag prefix is known. For example: create_tag_regexes 'v'. It might be a good idea to declare the resulting
 ## variables as readonly after calling this function:
 ##   declare -xr semverTagRegex
 ##   declare -xr semverTagReleaseRegex
@@ -188,7 +188,7 @@ function args_to_github_output()
 ## Validates if the first argument is a name of a valid JSON array of project paths, if it is null, empty or empty array, it use
 ## the second parameter as default value, usually `[""]`.
 # shellcheck disable=SC2154 # variable is referenced but not assigned.
-function validate_projects() {
+function are_safe_projects() {
     local -n projects=$1
     local default_projects=${2:-'[""]'}
 
