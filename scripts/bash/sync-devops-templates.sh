@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if ! pushd "$GIT_REPOS" > /dev/null; then
     echo "❌  ERROR: Could not change directory to '\$GIT_REPOS: $GIT_REPOS'." >&2

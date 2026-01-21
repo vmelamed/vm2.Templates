@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if ! declare -pF "error" > /dev/null; then
     semver_dir="$(dirname "${BASH_SOURCE[0]}")"

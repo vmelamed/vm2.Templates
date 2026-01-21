@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 common_scripts_dir="$(dirname "${BASH_SOURCE[0]}")"
 
