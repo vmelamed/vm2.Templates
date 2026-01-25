@@ -59,9 +59,9 @@ jobs:
 
           # Set the outputs:
           {
+              echo "dotnet-version=${dotnet_version}"
               echo "package-projects=${package_projects}"
               echo "nuget-server=${nuget_server}"
-              echo "dotnet-version=${dotnet_version}"
               echo "minver-tag-prefix=${minver_tag_prefix}"
               echo "minver-prerelease-id=${minver_prerelease_id}"
               echo "reason=${reason}"

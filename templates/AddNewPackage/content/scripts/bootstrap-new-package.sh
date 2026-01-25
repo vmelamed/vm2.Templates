@@ -52,9 +52,13 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-if ! command -v gh >/dev/null 2>&1; then
-    echo "gh CLI is required. Install from https://cli.github.com/" >&2
-    exit 1
+if ! command -v -p jq &> "$_ignore" || ! command -v -p gh 2>&1 "$_ignore"; then
+    if execute sudo apt-get update && sudo apt-get install -y gh jq; then
+        info "GitHub CLI 'gh' and/or 'jq' successfully installed."
+    else
+        error "GitHub CLI 'gh' and/or 'jq' were not found and could not install them. Please have 'gh' and 'jq' installed."
+        exit 1
+    fi
 fi
 
 gh auth status >/dev/null 2>&1 || { echo "gh is not authenticated" >&2; exit 1; }
