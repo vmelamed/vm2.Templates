@@ -1,0 +1,36 @@
+{
+    "diff": {
+        "tool": "diff",
+        "command": "delta --side-by-side --line-numbers --paging never \"$LOCAL\" \"$REMOTE\""
+    },
+    "merge": {
+        "tool": "code",
+        "command": "code --new-window --wait --diff \"$REMOTE\" \"$LOCAL\""
+    },
+    "action_overrides": {
+        ".editorconfig": "copy",
+        ".gitattributes": "copy",
+        ".gitignore": "copy",
+        "codecov.yml": "copy",
+        "Directory.Build.props": "copy",
+        "Directory.Packages.props": "copy",
+        "global.json": "copy",
+        "LICENSE": "copy",
+        "NuGet.config": "copy",
+        "test.runsettings": "copy",
+        ".github/dependabot.yaml": "copy",
+        ".github/workflows/ClearCache.yaml": "copy",
+        ".github/workflows/CI.yaml": "ask to merge",
+        ".github/workflows/Prerelease.yaml": "ask to merge",
+        ".github/workflows/Release.yaml": "ask to merge",
+        "scripts/_common.diagnostics.sh": "copy",
+        "scripts/_common.dump_vars.sh": "copy",
+        "scripts/_common.flags.sh": "copy",
+        "scripts/_common.predicates.sh": "copy",
+        "scripts/_common.sanitize.sh": "copy",
+        "scripts/_common.semver.sh": "copy",
+        "scripts/_common.user.sh": "copy",
+        "scripts/_common.sh": "copy",
+        "scripts/.shellcheckrc": "copy"
+    }
+}

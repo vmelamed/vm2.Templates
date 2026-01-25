@@ -15,8 +15,9 @@ on:
         description: Runner OS (or multiple OS-es separate by comma, e.g. 'ubuntu-latest,windows-latest')
         type: string
         default: ubuntu-latest
-        # There is a known GitHub actions issue: the workflow dispatch UI doesn't properly handle JSON strings with quotes.
-        # E.g. for the input '["ubuntu-latest"]', the UI removes the inner quotes and it becomes the invalid JSON: '[ubuntu-latest]'.
+        # Note: there is a known GitHub actions issue: the workflow dispatch UI doesn't properly handle JSON strings with quotes -
+        # it removes the quotes. E.g. entering '["ubuntu-latest"]' in the UI prompt removes the inner quotes and it becomes the
+        # invalid JSON: '[ubuntu-latest]'.
 
       preprocessor-symbols:
         description: Define semicolon-separated preprocessor symbols to pass to the compiler
@@ -34,7 +35,6 @@ env:
   BENCHMARK_PROJECTS: >-
     ["benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj"]
 
-  # *TODO* Semicolon-separated preprocessor symbols to pass to the compiler.
   PREPROCESSOR_SYMBOLS: ""
 
   OS: >-
