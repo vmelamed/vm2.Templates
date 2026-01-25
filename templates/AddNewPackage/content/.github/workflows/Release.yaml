@@ -16,6 +16,7 @@ on:
 env:
   PACKAGE_PROJECTS: >-
     ["src/MyPackage/MyPackage.csproj"]
+
   NUGET_SERVER: ${{ vars.NUGET_SERVER || 'github' }}
 
 jobs:
