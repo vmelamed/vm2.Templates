@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/templates/" />
+  <Folder Name="/templates/AddNewPackage/" />
+  <Folder Name="/templates/AddNewPackage/content/" />
+  <Folder Name="/templates/AddNewPackage/content/src/">
+    <Project Path="templates/AddNewPackage/content/src/MyPackage/MyPackage.csproj" />
+  </Folder>
+</Solution>
