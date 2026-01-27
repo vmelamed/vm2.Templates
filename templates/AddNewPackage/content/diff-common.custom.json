@@ -23,14 +23,5 @@
         ".github/workflows/CI.yaml": "ask to merge",
         ".github/workflows/Prerelease.yaml": "ask to merge",
         ".github/workflows/Release.yaml": "ask to merge",
-        "scripts/_common.diagnostics.sh": "copy",
-        "scripts/_common.dump_vars.sh": "copy",
-        "scripts/_common.flags.sh": "copy",
-        "scripts/_common.predicates.sh": "copy",
-        "scripts/_common.sanitize.sh": "copy",
-        "scripts/_common.semver.sh": "copy",
-        "scripts/_common.user.sh": "copy",
-        "scripts/_common.sh": "copy",
-        "scripts/.shellcheckrc": "copy"
     }
 }

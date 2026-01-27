@@ -3,10 +3,18 @@
 # SPDX-License-Identifier: {{license}}
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+this_script=${BASH_SOURCE[0]}
+script_name=$(basename "$this_script")
+script_dir=$(dirname "$(realpath -e "$this_script")")
+lib_dir="$script_dir/../../../vm2.DevOps/scripts/bash/lib"
 
-# shellcheck source=_common.github.sh
-source "${SCRIPT_DIR}/_common.github.sh"
+declare -xr script_name
+declare -xr script_dir
+declare -xr lib_dir
+
+# shellcheck disable=SC1091 # Not following: ./github.sh: openBinaryFile: does not exist (No such file or directory)
+source "${lib_dir}/github.sh"
+
 
 package_name="MyPackage"
 org="{{repositoryOrg}}"
@@ -17,7 +25,8 @@ branch="main"
 # Required checks enforced by branch protection; the list is extended dynamically based on repo contents.
 required_checks=("build")
 
-usage() {
+usage()
+{
     cat <<'EOF'
 Bootstrap a vm2 package repository using gh CLI.
 
@@ -52,6 +61,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+# shellcheck disable=SC2154 # _ignore is referenced but not assigned.
 if ! command -v -p jq &> "$_ignore" || ! command -v -p gh 2>&1 "$_ignore"; then
     if execute sudo apt-get update && sudo apt-get install -y gh jq; then
         info "GitHub CLI 'gh' and/or 'jq' successfully installed."
@@ -66,7 +76,8 @@ gh auth status >/dev/null 2>&1 || { echo "gh is not authenticated" >&2; exit 1; 
 repo_name="vm2.${package_name}"
 full_repo="${org}/${repo_name}"
 
-detect_required_checks() {
+detect_required_checks()
+{
     # Always require build
     required_checks=("build")
 
@@ -81,7 +92,8 @@ detect_required_checks() {
     fi
 }
 
-configure_repo_settings() {
+configure_repo_settings()
+{
     gh api -X PATCH "repos/${full_repo}" \
     -f delete_branch_on_merge=true \
     -f allow_squash_merge=true \
@@ -93,7 +105,8 @@ configure_repo_settings() {
     >/dev/null
 }
 
-configure_actions_permissions() {
+configure_actions_permissions()
+{
     gh api -X PUT "repos/${full_repo}/actions/permissions/workflow" \
     -H "Accept: application/vnd.github+json" \
     -f default_workflow_permissions=read \
@@ -101,7 +114,8 @@ configure_actions_permissions() {
     >/dev/null
 }
 
-configure_branch_protection() {
+configure_branch_protection()
+{
     local contexts_json="[]"
     if [[ ${#required_checks[@]} -gt 0 ]]; then
         contexts_json=$(printf '"%s",' "${required_checks[@]}")
