@@ -22,6 +22,6 @@
         ".github/workflows/ClearCache.yaml": "copy",
         ".github/workflows/CI.yaml": "ask to merge",
         ".github/workflows/Prerelease.yaml": "ask to merge",
-        ".github/workflows/Release.yaml": "ask to merge",
+        ".github/workflows/Release.yaml": "ask to merge"
     }
 }
