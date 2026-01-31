@@ -5,11 +5,11 @@ set -euo pipefail
 
 this_script=${BASH_SOURCE[0]}
 script_name=$(basename "$this_script")
-lib_dir=$(dirname "$(realpath -e "$this_script")")
-lib_dir="$lib_dir/../../../vm2.DevOps/scripts/bash/lib"
+script_dir=$(dirname "$(realpath -e "$this_script")")
+lib_dir=$(realpath -e "$script_dir/../../../vm2.DevOps/scripts/bash/lib")
 
 declare -xr script_name
-declare -xr lib_dir
+declare -xr script_dir
 declare -xr lib_dir
 
 # shellcheck disable=SC1091 # Not following: ./gh_core.sh: openBinaryFile: does not exist (No such file or directory)
