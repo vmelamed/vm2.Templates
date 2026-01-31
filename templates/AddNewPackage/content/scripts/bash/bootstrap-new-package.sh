@@ -5,7 +5,7 @@ set -euo pipefail
 
 this_script=${BASH_SOURCE[0]}
 script_name=$(basename "$this_script")
-script_dir=$(dirname "$(realpath -e "$this_script")")
+script_dir=$(realpath -e "$(dirname "$this_script")")
 lib_dir=$(realpath -e "$script_dir/../../../vm2.DevOps/scripts/bash/lib")
 
 declare -xr script_name
