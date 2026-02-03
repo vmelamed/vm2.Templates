@@ -124,27 +124,6 @@
             CA1701;CA1702;CA1707;CA1806;CA2211;
             IDE0021;IDE0022;IDE0039;IDE0065;IDE1006;IDE2000;IDE2002;IDE0058;IDE0290
         </NoWarn>
-        <!-- test.runsettings is assumed to be in the directory with the test project and it is supposed to be at <solution dir>/test/<Xyz.Tests>/Xyz.Tests.csproj -->
-        <RunSettingsFilePath>$(MSBuildProjectDirectory)\..\..\test.runsettings</RunSettingsFilePath>
-        <!-- Enable code coverage collection with Microsoft.Testing.Extensions.CodeCoverage ADD MTP Code Coverage settings: -->
-        <EnableCodeCoverage>true</EnableCodeCoverage>
-        <CodeCoverageExcludeByFile>
-            **/obj/**/*;
-            **/*.g.cs;**/*.i.cs;
-            **/*.g.i.cs;
-            *.generated.cs;
-            *Migrations/*;
-            *AssemblyInfo.cs;
-            *Designer.cs;
-            *.designer.cs
-        </CodeCoverageExcludeByFile>
-        <CodeCoverageExcludeByAttribute>
-            *ExcludeFromCodeCoverage*;
-            *GeneratedRegex*;
-            *GeneratedCode*;
-            *SourceGenerationContext*;
-            *CompilerGenerated*
-        </CodeCoverageExcludeByAttribute>
 
         <!-- Do not mix lock files between Visual Studio and command line/VSCode: -->
         <RestorePackagesWithLockFile Condition="$(BuildingInsideVisualStudio) == 'true'">false</RestorePackagesWithLockFile>

@@ -22,7 +22,7 @@ on:
       preprocessor-symbols:
         description: Comma-separated preprocessor symbols
         type: string
-        default: 'SHORT_RUN' # *TODO* Adjust the default preprocessor symbols as needed.
+        default: "SHORT_RUN" # *TODO* Adjust the default preprocessor symbols as needed.
 
 env:
   BUILD_PROJECTS: >
@@ -30,12 +30,12 @@ env:
     "./MyPackage.slnx"
     ]
 
-  TEST_PROJECTS: >-
+  TEST_PROJECTS: >
     [
     "test/MyPackage.Tests/MyPackage.Tests.csproj"
     ]
 
-  BENCHMARK_PROJECTS: >-
+  BENCHMARK_PROJECTS: >
     [
     "benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj"
     ]
@@ -45,7 +45,7 @@ env:
     "ubuntu-latest"
     ]
 
-  PREPROCESSOR_SYMBOLS: ''
+  PREPROCESSOR_SYMBOLS: ""
 
   DOTNET_VERSION: ${{ vars.DOTNET_VERSION || '10.0.x' }} # The .NET SDK version to use.
   CONFIGURATION: ${{ vars.CONFIGURATION || 'Release' }} # The build configuration: Debug, Release, etc.
