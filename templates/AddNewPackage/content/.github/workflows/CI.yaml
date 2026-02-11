@@ -3,11 +3,15 @@ name: "CI: Build, Test, Benchmark"
 on:
   push:
     branches:
-      - "**" # trigger on push for all branches or...
+      - "**" # trigger on push for all branches
 
   pull_request:
     branches:
-      - "**" # ...on PR for all branches.
+      - "**" # trigger on PR for all branches.
+
+  pull_request_review:
+    types:
+      - submitted # trigger after code reviews (including Copilot)
 
   workflow_dispatch:
     inputs:
@@ -59,7 +63,9 @@ jobs:
   get-params:
     name: Prepare input from env, vars, secrets, inputs, and defaults
     runs-on: ubuntu-latest # in this workflow the runner doesn't matter - we're just preparing the inputs for the next workload(s).
-    if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip ci]') }}
+    if: |
+      ( github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip ci]') ) &&
+      ( github.event_name != 'pull_request_review' || github.event.review.state == 'approved' )
     outputs:
       build-projects: ${{ steps.init-params.outputs.build-projects }}
       test-projects: ${{ steps.init-params.outputs.test-projects }}
@@ -98,6 +104,9 @@ jobs:
               # E.g. for the input '["ubuntu-latest"]', the UI removes the inner quotes and it becomes the invalid JSON: '[ubuntu-latest]'.
               runners_os=$(echo "${{ inputs.runners-os }}" | jq -Rc 'split(",") | map(select(length > 0) | gsub("^\\s+|\\s+$";""))')
               preprocessor_symbols="${preprocessor_symbols};${{ inputs.preprocessor-symbols }}"
+          elif [ '${{ github.event_name }}' == "pull_request" ] || [ '${{ github.event_name }}' == "pull_request_review" ]; then
+              # For pull requests and reviews, use default values from env (no modifications needed)
+              :
           else
               echo "Unsupported event: ${{ github.event_name }}"
               exit 5
