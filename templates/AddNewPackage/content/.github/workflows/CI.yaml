@@ -50,6 +50,11 @@ env:
     "benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj"
     ]
 
+  PACKAGE_PROJECTS: >
+    [
+    "src/MyPackage/MyPackage.csproj"
+    ]
+
   RUNNERS_OS: >
     [
     "ubuntu-latest"
@@ -78,6 +83,7 @@ jobs:
       build-projects: ${{ steps.init-params.outputs.build-projects }}
       test-projects: ${{ steps.init-params.outputs.test-projects }}
       benchmark-projects: ${{ steps.init-params.outputs.benchmark-projects }}
+      package-projects: ${{ steps.init-params.outputs.package-projects }}
       runners-os: ${{ steps.init-params.outputs.runners-os }}
       dotnet-version: ${{ steps.init-params.outputs.dotnet-version }}
       configuration: ${{ steps.init-params.outputs.configuration }}
@@ -95,6 +101,7 @@ jobs:
           build_projects='${{ env.BUILD_PROJECTS }}'
           test_projects='${{ env.TEST_PROJECTS }}'
           benchmark_projects='${{ env.BENCHMARK_PROJECTS }}'
+          package_projects='${{ env.PACKAGE_PROJECTS }}'
           runners_os='${{ env.RUNNERS_OS }}'
           dotnet_version='${{ env.DOTNET_VERSION }}'
           configuration='${{ env.CONFIGURATION }}'
@@ -145,6 +152,7 @@ jobs:
               echo "build-projects=${build_projects}"
               echo "test-projects=${test_projects}"
               echo "benchmark-projects=${benchmark_projects}"
+              echo "package-projects=${package_projects}"
               echo "runners-os=${runners_os}"
               echo "dotnet-version=${dotnet_version}"
               echo "configuration=${configuration}"
@@ -175,6 +183,7 @@ jobs:
       build-projects: ${{ needs.get-params.outputs.build-projects }}
       test-projects: ${{ needs.get-params.outputs.test-projects }}
       benchmark-projects: ${{ needs.get-params.outputs.benchmark-projects }}
+      package-projects: ${{ needs.get-params.outputs.package-projects }}
       runners-os: ${{ needs.get-params.outputs.runners-os }}
       dotnet-version: ${{ needs.get-params.outputs.dotnet-version }}
       configuration: ${{ needs.get-params.outputs.configuration }}
