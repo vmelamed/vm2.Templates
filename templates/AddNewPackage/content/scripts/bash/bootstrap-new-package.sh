@@ -34,9 +34,9 @@ Usage:
   bootstrap-new-package.sh [--name <PackageName>] [--org <github-org>] [--visibility public|private]
 
 Defaults:
-    name: MyPackage
+  name: MyPackage
   org:  {{repositoryOrg}}
-    visibility: public
+  visibility: public
 
 This script will:
   - ensure gh is installed and authenticated
@@ -62,7 +62,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # shellcheck disable=SC2154 # _ignore is referenced but not assigned.
-if ! command -v -p jq &> "$_ignore" || ! command -v -p gh 2>&1 "$_ignore"; then
+if ! command -v jq &> "$_ignore" || ! command -v gh &> "$_ignore"; then
     if execute sudo apt-get update && sudo apt-get install -y gh jq; then
         info "GitHub CLI 'gh' and/or 'jq' successfully installed."
     else
@@ -78,16 +78,15 @@ full_repo="${org}/${repo_name}"
 
 detect_required_checks()
 {
-    # Always require build
     required_checks=("build")
 
-    if find . -maxdepth 3 -type d \( -name "test" -o -name "tests" \) -print -quit 2>/dev/null \
-        || find . -maxdepth 5 -name "*.Tests.csproj" -print -quit 2>/dev/null; then
+    if [[ -n $(find . -maxdepth 3 -type d \( -name "test" -o -name "tests" \) -print -quit 2>/dev/null) ]] \
+        || [[ -n $(find . -maxdepth 5 -name "*.Tests.csproj" -print -quit 2>/dev/null) ]]; then
         required_checks+=("test")
     fi
 
-    if find . -maxdepth 3 -type d -iname "benchmarks" -print -quit 2>/dev/null \
-        || find . -maxdepth 5 -iname "*.Benchmarks.csproj" -print -quit 2>/dev/null; then
+    if [[ -n $(find . -maxdepth 3 -type d -iname "benchmarks" -print -quit 2>/dev/null) ]] \
+        || [[ -n $(find . -maxdepth 5 -iname "*.Benchmarks.csproj" -print -quit 2>/dev/null) ]]; then
         required_checks+=("benchmarks")
     fi
 }
@@ -110,12 +109,10 @@ configure_actions_permissions()
     if gh api -X PUT "repos/${full_repo}/actions/permissions/workflow" \
         -H "Accept: application/vnd.github+json" \
         -f default_workflow_permissions=read \
-        -f can_approve_pull_request_reviews=true \
         >/dev/null; then
-        info "Configured Actions workflow permissions (GITHUB_TOKEN default=read; PR create/approve enabled)."
+        info "Configured Actions workflow permissions (GITHUB_TOKEN default=read)."
     else
-        warning "Could not enable GitHub Actions PR create/approve setting (possibly restricted by org policy)."
-        warning "Manual step: Settings -> Actions -> General -> Workflow permissions -> Allow GitHub Actions to create and approve pull requests."
+        warning "Could not configure Actions workflow permissions (possibly restricted by org policy)."
     fi
 }
 
@@ -184,9 +181,11 @@ detect_required_checks
 secrets=(
     "CODECOV_TOKEN:codecov-secret"
     "BENCHER_API_TOKEN:bencher-secret"
+    "REPORTGENERATOR_LICENSE:reportgenerator-secret"
     "NUGET_API_GITHUB_KEY:github-secret"
     "NUGET_API_NUGET_KEY:nuget-secret"
     "NUGET_API_KEY:custom-secret"
+    "RELEASE_PAT:release-pat-secret"
 )
 
 variables=(
@@ -200,6 +199,7 @@ variables=(
     "ACTIONS_RUNNER_DEBUG:false"
     "ACTIONS_STEP_DEBUG:false"
     "SAVE_PACKAGE_ARTIFACTS:false"
+    "VERBOSE:false"
 )
 
 for entry in "${secrets[@]}"; do
