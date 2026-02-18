@@ -105,6 +105,9 @@ Then run the generated `scripts/bootstrap-new-package.sh` to create and push the
   └── CHANGELOG.md
   ```
 
+> [!Warning]
+> Note that GitHub only recognizes `dependabot.yml` filename, not `dependabot.yAml`
+
 - tests under `test/<name>.Tests/` (xUnit + FluentAssertions + MTP + coverage)
   - MTP v1 when built and run inside Visual Studio Test Explorer
   - MTP v2 when run via `dotnet run` CLI, or run the test executable, or in Visual Studio Code Test Explorer

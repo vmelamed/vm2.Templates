@@ -18,7 +18,7 @@
         "LICENSE": "copy",
         "NuGet.config": "copy",
         "test.runsettings": "copy",
-        ".github/dependabot.yaml": "copy",
+        ".github/dependabot.yml": "copy",
         ".github/workflows/ClearCache.yaml": "copy",
         ".github/workflows/CI.yaml": "ask to merge",
         ".github/workflows/Prerelease.yaml": "ask to merge",
