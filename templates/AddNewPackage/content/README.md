@@ -100,4 +100,8 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
   - `build` (job id from CI workflow "CI: Build, Test, Benchmark")
   - `test` (job id from CI workflow "CI: Build, Test, Benchmark")
   - `benchmark` (job id from CI workflow "CI: Build, Test, Benchmark")
+- In GitHub repo settings, enable Actions PR automation:
+  - `Settings` -> `Actions` -> `General` -> `Workflow permissions`
+  - enable `Allow GitHub Actions to create and approve pull requests`
+  - required for prerelease changelog PR creation.
 - Changelog: prerelease workflow appends a prerelease section; release workflow adds a stable header with "See prereleases below." (prerelease sections stay intact).

@@ -107,11 +107,16 @@ configure_repo_settings()
 
 configure_actions_permissions()
 {
-    gh api -X PUT "repos/${full_repo}/actions/permissions/workflow" \
-    -H "Accept: application/vnd.github+json" \
-    -f default_workflow_permissions=read \
-    -f can_approve_pull_request_reviews=false \
-    >/dev/null
+    if gh api -X PUT "repos/${full_repo}/actions/permissions/workflow" \
+        -H "Accept: application/vnd.github+json" \
+        -f default_workflow_permissions=read \
+        -f can_approve_pull_request_reviews=true \
+        >/dev/null; then
+        info "Configured Actions workflow permissions (GITHUB_TOKEN default=read; PR create/approve enabled)."
+    else
+        warning "Could not enable GitHub Actions PR create/approve setting (possibly restricted by org policy)."
+        warning "Manual step: Settings -> Actions -> General -> Workflow permissions -> Allow GitHub Actions to create and approve pull requests."
+    fi
 }
 
 configure_branch_protection()
