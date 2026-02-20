@@ -35,7 +35,7 @@ RootOfRepo/
 ```
 
 > [!Warning]
-> Note that GitHub only recognizes `dependabot.yml` filename, not `dependabot.yAml`
+> Note that GitHub only recognizes "dependabot.**yml**" filename, not "dependabot.**yAml**".
 
 Here are the sources and content of the listed files above:
 
