@@ -30,6 +30,7 @@ jobs:
     outputs:
       dotnet-version: ${{ steps.init-params.outputs.dotnet-version }}
       package-projects: ${{ steps.init-params.outputs.package-projects }}
+      package-projects-len: ${{ steps.init-params.outputs.package-projects-len }}
       preprocessor-symbols: ${{ steps.init-params.outputs.preprocessor-symbols }}
       minver-tag-prefix: ${{ steps.init-params.outputs.minver-tag-prefix }}
       minver-prerelease-id: ${{ steps.init-params.outputs.minver-prerelease-id }}
@@ -41,7 +42,10 @@ jobs:
         id: init-params
         shell: bash
         run: |
+          source $DEVOPS_LIB_DIR/gh_core.sh
+
           package_projects='${{ env.PACKAGE_PROJECTS }}'
+          package_projects_len=$(is_safe_json_array "package_projects" "$defaultPackageProjects" is_safe_existing_file)
           dotnet_version='${{ env.DOTNET_VERSION }}'
           preprocessor_symbols='${{ env.PREPROCESSOR_SYMBOLS }}'
           minver_tag_prefix='${{ env.MINVERTAGPREFIX }}'
@@ -54,17 +58,16 @@ jobs:
               reason='${{ inputs.reason }}'
           fi
 
-          # Set the outputs:
-          {
-              echo "package-projects=${package_projects}"
-              echo "dotnet-version=${dotnet_version}"
-              echo "preprocessor-symbols=${preprocessor_symbols}"
-              echo "minver-tag-prefix=${minver_tag_prefix}"
-              echo "minver-prerelease-id=${minver_prerelease_id}"
-              echo "reason=${reason}"
-              echo "nuget-server=${nuget_server}"
-              echo "save-package-artifacts=${save_package_artifacts}"
-          }  >> $GITHUB_OUTPUT
+          args_to_github_output \
+              package-projects \
+              package-projects-len \
+              dotnet-version \
+              preprocessor-symbols \
+              minver-tag-prefix \
+              minver-prerelease-id \
+              reason \
+              nuget-server \
+              save-package-artifacts
 
   log-trigger:
     name: Log manual trigger reason
@@ -93,6 +96,7 @@ jobs:
     with:
       dotnet-version: ${{ needs.get-params.outputs.dotnet-version }}
       package-projects: ${{ needs.get-params.outputs.package-projects }}
+      package-projects-len: ${{ needs.get-params.outputs.package-projects-len }}
       preprocessor-symbols: ${{ needs.get-params.outputs.preprocessor-symbols }}
       minver-tag-prefix: ${{ needs.get-params.outputs.minver-tag-prefix }}
       minver-prerelease-id: ${{ needs.get-params.outputs.minver-prerelease-id }}
