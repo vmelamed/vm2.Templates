@@ -1,6 +1,6 @@
 # TODO: Branch Protection & Bootstrap Script Improvements
 
-## Issues to Address in `bootstrap-new-package.sh`
+## Issues to Address in `repo-setup.sh`
 
 ### 1. Check Name Mismatch
 
@@ -31,5 +31,5 @@ Even admins can't bypass required reviews. Set to `false` or make configurable.
 
 1. Merge vm2.Glob PR #3 (using bypass checkbox)
 2. Capture actual CI check names from the workflow run on `main`
-3. Update `bootstrap-new-package.sh` with correct check names and chosen protection model
+3. Update `repo-setup.sh` with correct check names and chosen protection model
 4. Apply the same protection configuration to vm2.Glob and vm2.Ulid

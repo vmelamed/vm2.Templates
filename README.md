@@ -51,7 +51,7 @@ dotnet new vm2pkg \
   --includeDocs true
 ```
 
-Then run the generated `scripts/bootstrap-new-package.sh` to create and push the GitHub repo (uses `gh repo create`, default visibility public, requires authentication).
+Then run the generated `scripts/repo-setup.sh` to create and push the GitHub repo (uses `gh repo create`, default visibility public, requires authentication).
 
 ### Template parameters (key ones)
 
@@ -118,7 +118,7 @@ Then run the generated `scripts/bootstrap-new-package.sh` to create and push the
 
 ### Bootstrap script (generated)
 
-`scripts/bootstrap-new-package.sh` (SPDX uses selected license) will:
+`scripts/repo-setup.sh` (SPDX uses selected license) will:
 
 - Require `gh` and authentication
 - Create repo `vm2.<name>` under `--org` (default `vmelamed`) with `--visibility` (default `private`)
