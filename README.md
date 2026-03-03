@@ -145,6 +145,7 @@ Then run the generated `scripts/repo-setup.sh` to create and push the GitHub rep
    - `NUGET_SERVER`: `github`: the NuGet server to publish to (supported values: 'github', 'nuget', or custom URI)
    - `SAVE_PACKAGE_ARTIFACTS`: `false`: Whether to save package artifacts after build/publish
    - `MINVERDEFAULTPRERELEASEIDENTIFIERS`: `preview.0`: Prefix for the prerelease tag, e.g. 'preview.0', 'alpha', 'beta', 'rc', etc.
+   - `RESET_BENCHMARK_THRESHOLDS`: `false`: Whether to reset Bencher thresholds
 1. Protect `main` with required checks and require PRs. Suggested check names:
    - `build` (job id from CI workflow "CI: Build, Test, Benchmark")
    - `test` (job id from CI workflow "CI: Build, Test, Benchmark")

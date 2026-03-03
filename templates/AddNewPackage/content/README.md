@@ -92,6 +92,7 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
     - `SAVE_PACKAGE_ARTIFACTS`: `false`: Whether to save package artifacts after build/publish
     - `MIN_COVERAGE_PCT`: `80`%: Minimum code coverage percentage required
     - `MAX_REGRESSION_PCT`: `20`%: Maximum allowed regression percentage
+    - `RESET_BENCHMARK_THRESHOLDS`: `false`: Whether to reset Bencher thresholds
   - Set debug flags (variables):
     - `ACTIONS_RUNNER_DEBUG`: `false`: Whether to enable GitHub Actions runner debug logging
     - `ACTIONS_STEP_DEBUG`: `false`: Whether to enable GitHub Actions step debug logging

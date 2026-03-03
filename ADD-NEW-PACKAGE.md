@@ -112,6 +112,7 @@ The actions of this repo should have the following:
   - MINVERTAGPREFIX: `v`: Prefix for git tags to be recognized by MinVer
   - MINVERDEFAULTPRERELEASEIDENTIFIERS: `preview.0`: Prefix for the prerelease tag, e.g. 'preview.0', 'alpha', 'beta', 'rc', etc.
   - SAVE_PACKAGE_ARTIFACTS: `false`: Whether to save package artifacts after build/publish
+  - RESET_BENCHMARK_THRESHOLDS: `false`: Whether to reset Bencher thresholds
   - MIN_COVERAGE_PCT: `80`%: Minimum code coverage percentage required
   - MAX_REGRESSION_PCT: `20`%: Maximum allowed regression percentage
 
