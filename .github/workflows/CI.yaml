@@ -23,7 +23,9 @@ on:
         default: ubuntu-latest
 
       preprocessor-symbols:
-        description: Comma-separated preprocessor symbols
+        description: >-
+          Preprocessor symbols separated by semicolon, space, or comma. E.g. "SHORT_RUN;FEATURE_A;FEATURE_B" or
+          "SHORT_RUN FEATURE_A FEATURE_B" or "SHORT_RUN,FEATURE_A,FEATURE_B".
         type: string
         # *TODO* Adjust the default preprocessor symbols as needed.
         default: "SHORT_RUN"
@@ -60,13 +62,13 @@ env:
 
   # If not specified or empty, no benchmarks will be built or run.
   # *TODO* The benchmark project(s) to build and run. Must be a JSON array of strings containing path(s) to the buildable and runnable benchmark project(s).
-  BENCHMARK_PROJECTS:  >
+  BENCHMARK_PROJECTS: >
     [
     ]
 
   # If not specified or empty, no projects will be packed for NuGet validation during CI.
   # *TODO* The project(s) to pack for NuGet validation during CI. Must be a JSON array of strings containing path(s) to the packable project(s).
-  PACKAGE_PROJECTS:  >
+  PACKAGE_PROJECTS: >
     [
     ]
 
@@ -77,7 +79,6 @@ env:
     "ubuntu-latest"
     ]
 
-  # *TODO* Space or comma or semicolon-separated preprocessor symbols to pass to the compiler.
   PREPROCESSOR_SYMBOLS: ""
 
   DOTNET_VERSION: ${{ vars.DOTNET_VERSION || '10.0.x' }} # The .NET SDK version to use.
@@ -91,7 +92,7 @@ env:
 
 jobs:
   get-params:
-    name: Prepare input from env, vars, secrets, inputs, and defaults
+    name: Pre-CI
     runs-on: ubuntu-latest # in this workflow the runner doesn't matter - we're just preparing the inputs for the next workload(s).
     permissions:
       pull-requests: read
@@ -213,8 +214,8 @@ jobs:
               reset_benchmark_thresholds \
               skip_push
 
-  call-ci:
-    name: "Run CI: Build, Test, Benchmark, Pack"
+  run-ci:
+    name: "Run CI"
     needs:
       - get-params
     if: ${{ needs.get-params.outputs.skip-push != 'true' }}
@@ -242,3 +243,26 @@ jobs:
       minver-tag-prefix: ${{ needs.get-params.outputs.minver-tag-prefix }}
       minver-prerelease-id: ${{ needs.get-params.outputs.minver-prerelease-id }}
       reset-benchmark-thresholds: ${{ needs.get-params.outputs.reset-benchmark-thresholds == 'true' }}
+
+  # Gate job: single required status check for branch protection.
+  # Replaces per-job required checks that break with reusable workflows + matrix (check names include
+  # workflow prefix, matrix params, inner job names, and event suffixes that are impossible to predict).
+  ci-gate:
+    name: CI
+    needs: [get-params, run-ci]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Evaluate CI result
+        run: |
+          {
+              if [[ "${{ needs.get-params.result }}" == "failure" || "${{ needs.get-params.result }}" == "cancelled" ]]; then
+                echo "❌  ERROR: Arguments gathering and preparation failed"
+                exit 1
+              fi
+              if [[ "${{ needs.run-ci.result }}" == "failure" || "${{ needs.run-ci.result }}" == "cancelled" ]]; then
+                echo "❌  ERROR: CI pipeline ${{ needs.run-ci.result }}"
+                exit 1
+              fi
+              echo "✅  INFO: CI completed (get-params: ${{ needs.get-params.result }}, run-ci: ${{ needs.run-ci.result }})"
+          } >> GITHUB_STEP_SUMMARY
