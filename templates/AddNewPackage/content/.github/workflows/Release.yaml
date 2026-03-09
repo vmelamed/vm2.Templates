@@ -14,7 +14,6 @@ env:
     [
     "src/MyPackage/MyPackage.csproj"
     ]
-  # Ensure the NUGET_API_*KEY secrets corresponds to the server selected here.
   NUGET_SERVER: ${{ vars.NUGET_SERVER || 'github' }}
   PREPROCESSOR_SYMBOLS: ""
   CONFIGURATION: ${{ vars.CONFIGURATION || 'Release' }} # The build configuration: Debug, Release, etc.
@@ -40,6 +39,9 @@ jobs:
       nuget-server: ${{ steps.gather-params.outputs.nuget-server }}
       save-package-artifacts: ${{ steps.gather-params.outputs.save-package-artifacts }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
       - name: Setup DevOps environment variables
         id: setup-env
         uses: vmelamed/vm2.DevOps/.github/actions/setup-env@main
