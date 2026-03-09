@@ -61,9 +61,7 @@ env:
     [
     "ubuntu-latest"
     ]
-
   PREPROCESSOR_SYMBOLS: ""
-
   DOTNET_VERSION: ${{ vars.DOTNET_VERSION || '10.0.x' }} # The .NET SDK version to use.
   CONFIGURATION: ${{ vars.CONFIGURATION || 'Release' }} # The build configuration: Debug, Release, etc.
   MIN_COVERAGE_PCT: ${{ vars.MIN_COVERAGE_PCT || 80 }} # The minimum code coverage percentage required to pass the tests.

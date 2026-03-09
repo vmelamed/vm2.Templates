@@ -12,23 +12,12 @@ on:
         type: string
 
 env:
-  # The value of the PACKAGE_PROJECTS variable must be a string containing a JSON array of strings - path(s) to the project(s).
-  # Hint: the yaml folding indicator `>-` lets you enter single line, scalar, string values on multiple lines, which might
-  # be more readable, and writable - no need for escaping.
-
-  # If not specified or empty, no projects will be packed for stable release delivery.
-  # *TODO* The project(s) to pack for stable release delivery. Must be a JSON array of strings containing path(s) to the packable project(s).
   PACKAGE_PROJECTS: >
     [
     "src/Project/Project.csproj"
     ]
-
-  # Ensure the NUGET_API_*KEY secrets corresponds to the server selected here.
-  # *TODO* 'github' - GitHub Packages; 'nuget' - NuGet.org; URI - others.
   NUGET_SERVER: ${{ vars.NUGET_SERVER || 'github' }}
-  # *TODO* Semicolon-separated preprocessor symbols to pass to the compiler.
   PREPROCESSOR_SYMBOLS: ""
-
   CONFIGURATION: ${{ vars.CONFIGURATION || 'Release' }} # The build configuration: Debug, Release, etc.
   DOTNET_VERSION: ${{ vars.DOTNET_VERSION || '10.0.x' }} # The .NET SDK version to use.
   MINVERTAGPREFIX: ${{ vars.MINVERTAGPREFIX || 'v' }} # The MinVer tag prefix.
