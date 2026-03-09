@@ -41,22 +41,18 @@ env:
     [
     "./MyPackage.slnx"
     ]
-
   TEST_PROJECTS: >
     [
     "test/MyPackage.Tests/MyPackage.Tests.csproj"
     ]
-
   BENCHMARK_PROJECTS: >
     [
     "benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj"
     ]
-
   PACKAGE_PROJECTS: >
     [
     "src/MyPackage/MyPackage.csproj"
     ]
-
   RUNNERS_OS: >
     [
     "ubuntu-latest"
