@@ -37,23 +37,23 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  BUILD_PROJECTS: >
+  BUILD_PROJECTS: >-
     [
     "./MyPackage.slnx"
     ]
-  TEST_PROJECTS: >
+  TEST_PROJECTS: >-
     [
     "test/MyPackage.Tests/MyPackage.Tests.csproj"
     ]
-  BENCHMARK_PROJECTS: >
+  BENCHMARK_PROJECTS: >-
     [
     "benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj"
     ]
-  PACKAGE_PROJECTS: >
+  PACKAGE_PROJECTS: >-
     [
     "src/MyPackage/MyPackage.csproj"
     ]
-  RUNNERS_OS: >
+  RUNNERS_OS: >-
     [
     "ubuntu-latest"
     ]
