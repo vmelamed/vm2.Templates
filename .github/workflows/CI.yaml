@@ -39,10 +39,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  BUILD_PROJECTS: >-
-    [
-    "vm2.Templates.slnx"
-    ]
   PACKAGE_PROJECTS: >-
     [
     "vm2.Templates.slnx"
