@@ -147,7 +147,7 @@ I am sure I am missing something at the moment, so please be proactive in asking
 - Actions variables: see Variables section above.
 - Secrets expected: `BENCHER_API_TOKEN`, `CODECOV_TOKEN`, and `NUGET_API_KEY` - corresponding to the selected NuGet server.
 - Repo features: issues on; wiki off; projects optional (off by default); vulnerability alerts on; Dependabot security updates on; Actions enabled.
-- Permissions: least privilege for `GITHUB_TOKEN` (read by default; scoped write for release job); require approval for outside-contributor workflow runs.
+- Permissions: least privilege for `github.token` (read by default; scoped write for release job); require approval for outside-contributor workflow runs.
 - Environments: create `production` for release with required secrets; optional manual reviewer gate.
 - Releases: enable provenance/signing if allowed; push to GitHub Packages + NuGet in release workflow.
 
