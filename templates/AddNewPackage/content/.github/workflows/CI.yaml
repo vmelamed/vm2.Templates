@@ -1,3 +1,5 @@
+# Comments marked with *TODO* are the customization points where you should adjust the text of this workflow template to the
+# needs of your your repo.
 name: "CI: Build, Test, Benchmark, Pack"
 
 on:
@@ -17,17 +19,19 @@ on:
         # Note: there is a known GitHub actions issue: the workflow dispatch UI doesn't properly handle JSON strings with quotes -
         # it removes the quotes. E.g. entering '["ubuntu-latest"]' in the UI prompt removes the inner quotes and it becomes the
         # invalid JSON: '[ubuntu-latest]'.
+        # *TODO* Adjust the default runner OS or OS-es as needed.
         default: ubuntu-latest
 
       preprocessor-symbols:
         description: >-
-          Preprocessor symbols separated by semicolon, space, or comma. E.g. "SHORT_RUN;FEATURE_A;FEATURE_B" or
-          "SHORT_RUN FEATURE_A FEATURE_B" or "SHORT_RUN,FEATURE_A,FEATURE_B".
+          Preprocessor symbols separated by semicolon, space, or comma. E.g. "SHORT_RUN FEAT_A" or
+          "SHORT_RUN;FEAT_A" or "SHORT_RUN,FEAT_A".
         type: string
+        # *TODO* Adjust the default preprocessor symbols as needed.
         default: "SHORT_RUN"
 
       reset-benchmark-thresholds:
-        description: Set to "true" to reset Bencher thresholds if some degradation is expected.
+        description: Check to reset Bencher thresholds if some degradation is expected.
         type: boolean
         default: false
 
@@ -37,26 +41,32 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  # *TODO* The source code project(s) or solution(s) to build. Must be a JSON array of strings containing path(s) to the buildable project(s) or solution(s).
   BUILD_PROJECTS: >-
     [
     "./MyPackage.slnx"
     ]
+  # *TODO* The test project(s) to build and run. Must be a JSON array of strings containing path(s) to the buildable and runnable test project(s).
   TEST_PROJECTS: >-
     [
     "test/MyPackage.Tests/MyPackage.Tests.csproj"
     ]
+  # *TODO* The benchmark project(s) to build and run. Must be a JSON array of strings containing path(s) to the buildable and runnable benchmark project(s).
   BENCHMARK_PROJECTS: >-
     [
     "benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj"
     ]
+  # *TODO* The project(s) to pack for NuGet validation during CI. Must be a JSON array of strings containing path(s) to the packable project(s).
   PACKAGE_PROJECTS: >-
     [
     "src/MyPackage/MyPackage.csproj"
     ]
+  # *TODO* The OS-es of the runner(s) to use for building and testing. Must be a JSON array of strings containing OS-es.
   RUNNERS_OS: >-
     [
     "ubuntu-latest"
     ]
+  # *TODO* Space, comma, or semicolon-separated preprocessor symbols to pass to the compiler.
   PREPROCESSOR_SYMBOLS: ""
   DOTNET_VERSION: ${{ vars.DOTNET_VERSION || '10.0.x' }} # The .NET SDK version to use.
   CONFIGURATION: ${{ vars.CONFIGURATION || 'Release' }} # The build configuration: Debug, Release, etc.
@@ -100,10 +110,10 @@ jobs:
         run: |
           source $DEVOPS_LIB_DIR/gh_core.sh
 
-          build_projects='${{ env.BUILD_PROJECTS || '' }}'
-          test_projects='${{ env.TEST_PROJECTS || '' }}'
-          benchmark_projects='${{ env.BENCHMARK_PROJECTS || '' }}'
-          package_projects='${{ env.PACKAGE_PROJECTS || '' }}'
+          build_projects='${{ env.BUILD_PROJECTS || '[]' }}'
+          test_projects='${{ env.TEST_PROJECTS || '[]' }}'
+          benchmark_projects='${{ env.BENCHMARK_PROJECTS || '[]' }}'
+          package_projects='${{ env.PACKAGE_PROJECTS || '[]' }}'
           runners_os='${{ env.RUNNERS_OS || '["ubuntu-latest"]' }}'
           dotnet_version='${{ env.DOTNET_VERSION || '10.0.x' }}'
           configuration='${{ env.CONFIGURATION || 'Release' }}'

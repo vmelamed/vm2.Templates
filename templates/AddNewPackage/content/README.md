@@ -79,10 +79,7 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
   - Set required secrets in the new GitHub repo:
     - `CODECOV_TOKEN`
     - `BENCHER_API_TOKEN`
-    - NuGet API keys - at least one of them must be defined and it must match the selected `NUGET_SERVER` (below)
-      - `NUGET_API_GITHUB_KEY`
-      - `NUGET_API_NUGET_KEY`
-      - `NUGET_API_KEY` (if NUGET_SERVER is set to a custom server)
+    - `NUGET_API_KEY` must be issued by the selected `NUGET_SERVER` (below)
   - Set required variables:
     - `DOTNET_VERSION`: `10.0.x`: the .NET SDK version to use
     - `CONFIGURATION`: `Release`: the build configuration to use (e.g., Release or Debug)

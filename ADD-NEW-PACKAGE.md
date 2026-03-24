@@ -11,6 +11,7 @@ RootOfRepo/
 ├── .github/
 │   └── dependabot.yml
 │   └── workflows/
+│       ├── AutoMerge.yaml
 │       ├── ClearCache.yaml
 │       ├── CI.yaml
 │       ├── Prerelease.yaml
@@ -119,10 +120,7 @@ The actions of this repo should have the following:
 - Secrets:
   - BENCHER_API_TOKEN: ${{ secrets.BENCHER_API_TOKEN }}
   - CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  - at least one of:
-    - NUGET_API_GITHUB_KEY: ${{ secrets.NUGET_API_GITHUB_KEY }}
-    - NUGET_API_NUGET_KEY: ${{ secrets.NUGET_API_NUGET_KEY }}
-    - NUGET_API_KEY: ${{ secrets.NUGET_API_NUGET_KEY }}
+  - NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
 
 The GitHub repositories have a lot of levers and knobs. Propose a sane default configuration for the new package repositories. You can discuss it with me as needed.
 
@@ -147,7 +145,7 @@ I am sure I am missing something at the moment, so please be proactive in asking
 
 - Branching: default branch `main`; protect with required checks (CI/prerelease/release) and require PRs; dismiss stale approvals on push.
 - Actions variables: see Variables section above.
-- Secrets expected: `BENCHER_API_TOKEN`, `CODECOV_TOKEN`, and at least one of: `NUGET_API_GITHUB_KEY`, `NUGET_API_NUGET_KEY`, `NUGET_API_KEY` - corresponding to the selected NuGet server.
+- Secrets expected: `BENCHER_API_TOKEN`, `CODECOV_TOKEN`, and `NUGET_API_KEY` - corresponding to the selected NuGet server.
 - Repo features: issues on; wiki off; projects optional (off by default); vulnerability alerts on; Dependabot security updates on; Actions enabled.
 - Permissions: least privilege for `GITHUB_TOKEN` (read by default; scoped write for release job); require approval for outside-contributor workflow runs.
 - Environments: create `production` for release with required secrets; optional manual reviewer gate.

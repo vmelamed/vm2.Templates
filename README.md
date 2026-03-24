@@ -82,6 +82,7 @@ Then run the generated `scripts/repo-setup.sh` to create and push the GitHub rep
   ├── .github/
   │   └── dependabot.yml
   │   └── workflows/
+  │       ├── AutoMerge.yaml
   │       ├── ClearCache.yaml
   │       ├── CI.yaml
   │       ├── Prerelease.yaml
@@ -129,10 +130,8 @@ Then run the generated `scripts/repo-setup.sh` to create and push the GitHub rep
 1. Set required secrets in the new GitHub repo:
    - `CODECOV_TOKEN`
    - `BENCHER_API_TOKEN`
-   - NuGet API keys - at least one of them must be defined and it must match the selected `NUGET_SERVER` (below)
-     - `NUGET_API_GITHUB_KEY`
-     - `NUGET_API_NUGET_KEY`
-     - `NUGET_API_KEY` (if NUGET_SERVER is set to a custom server)
+   - `NUGET_API_KEY` - must be issued by the selected `NUGET_SERVER` (below)
+
 1. Set debug flags (variables):
    - `ACTIONS_RUNNER_DEBUG`: `false`: Whether to enable GitHub Actions runner debug logging
    - `ACTIONS_STEP_DEBUG`: `false`: Whether to enable GitHub Actions step debug logging
