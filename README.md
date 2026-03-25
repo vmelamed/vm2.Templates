@@ -43,7 +43,7 @@ The first template is **vm2 Add New NuGet Package Solution (short name `vm2pkg`)
 ```bash
 dotnet new vm2pkg \
   --name MyPackage \
-  --initialVersion 0.1.0 \
+  --initialVersion 0.0.0 \
   --license MIT \
   --repositoryOrg vmelamed \
   --includeBenchmarks true \
