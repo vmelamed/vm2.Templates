@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <PackageType>Template</PackageType>
+        <PackageId>vm2.Templates</PackageId>
+        <Title>vm2 dotnet-new Templates</Title>
+        <Description>dotnet-new templates for scaffolding vm2 NuGet package repositories.</Description>
+        <PackageTags>dotnet-new;templates;vm2</PackageTags>
+        <PackageProjectUrl>https://github.com/vmelamed/vm2.Templates</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+
+        <!-- Template packages have no compilable code -->
+        <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <IncludeContentInPack>true</IncludeContentInPack>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <ContentTargetFolders>content</ContentTargetFolders>
+        <NoDefaultExcludes>true</NoDefaultExcludes>
+        <NoWarn>$(NoWarn);NU5128</NoWarn>
+
+        <!-- Override inherited settings that don't apply to template packages -->
+        <EnablePackageValidation>false</EnablePackageValidation>
+        <IncludeSymbols>false</IncludeSymbols>
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+        <IsTrimmable>false</IsTrimmable>
+        <EnableTrimAnalyzer>false</EnableTrimAnalyzer>
+    </PropertyGroup>
+
+    <!-- Remove all inherited package references — template packages have no code dependencies -->
+    <ItemGroup>
+        <PackageReference Remove="@(PackageReference)" />
+        <!-- Add back MinVer for version calculation from git tags -->
+        <PackageReference Include="MinVer" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="templates/**" Exclude="templates/**/bin/**;templates/**/obj/**" />
+        <None Include="README.md" Pack="true" PackagePath="/" />
+    </ItemGroup>
+
+</Project>

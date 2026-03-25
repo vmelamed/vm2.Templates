@@ -36,10 +36,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PACKAGE_PROJECTS: >-
-    [
-    "vm2.Templates.slnx"
-    ]
   RUNNERS_OS: >-
     [
     "ubuntu-latest"

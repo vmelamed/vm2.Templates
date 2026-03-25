@@ -14,7 +14,7 @@ on:
 env:
   PACKAGE_PROJECTS: >-
     [
-    "src/Project/Project.csproj"
+    "vm2.Templates.csproj"
     ]
   # Ensure the NUGET_API_KEY secret is issued by the server selected here.
   NUGET_SERVER: ${{ vars.NUGET_SERVER || 'github' }}
