@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="vm2.Templates.csproj" />
   <Folder Name="/templates/" />
   <Folder Name="/templates/AddNewPackage/" />
   <Folder Name="/templates/AddNewPackage/content/" />
