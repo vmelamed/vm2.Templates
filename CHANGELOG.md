@@ -1,9 +1,9 @@
 # Changelog
 
-
 ## Usage Notes
 
-> [!TIP] Be disciplined with your commit messages and let git-cliff do the work of updating this file.
+> [!TIP]
+> Be disciplined with your commit messages and let git-cliff do the work of updating this file.
 >
 > **Added:**
 >
@@ -12,7 +12,7 @@
 >
 > **Changed:**
 >
-> - add behavior changes here
+> - add behavior changes/refactors here
 > - commit prefix for git-cliff: `refactor:`
 >
 > **Fixed:**
@@ -38,7 +38,11 @@
 > **Internal**
 >
 > - add internal changes here
-> - commit prefix for git-cliff: `refactor:`, `docs:`, `style:`, `test:`, `chore:`, `ci:`, `build:`
+> - commit prefix for git-cliff: `docs:`, `style:`, `test:`, `chore:`
+>
+> **Skipped by git-cliff**
+>
+> - commit prefix: `ci:`, `devops:`, `build:`
 >
 
 ## References

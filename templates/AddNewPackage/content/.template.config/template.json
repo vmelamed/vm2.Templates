@@ -8,8 +8,9 @@
         "nuget",
         "package"
     ],
+    "groupIdentity": "vm2.Templates",
     "identity": "vm2.Templates.AddNewPackage",
-    "name": "vm2 Add New NuGet Package Solution",
+    "name": "Add New NuGet Package Solution to the vm2 namespace with vm2.DevOps GitHub Integration",
     "shortName": "vm2pkg",
     "sourceName": "MyPackage",
     "preferNameDirectory": true,

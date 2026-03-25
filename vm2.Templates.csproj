@@ -3,9 +3,10 @@
     <PropertyGroup>
         <PackageType>Template</PackageType>
         <PackageId>vm2.Templates</PackageId>
+        <TargetFramework>net10.0</TargetFramework>
         <Title>vm2 dotnet-new Templates</Title>
-        <Description>dotnet-new templates for scaffolding vm2 NuGet package repositories.</Description>
-        <PackageTags>dotnet-new;templates;vm2</PackageTags>
+        <Description>dotnet-new templates for scaffolding vm2 NuGet packages.</Description>
+        <PackageTags>dotnet-new;templates;vm2;nuget;package</PackageTags>
         <PackageProjectUrl>https://github.com/vmelamed/vm2.Templates</PackageProjectUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
 
@@ -29,12 +30,12 @@
     <!-- Remove all inherited package references — template packages have no code dependencies -->
     <ItemGroup>
         <PackageReference Remove="@(PackageReference)" />
-        <!-- Add back MinVer for version calculation from git tags -->
         <PackageReference Include="MinVer" PrivateAssets="all" />
+        <Compile Remove="**\*"></Compile>
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="templates/**" Exclude="templates/**/bin/**;templates/**/obj/**" />
+        <Content Include="templates/**/*" Exclude="templates/**/bin/**;templates/**/obj/**" />
         <None Include="README.md" Pack="true" PackagePath="/" />
     </ItemGroup>
 
