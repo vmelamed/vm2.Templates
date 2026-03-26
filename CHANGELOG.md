@@ -1,5 +1,11 @@
 # Changelog
 
+
+## v1.0.0-preview.1 - 2026-03-26
+
+### Internal
+
+DevOps changes only.
 ## Usage Notes
 
 > [!TIP]
