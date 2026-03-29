@@ -6,49 +6,48 @@ All notable changes to this project will be documented in this file.
 
 - Initial scaffold created from vm2 template.
 
-## [Unreleased]
-
-# Changelog
-
-## [Unreleased]
-
 ## Usage Notes
 
 > [!TIP] Be disciplined with your commit messages and let git-cliff do the work of updating this file.
 >
 > **Added:**
 >
-> - add new features here
+> - add new features
 > - commit prefix for git-cliff: `feat:`
 >
 > **Changed:**
 >
-> - add behavior changes here
+> - add behavior changes
 > - commit prefix for git-cliff: `refactor:`
 >
 > **Fixed:**
 >
-> - add bug fixes here
+> - add bug fixes
 > - commit prefix for git-cliff: `fix:`
 >
 > **Performance**
 >
-> - add performance improvements here
+> - add performance improvements
 > - commit prefix for git-cliff: `perf:`
+>
+> **Security**
+>
+> - add security-related changes
+> - commit prefix for git-cliff: `security:`
 >
 > **Removed**
 >
-> - add removed/obsolete items here
+> - add removed/obsolete items
 > - commit prefix for git-cliff: `revert:`
 >
 > **Security**
 >
-> - add security-related changes here
+> - add security-related changes
 > - commit prefix for git-cliff: `security:`
 >
 > **Internal**
 >
-> - add internal changes here
+> - add internal changes
 > - commit prefix for git-cliff: `refactor:`, `docs:`, `style:`, `test:`, `chore:`, `ci:`, `build:`
 >
 

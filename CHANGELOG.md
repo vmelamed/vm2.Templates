@@ -1,15 +1,14 @@
 # Changelog
 
-
 ## v1.0.0-preview.1 - 2026-03-26
 
 ### Internal
 
 DevOps changes only.
+
 ## Usage Notes
 
-> [!TIP]
-> Be disciplined with your commit messages and let git-cliff do the work of updating this file.
+> [!TIP] Be disciplined with your commit messages and let git-cliff do the work of updating this file.
 >
 > **Added:**
 >
