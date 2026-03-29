@@ -8,19 +8,7 @@
         "command": "code --new-window --wait --diff \"$REMOTE\" \"$LOCAL\""
     },
     "action_overrides": {
-        ".editorconfig": "copy",
-        ".gitattributes": "copy",
-        ".gitignore": "copy",
-        "codecov.yaml": "copy",
         "Directory.Build.props": "copy",
-        "Directory.Packages.props": "copy",
-        "global.json": "copy",
-        "LICENSE": "copy",
-        "NuGet.config": "copy",
-        ".github/dependabot.yml": "copy",
-        ".github/workflows/ClearCache.yaml": "copy",
-        ".github/workflows/CI.yaml": "ask to merge",
-        ".github/workflows/Prerelease.yaml": "ask to merge",
-        ".github/workflows/Release.yaml": "ask to merge"
+        "Directory.Packages.props": "copy"
     }
 }

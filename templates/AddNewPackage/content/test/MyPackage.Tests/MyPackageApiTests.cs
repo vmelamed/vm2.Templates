@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: {{license}}
 
-using vm2.MyPackage;
-
 namespace vm2.MyPackage.Tests;
 
 public class MyPackageApiTests

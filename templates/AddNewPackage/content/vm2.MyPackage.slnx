@@ -1,4 +1,7 @@
 <Solution>
+    <Folder Name="/.github/">
+        <File Path=".github/dependabot.yml" />
+    </Folder>
     <Folder Name="/.github/workflows/">
         <File Path=".github/workflows/CI.yaml" />
         <File Path=".github/workflows/ClearCache.yaml" />

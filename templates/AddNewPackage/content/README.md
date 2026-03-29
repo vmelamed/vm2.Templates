@@ -51,7 +51,7 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
   dotnet run --project benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj --configuration Release
   ```
 
-  > **Hint**: in a personal development environment, you can run benchmarks with defined `SHORT_RUN` preprocessor directive. The run will be faster, although less accurate, but still suitable for quick iterations.
+  > [!TIP] in a personal development environment, you can run benchmarks with defined `SHORT_RUN` preprocessor directive. The run will be faster, although less accurate, but still suitable for quick iterations.
 
 ## Package metadata
 
