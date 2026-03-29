@@ -1,8 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
     <PropertyGroup>
         <RootNamespace>vm2.MyPackage.Tests</RootNamespace>
     </PropertyGroup>
+
     <ItemGroup>
         <ProjectReference Include="../../src/MyPackage/MyPackage.csproj" />
     </ItemGroup>
+
 </Project>

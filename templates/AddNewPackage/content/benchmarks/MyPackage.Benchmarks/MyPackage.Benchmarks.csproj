@@ -1,8 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
     <PropertyGroup>
-        <RootNamespace>vm2.MyPackage.Benchmarks</RootNamespace>
+        <RootNamespace>vm2.SemVer.Benchmarks</RootNamespace>
     </PropertyGroup>
+
     <ItemGroup>
         <ProjectReference Include="../../src/MyPackage/MyPackage.csproj" />
     </ItemGroup>
+
 </Project>

@@ -43,7 +43,7 @@ env:
   # *TODO* The source code project(s) or solution(s) to build. Must be a JSON array of strings containing path(s) to the buildable project(s) or solution(s).
   BUILD_PROJECTS: >-
     [
-    "./MyPackage.slnx"
+    "src/MyPackage/MyPackage.csproj"
     ]
   # *TODO* The test project(s) to build and run. Must be a JSON array of strings containing path(s) to the buildable and runnable test project(s).
   TEST_PROJECTS: >-
