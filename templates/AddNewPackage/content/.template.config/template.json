@@ -75,7 +75,7 @@
                 {
                     "exclude": [
                         "licenses/**",
-                        "diff-common.custom.json"
+                        "diff-shared.custom.json"
                     ]
                 },
                 {
