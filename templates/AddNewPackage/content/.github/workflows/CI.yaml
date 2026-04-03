@@ -40,10 +40,9 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  # *TODO* The source code project(s) or solution(s) to build. Must be a JSON array of strings containing path(s) to the buildable project(s) or solution(s).
   BUILD_PROJECTS: >-
     [
-    "src/MyPackage/MyPackage.csproj"
+    "vm2.MyPackage.slnx"
     ]
   # *TODO* The test project(s) to build and run. Must be a JSON array of strings containing path(s) to the buildable and runnable test project(s).
   TEST_PROJECTS: >-
