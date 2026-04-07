@@ -9,9 +9,6 @@ namespace vm2.MyPackage.Benchmarks;
 [SimpleJob(RuntimeMoniker.HostProcess)]
 #endif
 //+:cnd:noEmit
-[MemoryDiagnoser]
-[JsonExporter]
-[Orderer(SummaryOrderPolicy.FastestToSlowest, MethodOrderPolicy.Declared)]
 public class EchoBenchmarks
 {
     private string _value = "payload";
