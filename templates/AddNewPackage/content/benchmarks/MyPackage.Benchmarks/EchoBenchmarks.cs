@@ -9,6 +9,9 @@ namespace vm2.MyPackage.Benchmarks;
 [SimpleJob(RuntimeMoniker.HostProcess)]
 #endif
 //+:cnd:noEmit
+[JsonExporterAttribute.BriefCompressed]
+[MarkdownExporterAttribute.GitHub]
+[MemoryDiagnoser]
 public class EchoBenchmarks
 {
     private string _value = "payload";
