@@ -1,5 +1,34 @@
 # Changelog
 
+
+## v1.0.0-preview.2 - 2026-04-11
+
+### Added
+
+- add example program to the template
+
+
+### Fixed
+
+- details in the template
+- in CI build the solution, not the project
+- update copyright year to 2025-2026 in license files and .editorconfig
+- remove unnecessary attributes from EchoBenchmarks class
+- update workflow configurations to use pull_request_target and set default for SAVE_PACKAGE_ARTIFACTS
+- add missing attributes for JSON and Markdown export in EchoBenchmarks class
+- update CI and workflow configurations to set default values for environment variables and improve logging
+- update DisableTestingPlatformServerCapability condition for Visual Studio builds
+- update git-cliff template for v2.x compatibility
+- add blank line for improved readability in changelog template
+- update vm2.TestUtilities package version to 1.4.0
+- update MyPackageApiTests class constructor to include ITestOutputHelper dependency
+- update changelog format, remove obsolete configuration files, and adjust project namespace
+
+
+### Internal
+
+- diff-shared
+
 ## v1.0.0-preview.1 - 2026-03-26
 
 ### Internal
