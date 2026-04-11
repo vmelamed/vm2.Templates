@@ -2,7 +2,7 @@
 
 namespace vm2.MyPackage.Tests;
 
-public class MyPackageApiTests
+public class MyPackageApiTests(ITestOutputHelper outputHelper) : TestBase(outputHelper)
 {
     [Fact]
     public void Echo_returns_value_when_present()
