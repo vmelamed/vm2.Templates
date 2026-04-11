@@ -32,12 +32,12 @@ DevOps changes only.
 >
 > **Removed**
 >
-> - add removed/obsolete items here
-> - commit prefix for git-cliff: `revert:`
+> - add removed/obsolete items
+> - commit prefix for git-cliff: `revert:` or `remove:`
 >
 > **Security**
 >
-> - add security-related changes here
+> - add security-related changes
 > - commit prefix for git-cliff: `security:`
 >
 > **Internal**
