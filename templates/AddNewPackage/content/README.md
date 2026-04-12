@@ -51,7 +51,8 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
   dotnet run --project benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj --configuration Release
   ```
 
-  > [!TIP] in a personal development environment, you can run benchmarks with defined `SHORT_RUN` preprocessor directive. The run will be faster, although less accurate, but still suitable for quick iterations.
+  > [!TIP] in a personal development environment, you can run benchmarks with defined `SHORT_RUN` preprocessor directive. The
+  run will be faster, although less accurate, but still suitable for quick iterations.
 
 ## Package metadata
 
@@ -102,4 +103,5 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
   - `Settings` -> `Actions` -> `General` -> `Workflow permissions`
   - enable `Allow GitHub Actions to create and approve pull requests`
   - required for prerelease changelog PR creation.
-- Changelog: prerelease workflow appends a prerelease section; release workflow adds a stable header with "See prereleases below." (prerelease sections stay intact).
+- Changelog: prerelease workflow appends a prerelease section; release workflow adds a stable header with "See prereleases
+  below." (prerelease sections stay intact).
