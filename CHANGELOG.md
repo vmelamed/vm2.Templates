@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.1.0-preview.1 - 2026-04-12
+
+### Added
+
+- this is now the source of truth for diff-shared.sh. Added PULL_REQUEST_TEMPLATE.md and .gitmessage - commit message template
+- add support for .slnx files in .gitattributes
+
+
+## v1.0.0 - 2026-04-11
+
+### Internal
+
+- promote to stable v1.0.0 [skip ci]
+- update changelog for v1.0.0 [skip ci]
+
+
 
 ## v1.0.0 - 2026-04-11
 See prereleases below.
