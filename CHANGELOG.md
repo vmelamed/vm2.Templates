@@ -1,12 +1,10 @@
 # Changelog
 
-
 ## v1.2.0-preview.1 - 2026-04-13
 
 ### Added
 
 - add prerelease reminder and normalize cliff parser rules
-
 
 ## v1.1.0 - 2026-04-12
 
@@ -15,20 +13,20 @@
 - promote to stable v1.1.0 [skip ci]
 - update changelog for v1.1.0 [skip ci]
 
-
-
 ## v1.1.0 - 2026-04-12
+
 See prereleases below.
 
 ## v1.1.0-preview.1 - 2026-04-12
+
 See prereleases below.
+
 ## v1.1.0-preview.1 - 2026-04-12
 
 ### Added
 
 - this is now the source of truth for diff-shared.sh. Added PULL_REQUEST_TEMPLATE.md and .gitmessage - commit message template
 - add support for .slnx files in .gitattributes
-
 
 ## v1.0.0 - 2026-04-11
 
@@ -37,16 +35,15 @@ See prereleases below.
 - promote to stable v1.0.0 [skip ci]
 - update changelog for v1.0.0 [skip ci]
 
-
-
 ## v1.0.0 - 2026-04-11
+
 See prereleases below.
+
 ## v1.0.0-preview.2 - 2026-04-11
 
 ### Added
 
 - add example program to the template
-
 
 ### Fixed
 
@@ -63,7 +60,6 @@ See prereleases below.
 - update vm2.TestUtilities package version to 1.4.0
 - update MyPackageApiTests class constructor to include ITestOutputHelper dependency
 - update changelog format, remove obsolete configuration files, and adjust project namespace
-
 
 ### Internal
 
@@ -112,7 +108,7 @@ DevOps changes only.
 > **Internal**
 >
 > - add internal changes here
-> - commit prefix for git-cliff: `docs:`, `style:`, `test:`, `chore:`
+> - commit prefix for git-cliff: `refactor:`, `doc:`, `docs:`, `style:`, `test:`, `chore:`, `ci:`, `build:`
 >
 > **Skipped by git-cliff**
 >
