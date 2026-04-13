@@ -1,6 +1,5 @@
 # Changelog
 
-
 ## v1.2.0-preview.2 - 2026-04-13
 
 ### Internal
@@ -20,14 +19,6 @@
 - promote to stable v1.1.0 [skip ci]
 - update changelog for v1.1.0 [skip ci]
 
-## v1.1.0 - 2026-04-12
-
-See prereleases below.
-
-## v1.1.0-preview.1 - 2026-04-12
-
-See prereleases below.
-
 ## v1.1.0-preview.1 - 2026-04-12
 
 ### Added
@@ -41,10 +32,6 @@ See prereleases below.
 
 - promote to stable v1.0.0 [skip ci]
 - update changelog for v1.0.0 [skip ci]
-
-## v1.0.0 - 2026-04-11
-
-See prereleases below.
 
 ## v1.0.0-preview.2 - 2026-04-11
 
