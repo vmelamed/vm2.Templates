@@ -1,5 +1,13 @@
 # Changelog
 
+
+## v1.2.0-preview.3 - 2026-04-13
+
+### Internal
+
+- bump vm2.TestUtilities to 1.4.2 and harden docs parser regex
+- remove duplicate version sections
+
 ## v1.2.0-preview.2 - 2026-04-13
 
 ### Internal
