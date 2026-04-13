@@ -2,16 +2,17 @@
 
 <!-- TOC tocDepth:2..3 chapterDepth:2..6 -->
 
-- [To install a template locally](#to-install-a-template-locally)
-- [vm2 Add New NuGet Package Solution (**`vm2pkg`**)](#vm2-add-new-nuget-package-solution-vm2pkg)
-  - [Prerequisites](#prerequisites)
-  - [Create a package scaffold](#create-a-package-scaffold)
-  - [Template parameters (key ones)](#template-parameters-key-ones)
-  - [What gets generated](#what-gets-generated)
-  - [Bootstrap script (generated)](#bootstrap-script-generated)
-  - [After generation](#after-generation)
-  - [Repo layout](#repo-layout)
-  - [Development notes](#development-notes)
+- [vm2.Templates](#vm2templates)
+  - [To install a template locally](#to-install-a-template-locally)
+  - [vm2 Add New NuGet Package Solution (**`vm2pkg`**)](#vm2-add-new-nuget-package-solution-vm2pkg)
+    - [Prerequisites](#prerequisites)
+    - [Create a package scaffold](#create-a-package-scaffold)
+    - [Template parameters (key ones)](#template-parameters-key-ones)
+    - [What gets generated](#what-gets-generated)
+    - [Bootstrap script (generated)](#bootstrap-script-generated)
+    - [After generation](#after-generation)
+    - [Repo layout](#repo-layout)
+    - [Development notes](#development-notes)
 
 <!-- /TOC -->
 
@@ -31,7 +32,8 @@ dotnet new install . --force
 
 ## vm2 Add New NuGet Package Solution (**`vm2pkg`**)
 
-The first template is **vm2 Add New NuGet Package Solution (short name `vm2pkg`)**, which scaffolds a new .NET package repository with conventional structure, GitHub Actions workflows, and optional components.
+The first template is **vm2 Add New NuGet Package Solution (short name `vm2pkg`)**, which scaffolds a new .NET package
+repository with conventional structure, GitHub Actions workflows, and optional components.
 
 ### Prerequisites
 
@@ -51,7 +53,8 @@ dotnet new vm2pkg \
   --includeDocs true
 ```
 
-Then run the generated `scripts/repo-setup.sh` to create and push the GitHub repo (uses `gh repo create`, default visibility public, requires authentication).
+Then run the generated `scripts/repo-setup.sh` to create and push the GitHub repo (uses `gh repo create`, default visibility
+public, requires authentication).
 
 ### Template parameters (key ones)
 
@@ -143,14 +146,14 @@ Then run the generated `scripts/repo-setup.sh` to create and push the GitHub rep
    - `MIN_COVERAGE_PCT`: `80`%: Minimum code coverage percentage required
    - `NUGET_SERVER`: `github`: the NuGet server to publish to (supported values: 'github', 'nuget', or custom URI)
    - `SAVE_PACKAGE_ARTIFACTS`: `false`: Whether to save package artifacts after build/publish
-   - `MINVERDEFAULTPRERELEASEIDENTIFIERS`: `preview.0`: Prefix for the prerelease tag, e.g. 'preview.0', 'alpha', 'beta', 'rc', etc.
+   - `MINVERDEFAULTPRERELEASEIDENTIFIERS`: `preview.0`: Prefix for the prerelease tag, e.g. 'preview.0', 'alpha', 'beta', 'rc',
+     etc.
    - `RESET_BENCHMARK_THRESHOLDS`: `false`: Whether to reset Bencher thresholds
 1. Protect `main` with required checks and require PRs. Suggested check names:
    - `build` (job id from CI workflow "CI: Build, Test, Benchmark")
    - `test` (job id from CI workflow "CI: Build, Test, Benchmark")
    - `benchmark` (job id from CI workflow "CI: Build, Test, Benchmark")
-
-1) Update README/CHANGELOG content and package metadata as needed.
+1. Update README/CHANGELOG content and package metadata as needed.
 
 ### Repo layout
 
