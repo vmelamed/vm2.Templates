@@ -1,5 +1,12 @@
 # Changelog
 
+
+## v1.2.0-preview.2 - 2026-04-13
+
+### Internal
+
+- clean-up the changelog
+
 ## v1.2.0-preview.1 - 2026-04-13
 
 ### Added
