@@ -1,6 +1,21 @@
 # Changelog
 
 
+## v1.2.0-preview.1 - 2026-04-13
+
+### Added
+
+- add prerelease reminder and normalize cliff parser rules
+
+
+## v1.1.0 - 2026-04-12
+
+### Internal
+
+- promote to stable v1.1.0 [skip ci]
+- update changelog for v1.1.0 [skip ci]
+
+
 
 ## v1.1.0 - 2026-04-12
 See prereleases below.
