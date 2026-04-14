@@ -5,6 +5,15 @@
 
 
 
+
+## v1.2.1 - 2026-04-14
+
+See prereleases below.
+
+
+
+
+
 ## v1.2.1-preview.3 - 2026-04-14
 
 
