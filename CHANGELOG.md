@@ -1,6 +1,13 @@
 # Changelog
 
 
+## v1.2.1-preview.2 - 2026-04-14
+
+### Internal
+
+- update changelog template formatting for consistency - addressed GH copilot review messages
+
+
 ## v1.2.1-preview.1 - 2026-04-14
 
 ### Fixed
