@@ -1,5 +1,20 @@
 # Changelog
 
+
+## v1.2.1-preview.1 - 2026-04-14
+
+### Fixed
+
+- prevent prerelease pointer duplication
+
+
+## v1.2.0 - 2026-04-14
+
+### Internal
+
+- promote to stable v1.2.0 [skip ci]
+- update changelog for v1.2.0 [skip ci]
+
 ## v1.2.0 - 2026-04-14
 
 See prereleases below.
