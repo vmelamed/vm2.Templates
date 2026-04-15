@@ -5,6 +5,20 @@
 
 
 
+## v1.2.1-preview.4 - 2026-04-15
+
+
+### Internal
+
+- promote to stable v1.2.1 [skip ci]
+- update changelog for v1.2.1 [skip ci]
+- add workflow to refresh NuGet lock files
+
+
+
+
+
+
 
 ## v1.2.1 - 2026-04-14
 
