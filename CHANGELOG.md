@@ -5,6 +5,22 @@
 
 
 
+## v1.2.1-preview.5 - 2026-04-17
+
+
+### Internal
+
+- update dependencies
+- remove obsolete packages.lock.json file
+- add packages.lock.json for dependency management
+- add pull request template for better contribution guidelines
+- update pull request template to remove performance and test coverage checks
+
+
+
+
+
+
 ## v1.2.1-preview.4 - 2026-04-15
 
 
