@@ -5,6 +5,18 @@
 
 
 
+## v1.2.2-preview.1 - 2026-04-20
+
+
+### Internal
+
+- fix formatting in changelog body for consistency
+
+
+
+
+
+
 
 ## v1.2.2 - 2026-04-17
 
