@@ -1,5 +1,17 @@
 # Changelog
 
+
+
+
+
+
+## v1.2.3-preview.3 - 2026-04-22
+
+
+### Internal
+
+- clean up changelog by removing unnecessary whitespace and empty lines
+
 ## v1.2.3-preview.2 - 2026-04-22
 
 ### Internal
