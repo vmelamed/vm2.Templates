@@ -1,6 +1,7 @@
 <Solution>
     <Folder Name="/.github/">
         <File Path=".github/dependabot.yml" />
+        <File Path=".github/PULL_REQUEST_TEMPLATE.md" />
     </Folder>
     <Folder Name="/.github/workflows/">
         <File Path=".github/workflows/AutoMerge.yaml" />
@@ -26,6 +27,7 @@
         <File Path=".editorconfig" />
         <File Path=".gitattributes" />
         <File Path=".gitignore" />
+        <File Path=".gitmessage" />
         <File Path="CHANGELOG.md" />
         <File Path="codecov.yaml" />
         <File Path="coverage.settings.xml" />
