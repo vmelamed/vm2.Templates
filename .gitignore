@@ -425,8 +425,6 @@ report.txt
 _ignore
 *[Ii][Nn][Ss][Tt][Rr][Uu][Cc][Tt][Ii][Oo][Nn][Ss]*.[Mm][Dd]
 
-CLAUDE.local.md
-
 # Ignore user-specific config e.g. "appsettings.val melamed.json"
 **/appsettings.*.json
 # But allow all environment specific configs
