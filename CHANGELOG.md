@@ -5,6 +5,23 @@
 
 
 
+## v1.2.3-preview.1 - 2026-04-22
+
+
+### Fixed
+
+- enhance CI and prerelease workflows with improved error handling and environment setup
+
+
+### Internal
+
+- add shared conventions document for vm2 packages for claude [skip ci]
+
+
+
+
+
+
 ## v1.2.2-preview.4 - 2026-04-22
 
 
