@@ -5,6 +5,18 @@
 
 
 
+## v1.2.2-preview.3 - 2026-04-22
+
+
+### Internal
+
+- upgrade packages and remove vulnerable package versions from Directory.Packages.props
+
+
+
+
+
+
 ## v1.2.2-preview.2 - 2026-04-22
 
 ### Internal
