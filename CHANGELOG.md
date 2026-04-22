@@ -5,6 +5,18 @@
 
 
 
+## v1.2.3-preview.2 - 2026-04-22
+
+
+### Internal
+
+- diff-shared
+
+
+
+
+
+
 ## v1.2.3-preview.1 - 2026-04-22
 
 
