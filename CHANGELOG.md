@@ -1,62 +1,32 @@
 # Changelog
 
-
-
-
-
-
 ## v1.2.3-preview.2 - 2026-04-22
-
 
 ### Internal
 
 - diff-shared
 
-
-
-
-
-
 ## v1.2.3-preview.1 - 2026-04-22
-
 
 ### Fixed
 
 - enhance CI and prerelease workflows with improved error handling and environment setup
 
-
 ### Internal
 
 - add shared conventions document for vm2 packages for claude [skip ci]
 
-
-
-
-
-
 ## v1.2.2-preview.4 - 2026-04-22
-
 
 ### Internal
 
 - upgrade packages and remove vulnerable package versions from Directory.Packages.props
-
-
-
-
-
 
 ## v1.2.2-preview.3 - 2026-04-22
 
-
 ### Internal
 
 - upgrade packages and remove vulnerable package versions from Directory.Packages.props
-
-
-
-
-
 
 ## v1.2.2-preview.2 - 2026-04-22
 
@@ -64,34 +34,17 @@
 
 DevOps changes only.
 
-
-
-
-
-
 ## v1.2.2-preview.1 - 2026-04-20
-
 
 ### Internal
 
 - fix formatting in changelog body for consistency
 
-
-
-
-
-
-
 ## v1.2.2 - 2026-04-17
 
 See prereleases below.
 
-
-
-
-
 ## v1.2.1-preview.5 - 2026-04-17
-
 
 ### Internal
 
@@ -101,13 +54,7 @@ See prereleases below.
 - add pull request template for better contribution guidelines
 - update pull request template to remove performance and test coverage checks
 
-
-
-
-
-
 ## v1.2.1-preview.4 - 2026-04-15
-
 
 ### Internal
 
@@ -115,27 +62,15 @@ See prereleases below.
 - update changelog for v1.2.1 [skip ci]
 - add workflow to refresh NuGet lock files
 
-
-
-
-
-
-
 ## v1.2.1 - 2026-04-14
 
 See prereleases below.
 
-
-
-
-
 ## v1.2.1-preview.3 - 2026-04-14
-
 
 ### Internal
 
 - sync round-3 changelog templates and bump TestUtilities to 1.4.4
-
 
 ## v1.2.1-preview.2 - 2026-04-14
 
@@ -143,13 +78,11 @@ See prereleases below.
 
 - update changelog template formatting for consistency - addressed GH copilot review messages
 
-
 ## v1.2.1-preview.1 - 2026-04-14
 
 ### Fixed
 
 - prevent prerelease pointer duplication
-
 
 ## v1.2.0 - 2026-04-14
 
