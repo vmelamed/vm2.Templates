@@ -5,6 +5,18 @@
 
 
 
+## v1.2.3-preview.5 - 2026-04-23
+
+
+### Internal
+
+- enhance README code example guidelines for clarity and completeness
+
+
+
+
+
+
 ## v1.2.3-preview.4 - 2026-04-23
 
 
