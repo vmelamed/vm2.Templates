@@ -5,6 +5,18 @@
 
 
 
+## v1.2.3-preview.4 - 2026-04-23
+
+
+### Fixed
+
+- update regex patterns for source exclusions in coverage settings for Windows and Linux compatibility
+
+
+
+
+
+
 ## v1.2.3-preview.3 - 2026-04-22
 
 
