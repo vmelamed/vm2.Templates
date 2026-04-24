@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.3-preview.6 - 2026-04-24
+
+### Fixed
+
+- adjust template formatting for changelog headers and body
+
 
 
 
