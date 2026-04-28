@@ -51,7 +51,8 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
   dotnet run --project benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj --configuration Release
   ```
 
-  > [!TIP] in a personal development environment, you can run benchmarks with defined `SHORT_RUN` preprocessor directive. The
+  > [!TIP]
+  > In a personal development environment, you can run benchmarks with defined `SHORT_RUN` preprocessor directive. The
   run will be faster, although less accurate, but still suitable for quick iterations.
 
 ## Package metadata
@@ -86,7 +87,7 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
     - `CONFIGURATION`: `Release`: the build configuration to use (e.g., Release or Debug)
     - `NUGET_SERVER`: `github`: the NuGet server to publish to (supported values: 'github', 'nuget', or custom URI)
     - `MINVERTAGPREFIX`: `v`: Prefix for git tags to be recognized by MinVer
-    - `MINVERDEFAULTPRERELEASEIDENTIFIERS`: `.0`: Prefix for the prerelease tag, e.g. 'preview.0', 'alpha', 'beta', 'rc', etc.
+    - `MINVERDEFAULTPRERELEASEIDENTIFIERS`: `preview.0`: Prefix for the prerelease tag, e.g. 'preview.0', 'alpha', 'beta', 'rc', etc.
     - `SAVE_PACKAGE_ARTIFACTS`: `false`: Whether to save package artifacts after build/publish
     - `MIN_COVERAGE_PCT`: `80`%: Minimum code coverage percentage required
     - `MAX_REGRESSION_PCT`: `20`%: Maximum allowed regression percentage
