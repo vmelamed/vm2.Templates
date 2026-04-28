@@ -84,6 +84,14 @@ env:
   # Preprocessor symbols separated by semicolon, space, or comma. E.g. "SHORT_RUN;FEATURE_A;FEATURE_B" or "SHORT_RUN FEATURE_A FEATURE_B" or "SHORT_RUN,FEATURE_A,FEATURE_B".
   # *TODO* Space, comma, or semicolon-separated preprocessor symbols to pass to the compiler.
   PREPROCESSOR_SYMBOLS: ""
+  DOTNET_VERSION: ${{ vars.DOTNET_VERSION || '10.0.x' }}
+  CONFIGURATION: ${{ vars.CONFIGURATION || 'Release' }}
+  MIN_COVERAGE_PCT: ${{ vars.MIN_COVERAGE_PCT || 80 }}
+  MAX_REGRESSION_PCT: ${{ vars.MAX_REGRESSION_PCT || 20 }}
+  MINVERTAGPREFIX: ${{ vars.MINVERTAGPREFIX || 'v' }}
+  MINVERDEFAULTPRERELEASEIDENTIFIERS: ${{ vars.MINVERDEFAULTPRERELEASEIDENTIFIERS || 'preview.0' }}
+  RESET_BENCHMARK_THRESHOLDS: ${{ vars.RESET_BENCHMARK_THRESHOLDS || 'false' }}
+  VERBOSE: ${{ vars.VERBOSE || 'false' }}
 
 jobs:
   prerun-ci:
@@ -121,6 +129,14 @@ jobs:
           dispatch-runners-os: ${{ inputs.runners-os }}
           dispatch-preprocessor-symbols: ${{ inputs.preprocessor-symbols }}
           dispatch-reset-benchmark-thresholds: ${{ inputs.reset-benchmark-thresholds }}
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          configuration: ${{ env.CONFIGURATION }}
+          min-coverage-pct: ${{ env.MIN_COVERAGE_PCT }}
+          max-regression-pct: ${{ env.MAX_REGRESSION_PCT }}
+          minver-tag-prefix: ${{ env.MINVERTAGPREFIX }}
+          minver-prerelease-id: ${{ env.MINVERDEFAULTPRERELEASEIDENTIFIERS }}
+          reset-benchmark-thresholds: ${{ env.RESET_BENCHMARK_THRESHOLDS }}
+          verbose: ${{ env.VERBOSE }}
 
   run-ci:
     name: "Run CI"
