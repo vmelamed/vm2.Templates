@@ -6,37 +6,19 @@
 
 - adjust template formatting for changelog headers and body
 
-
-
-
-
-
 ## v1.2.3-preview.5 - 2026-04-23
-
 
 ### Internal
 
 - enhance README code example guidelines for clarity and completeness
 
-
-
-
-
-
 ## v1.2.3-preview.4 - 2026-04-23
-
 
 ### Fixed
 
 - update regex patterns for source exclusions in coverage settings for Windows and Linux compatibility
 
-
-
-
-
-
 ## v1.2.3-preview.3 - 2026-04-22
-
 
 ### Internal
 
