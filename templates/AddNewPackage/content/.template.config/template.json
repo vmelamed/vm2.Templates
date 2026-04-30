@@ -1,74 +1,44 @@
 {
-    "$schema": "http://json.schemastore.org/template",
+    "$schema": "https://json.schemastore.org/template",
+    //
+    // TEMPLATE METADATA - these are used primarily for display in template galleries and search results, but can also be used to conditionally include/exclude content in the template
+    "identity": "vm2.Templates.AddNewPackage",
     "author": "Val Melamed",
     "classifications": [
         "vm2",
-        ".NET",
-        "library",
-        "nuget",
-        "package"
+        "NuGet",
+        "Package",
+        "Repository",
+        "GitHub",
+        "GitHub Actions"
     ],
+    "name": "vm2 NuGet Package Solution with GitHub Repository, Actions",
     "groupIdentity": "vm2.Templates",
-    "identity": "vm2.Templates.AddNewPackage",
-    "name": "Add New NuGet Package Solution to the vm2 namespace with vm2.DevOps GitHub Integration",
-    "shortName": "vm2pkg",
-    "sourceName": "MyPackage",
-    "preferNameDirectory": true,
-    "symbols": {
-        "initialVersion": {
-            "type": "parameter",
-            "datatype": "string",
-            "description": "Initial package version",
-            "defaultValue": "0.1.0",
-            "replaces": "{{initialVersion}}"
-        },
-        "license": {
-            "type": "parameter",
-            "datatype": "choice",
-            "description": "License for the project",
-            "defaultValue": "MIT",
-            "replaces": "{{license}}",
-            "choices": [
-                {
-                    "choice": "MIT",
-                    "description": "MIT License"
-                },
-                {
-                    "choice": "Apache-2.0",
-                    "description": "Apache License 2.0"
-                },
-                {
-                    "choice": "BSD-3",
-                    "description": "BSD 3-Clause License"
-                }
-            ]
-        },
-        "includeBenchmarks": {
-            "type": "parameter",
-            "datatype": "bool",
-            "description": "Include benchmarks project",
-            "defaultValue": "true"
-        },
-        "includeExamples": {
-            "type": "parameter",
-            "datatype": "bool",
-            "description": "Include examples folder",
-            "defaultValue": "true"
-        },
-        "includeDocs": {
-            "type": "parameter",
-            "datatype": "bool",
-            "description": "Include docs folder",
-            "defaultValue": "true"
-        },
-        "repositoryOrg": {
-            "type": "parameter",
-            "datatype": "string",
-            "description": "GitHub organization/user",
-            "defaultValue": "vmelamed",
-            "replaces": "{{repositoryOrg}}"
-        }
+    "tags": {
+        "language": "C#",
+        "type": "project"
     },
+    "shortName": "vm2pkg",
+    "postActions": [
+        {
+            "id": "run-repo-setup-again",
+            "description": "Finish the configuration of the GitHub repository.",
+            "actionId": "AC1156F7-BB77-4DB8-B28F-24EEBCCA1E5C",
+            "manualInstructions": [
+                {
+                    "text": "To create the repository and set it up for CI/CD:\n1. Prepare the secrets:\n  - BENCHER_API_TOKEN\n  - CODECOV_TOKEN (create new for this repo only!)\n  - RELEASE_PAT\n  - REPORTGENERATOR_LICENSE\n  - NUGET_API_KEY\n  - GH_PACKAGES_TOKEN and\n2. Run 'repo-setup.sh' to possibly change some repo vars and to set the secrets."
+                }
+            ],
+            "args": {
+                "executable": "$VM2_REPOS/vm2.DevOps/scripts/bash/repo-setup.sh",
+                "args": "--repo-name vm2.<NAME> --interactive-vars --interactive-secrets"
+            }
+        }
+    ],
+    // "constraints": {
+    // },
+    //
+    // TEMPLATE SOURCE files configuration - these are the files that will be copied and processed to create the new project/solution. You can specify include/exclude patterns, conditional inclusion based on symbols, and renaming rules.
     "sources": [
         {
             "modifiers": [
@@ -106,6 +76,12 @@
                     }
                 },
                 {
+                    "condition": "!(includeTests)",
+                    "exclude": [
+                        "test/**"
+                    ]
+                },
+                {
                     "condition": "!(includeBenchmarks)",
                     "exclude": [
                         "benchmarks/**"
@@ -126,16 +102,179 @@
             ]
         }
     ],
+    // "guids": [
+    //     "MyPackage.csproj",
+    //     "MyPackage.Tests.csproj"
+    // ],
+    "symbols": {
+        "initialVersion": {
+            "type": "parameter",
+            "datatype": "string",
+            "description": "Initial package version",
+            "defaultValue": "0.0.0",
+            "replaces": "{{initialVersion}}"
+        },
+        "license": {
+            "type": "parameter",
+            "datatype": "choice",
+            "description": "License for the project",
+            "defaultValue": "MIT",
+            "replaces": "{{license}}",
+            "choices": [
+                {
+                    "choice": "MIT",
+                    "description": "MIT License"
+                },
+                {
+                    "choice": "Apache-2.0",
+                    "description": "Apache License 2.0"
+                },
+                {
+                    "choice": "BSD-3",
+                    "description": "BSD 3-Clause License"
+                }
+            ]
+        },
+        "includeTests": {
+            "type": "parameter",
+            "datatype": "bool",
+            "description": "Include test project",
+            "defaultValue": "true"
+        },
+        "includeBenchmarks": {
+            "type": "parameter",
+            "datatype": "bool",
+            "description": "Include benchmarks project",
+            "defaultValue": "true"
+        },
+        "includePackage": {
+            "type": "parameter",
+            "datatype": "bool",
+            "description": "Include packable project",
+            "defaultValue": "true"
+        },
+        "includeExamples": {
+            "type": "parameter",
+            "datatype": "bool",
+            "description": "Include examples folder",
+            "defaultValue": "true"
+        },
+        "includeDocs": {
+            "type": "parameter",
+            "datatype": "bool",
+            "description": "Include docs folder",
+            "defaultValue": "true"
+        },
+        "repositoryOrg": {
+            "type": "parameter",
+            "datatype": "string",
+            "description": "GitHub organization/user",
+            "defaultValue": "vmelamed",
+            "replaces": "{{repositoryOrg}}"
+        }
+    },
+    // "forms": [
+    //     {
+    //         "name": "Package Information",
+    //         "fields": [
+    //             {
+    //                 "name": "initialVersion"
+    //             },
+    //             {
+    //                 "name": "license"
+    //             },
+    //             {
+    //                 "name": "includeBenchmarks"
+    //             },
+    //             {
+    //                 "name": "includeExamples"
+    //             },
+    //             {
+    //                 "name": "includeDocs"
+    //             },
+    //             {
+    //                 "name": "repositoryOrg"
+    //             }
+    //         ]
+    //     }
+    // ],
+    //
+    // OUTPUT MANAGEMENT - specify the primary outputs of the template, which are the files that will be generated and can be used for post-processing actions. You can also specify custom output modifiers here if needed.
+    "sourceName": "MyPackage",
+    // *TODO*  the solution file and other artifacts have vm2. hardcoded as a prefix: vm2.MyPackage.slnx, vm2.MyPackage.csproj,
+    // etc. When a user passes --name vm2.test1, MyPackage → vm2.test1 everywhere, so vm2.MyPackage → vm2.vm2.test1.
+    // Double prefix. For now the solution is to pass `--name MyPackage --output vm2.MyPackage`.
+    // Ideally the template should be smart enough to detect and avoid double prefixing.
+    "preferNameDirectory": true,
     "primaryOutputs": [
         {
             "path": "src/MyPackage/MyPackage.csproj"
         },
         {
+            "condition": "(includeTests)",
             "path": "test/MyPackage.Tests/MyPackage.Tests.csproj"
+        },
+        {
+            "condition": "(includeBenchmarks)",
+            "path": "benchmarks/MyPackage.Benchmarks/MyPackage.Benchmarks.csproj"
+        },
+        {
+            "condition": "(includeDocs)",
+            "path": "docs/README.md"
+        },
+        {
+            "condition": "(includeExamples)",
+            "path": "examples/Program.cs"
         }
     ],
-    "tags": {
-        "language": "C#",
-        "type": "project"
+    "specialCustomOperations": {
+        "**/*.yaml": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "#if"
+                        ],
+                        "else": [
+                            "#else"
+                        ],
+                        "elseif": [
+                            "#elseif"
+                        ],
+                        "endif": [
+                            "#endif"
+                        ],
+                        "evaluator": "C++",
+                        "trim": true,
+                        "wholeLine": true
+                    }
+                }
+            ]
+        },
+        "**/*.yml": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "#if"
+                        ],
+                        "else": [
+                            "#else"
+                        ],
+                        "elseif": [
+                            "#elseif"
+                        ],
+                        "endif": [
+                            "#endif"
+                        ],
+                        "evaluator": "C++",
+                        "trim": true,
+                        "wholeLine": true
+                    }
+                }
+            ]
+        }
     }
 }
