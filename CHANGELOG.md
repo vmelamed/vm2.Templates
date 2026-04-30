@@ -1,5 +1,24 @@
 # Changelog
 
+## v1.3.0-preview.1 - 2026-04-30
+
+### Added
+
+- update conventions.md and claude.md for vm2 package structure and guidelines:
+- add environment variables for .NET configuration in CI workflows
+
+### Fixed
+
+- commit prefix
+- change the dependabot's commit message prefix
+
+### Internal
+
+- update CONVENTIONS.md for scope and depth and README.md for improved Markdown formatting
+- streamline CI workflow by replacing custom input gathering with reusable action
+- update dependency, clean-up CHANGELOG.props
+- addressed copilot comments
+
 ## v1.2.3-preview.6 - 2026-04-24
 
 ### Fixed
