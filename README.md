@@ -45,12 +45,14 @@ repository with conventional structure, GitHub Actions workflows, and optional c
 ```bash
 dotnet new vm2pkg \
   --name MyPackage \
+  --output $VM2_REPOS/vm2.MyPackage \
   --initialVersion 0.0.0 \
-  --license MIT \
   --repositoryOrg vmelamed \
+  --includeTests true \
   --includeBenchmarks true \
   --includeExamples true \
   --includeDocs true
+  --license MIT \
 ```
 
 Then run the generated `scripts/repo-setup.sh` to create and push the GitHub repo (uses `gh repo create`, default visibility
@@ -115,10 +117,8 @@ public, requires authentication).
 - tests under `test/<name>.Tests/` (xUnit + FluentAssertions + MTP + coverage)
   - MTP v1 when built and run inside Visual Studio Test Explorer
   - MTP v2 when run via `dotnet run` CLI, or run the test executable, or in Visual Studio Code Test Explorer
-- optional benchmarks under `benchmarks/<name>.Benchmarks/` using BenchmarkDotNet
-- optional console example under `examples/<name>.Example/`
-- scripts folder with bootstrap helper and `_common.sh` and `github.sh` utilities
-- Packaging metadata patterned after vm2.Ulid (packable, SourceLink, MinVer tag prefix `v`, README/CHANGELOG/LICENSE packing entries).
+- optional benchmarks project under `benchmarks/<name>.Benchmarks/` using BenchmarkDotNet
+- optional console example single file program: `examples/<name>.cs/`
 
 ### Bootstrap script (generated)
 
@@ -131,24 +131,29 @@ public, requires authentication).
 ### After generation
 
 1. Set required secrets in the new GitHub repo:
-   - `CODECOV_TOKEN`
    - `BENCHER_API_TOKEN`
-   - `NUGET_API_KEY` - must be issued by the selected `NUGET_SERVER` (below)
+   - `CODECOV_TOKEN` - **one for each repo!**
+   - `NUGET_API_KEY` - must be issued by the selected `NUGET_SERVER`: NuGet or GitHub Packages
+   - `RELEASE_PAT`
+   - `REPORT_GENERATOR` - license key
+   - `GH_PACKAGES_TOKEN` - GitHub token with `read:packages` and `write:packages` scopes
 
-1. Set debug flags (variables):
-   - `ACTIONS_RUNNER_DEBUG`: `false`: Whether to enable GitHub Actions runner debug logging
-   - `ACTIONS_STEP_DEBUG`: `false`: Whether to enable GitHub Actions step debug logging
-1. Set required variables:
-   - `CONFIGURATION`: `Release`: the build configuration to use (e.g., Release or Debug)
-   - `DOTNET_VERSION`: `10.0.x`: the .NET SDK version to use
-   - `MAX_REGRESSION_PCT`: `20`%: Maximum allowed regression percentage
-   - `MINVERTAGPREFIX`: `v`: Prefix for git tags to be recognized by MinVer
-   - `MIN_COVERAGE_PCT`: `80`%: Minimum code coverage percentage required
-   - `NUGET_SERVER`: `github`: the NuGet server to publish to (supported values: 'github', 'nuget', or custom URI)
-   - `SAVE_PACKAGE_ARTIFACTS`: `false`: Whether to save package artifacts after build/publish
-   - `MINVERDEFAULTPRERELEASEIDENTIFIERS`: `preview.0`: Prefix for the prerelease tag, e.g. 'preview.0', 'alpha', 'beta', 'rc',
-     etc.
-   - `RESET_BENCHMARK_THRESHOLDS`: `false`: Whether to reset Bencher thresholds
+1. Variables
+   1. Set required variables:
+      - `CONFIGURATION`: `Release`: the build configuration to use (e.g., Release or Debug)
+      - `DOTNET_VERSION`: `10.0.x`: the .NET SDK version to use
+      - `MAX_REGRESSION_PCT`: `20`%: Maximum allowed regression percentage
+      - `MINVERTAGPREFIX`: `v`: Prefix for git tags to be recognized by MinVer
+      - `MIN_COVERAGE_PCT`: `80`%: Minimum code coverage percentage required
+      - `NUGET_SERVER`: `github`: the NuGet server to publish to (supported values: 'github', 'nuget', or custom URI)
+      - `SAVE_PACKAGE_ARTIFACTS`: `false`: Whether to save package artifacts after build/publish
+      - `MINVERDEFAULTPRERELEASEIDENTIFIERS`: `preview.0`: Prefix for the prerelease tag, e.g. 'preview.0', 'alpha', 'beta', 'rc',
+        etc.
+      - `RESET_BENCHMARK_THRESHOLDS`: `false`: Whether to reset Bencher thresholds
+   1. Set debug flags (variables):
+      - `ACTIONS_RUNNER_DEBUG`: `false`: Whether to enable GitHub Actions runner debug logging
+      - `ACTIONS_STEP_DEBUG`: `false`: Whether to enable GitHub Actions step debug logging
+
 1. Protect `main` with required checks and require PRs. Suggested check names:
    - `build` (job id from CI workflow "CI: Build, Test, Benchmark")
    - `test` (job id from CI workflow "CI: Build, Test, Benchmark")
