@@ -202,7 +202,7 @@ The project owner is a non-native English speaker.
 - **Prefer `ILogger<T>`** with structured logging over static loggers or string-based logging
 - In services with external dependencies, prefer **circuit breakers and retries** over exceptions for transient faults
 - In services use **health checks and monitoring** to detect and respond to failures instead of relying on exceptions for observability
-- In services for distributed systems **use Open Telemetry** for distributed tracing and metrics to understand system behavior and failures instead of relying on exceptions alone
+- In services for distributed systems **use OpenTelemetry** for distributed tracing and metrics to understand system behavior and failures instead of relying on exceptions alone
 
 ## Testing
 
