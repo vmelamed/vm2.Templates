@@ -51,17 +51,16 @@ Key design decisions:
   │   └── vm2.<name>/
   │       ├── MyPackage.csproj
   │       ├── MyPackage.Api.cs
-  |       └── usings.cs
+  │       └── usings.cs
   ├── test/                     # Test projects (highly recommended)
   │   └── vm2.<name>.Tests/
   │       ├── MyPackage.Tests.csproj
   │       ├── MyPackageApiTests.cs
-  |       └── usings.cs
+  │       └── usings.cs
   ├── .editorconfig *
   ├── .gitattributes *
   ├── .gitmessage *
   ├── .gitignore *
-  ├── CHANGELOG.md
   ├── CLAUDE.md
   ├── codecov.yml *
   ├── coverage.settings.xml *

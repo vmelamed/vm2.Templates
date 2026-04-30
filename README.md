@@ -51,8 +51,8 @@ dotnet new vm2pkg \
   --includeTests true \
   --includeBenchmarks true \
   --includeExamples true \
-  --includeDocs true
-  --license MIT \
+  --includeDocs true \
+  --license MIT
 ```
 
 Then run the generated `scripts/repo-setup.sh` to create and push the GitHub repo (uses `gh repo create`, default visibility
@@ -118,7 +118,7 @@ public, requires authentication).
   - MTP v1 when built and run inside Visual Studio Test Explorer
   - MTP v2 when run via `dotnet run` CLI, or run the test executable, or in Visual Studio Code Test Explorer
 - optional benchmarks project under `benchmarks/<name>.Benchmarks/` using BenchmarkDotNet
-- optional console example single file program: `examples/<name>.cs/`
+- optional console example single file program: `examples/Program.cs/`
 
 ### Bootstrap script (generated)
 
@@ -135,7 +135,7 @@ public, requires authentication).
    - `CODECOV_TOKEN` - **one for each repo!**
    - `NUGET_API_KEY` - must be issued by the selected `NUGET_SERVER`: NuGet or GitHub Packages
    - `RELEASE_PAT`
-   - `REPORT_GENERATOR` - license key
+   - `REPORTGENERATOR_LICENSE` - license key
    - `GH_PACKAGES_TOKEN` - GitHub token with `read:packages` and `write:packages` scopes
 
 1. Variables

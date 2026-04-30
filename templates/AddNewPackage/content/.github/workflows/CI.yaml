@@ -75,7 +75,7 @@ env:
 #endif
   # If not specified or empty, no projects will be packed for NuGet validation during CI.
   # *TODO* The project(s) to pack for NuGet validation during CI. Must be a JSON array of strings containing path(s) to the packable project(s).
-#if (includePackage)
+#if (includePackages)
   PACKAGE_PROJECTS: >-
     [
     "src/MyPackage/MyPackage.csproj"
