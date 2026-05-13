@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.0-preview.1 - 2026-05-13
+
+### Added
+
+- update diff tool to delta and add telemetry opt-out settings
+
 ## v1.3.0-preview.1 - 2026-04-30
 
 ### Added
