@@ -1,7 +1,7 @@
 {
     "diff": {
-        "tool": "meld",
-        "command": "meld --diff \"$LOCAL\" \"$REMOTE\""
+        "tool": "delta",
+        "command": "delta --side-by-side --line-numbers --paging never \"$LOCAL\" \"$REMOTE\""
     },
     "merge": {
         "tool": "code",
