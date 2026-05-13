@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.0-preview.3 - 2026-05-13
+
+### Added
+
+- add NSubstitute package reference to test projects
+
 ## v2.0.0-preview.2 - 2026-05-13
 
 ### Added
