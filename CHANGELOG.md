@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.0-preview.4 - 2026-05-15
+
+### Internal
+
+- update CONVENTIONS.md to use TimeProvider
+
 ## v2.0.0-preview.3 - 2026-05-13
 
 ### Added
