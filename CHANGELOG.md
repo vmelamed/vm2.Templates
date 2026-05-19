@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.0.0-preview.5 - 2026-05-19
+
+### Internal
+
+- Bump the minor-and-patch group with 12 updates
+- SDK version
+
 ## v2.0.0-preview.4 - 2026-05-15
 
 ### Internal
