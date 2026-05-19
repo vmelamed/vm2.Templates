@@ -37,7 +37,7 @@ repository with conventional structure, GitHub Actions workflows, and optional c
 
 ### Prerequisites
 
-- .NET SDK 10.0.101
+- .NET SDK 10.0.x
 - `gh` CLI (used by the generated bootstrap script)
 
 ### Create a package scaffold
@@ -85,34 +85,79 @@ public, requires authentication).
   ```text
   vm2.<name>/
   ├── .github/
-  │   └── dependabot.yml
-  │   └── workflows/
-  │       ├── AutoMerge.yaml
-  │       ├── ClearCache.yaml
-  │       ├── CI.yaml
-  │       ├── Prerelease.yaml
-  │       └── Release.yaml
+  │   ├── dependabot.yml *      # dependabot configuration (see note below)
+  │   ├── CONVENTIONS.md *      # Claude conventions for contributing to the repo
+  │   ├── copilot-instructions.md
+  │   ├── PULL_REQUEST_TEMPLATE.md *
+  │   └── workflows/            # GitHub Actions workflows
+  │       ├── AutoMerge.yaml *
+  │       ├── ClearCache.yaml *
+  │       ├── CI.yaml **
+  │       ├── Prerelease.yaml **
+  │       └── Release.yaml **
   ├── benchmarks/               # Benchmark projects (recommended)
   │   └── vm2.<name>.Benchmarks/
+  │       ├── EchoBenchmarks.cs
+  │       ├── vm2.<name>.Benchmarks.cs
+  │       ├── Program.cs
+  │       └── usings.cs
+  ├── changelog/                # git-cliff toml files for updating the Changelog from commit messages
+  │   ├── cliff-prerelease.toml *
+  │   └── cliff-release.toml *
+  ├── docs/                     # Extra documentation - in addition to the README.md in the repo root (optional)
+  │   └── README.md
+  ├── examples/                 # Example program(s) (one file program(s) or project(s) - optional)
+  │   └── Program.cs
   ├── src/                      # Source code
   │   └── vm2.<name>/
+  │       ├── MyPackage.csproj
+  │       ├── MyPackage.Api.cs
+  |       └── usings.cs
   ├── test/                     # Test projects (highly recommended)
   │   └── vm2.<name>.Tests/
-  ├── .editorconfig
-  ├── .gitattributes
-  ├── .gitignore
-  ├── codecov.yml
-  ├── Directory.Build.props
-  ├── Directory.Packages.props
-  ├── global.json
-  ├── test.runsettings
+  │       ├── MyPackage.Tests.csproj
+  │       ├── MyPackageApiTests.cs
+  |       └── usings.cs
+  ├── .editorconfig *
+  ├── .gitattributes *
+  ├── .gitmessage *
+  ├── .gitignore *
+  ├── CHANGELOG.md
+  ├── CLAUDE.md
+  ├── codecov.yml *
+  ├── coverage.settings.xml *
+  ├── Directory.Build.props **
+  ├── Directory.Packages.props **
+  ├── global.json *
+  ├── LICENSE *
+  ├── NuGet.config *
   ├── README.md
-  ├── LICENSE
+  ├── testconfig.json *
+  ├── vm2.MyPackage.slnx
   └── CHANGELOG.md
   ```
 
-> [!Warning]
-> Note that GitHub only recognizes `dependabot.yml` filename, not `dependabot.yAml`
+---
+> [!NOTE]
+> The files marked with asterisk(s) **\*** or **\*\*** are the "source-of-truth" files (SoT) that contain shared content between all repos
+> in this workspace. To propagate and or update the shared content from this folder to one or more repos in this workspace, use
+> the `diff-shared.sh` script - a configurable tool that is used to diff, and copy or merge content from the source SoT files \
+> in this project to one or more target repos, with token replacement. The files marked with
+>
+> - **\*** indicates files that by default are copied from the template content folder without modification, e.g.
+>      `.editorconfig`, `codecov.yml`, `global.json`, etc.
+> - **\*\*** indicate files that are diff-ed and then copied to (if missing) or merged with the existing file in the target
+> repo, e.g.
+      `Directory.Build.props` and `Directory.Packages.props`, which contain shared content but also have repo-specific content (e.g. package references, project references, etc.) that needs to be preserved.
+>
+> For more details on how to use the `diff-shared.sh` script, see the [tool's documentation](../vm2.DevOps/docs/diff-shared.md)
+
+---
+
+> [!WARNING]
+> Note that GitHub only recognizes the `dependabot.yml` filename, not `dependabot.yAml`
+
+---
 
 - tests under `test/<name>.Tests/` (xUnit + FluentAssertions + MTP + coverage)
   - MTP v1 when built and run inside Visual Studio Test Explorer
