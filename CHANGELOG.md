@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.0-preview.10 - 2026-05-20
+
+### Fixed
+
+- restored accidentally deleted parts
+
 ## v2.0.0-preview.9 - 2026-05-20
 
 ### Internal
