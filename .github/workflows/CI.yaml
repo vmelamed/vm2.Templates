@@ -30,7 +30,7 @@ on:
         default: false
 
       skip-benchmarks:
-        description: If selected, the workflow will skip running benchmark tests and THE CI WORKFLOW WILL BE MARKED AS FAILED. Use only for faster testing of building and other non-benchmark CI jobs.
+        description: If selected, the workflow will skip running benchmark tests and THE CI WORKFLOW WILL BE MARKED AS FAILED. Use only for faster testing of building and other non-benchmark test CI jobs.
         type: boolean
         default: false
 
