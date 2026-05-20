@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.0.0-preview.8 - 2026-05-20
+
+### Fixed
+
+- improve descriptions for skip options in CI workflow
+- minor grammar mistakes
+- UI phrasing
+
 ## v2.0.0-preview.7 - 2026-05-20
 
 ### Added
