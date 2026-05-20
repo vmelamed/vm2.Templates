@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.0-preview.9 - 2026-05-20
+
+### Internal
+
+- after running diff-shared.sh
+
 ## v2.0.0-preview.8 - 2026-05-20
 
 ### Fixed
