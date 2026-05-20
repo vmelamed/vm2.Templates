@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.0.0-preview.7 - 2026-05-20
+
+### Added
+
+- add skip flags for benchmarks, tests, and packages in CI workflow
+- add skip flags
+
+### Fixed
+
+- description of skip-packages [skip ci]
+- messages
+
 ## v2.0.0-preview.6 - 2026-05-20
 
 ### Internal
