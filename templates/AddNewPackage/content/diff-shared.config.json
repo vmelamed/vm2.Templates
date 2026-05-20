@@ -9,6 +9,11 @@
     },
     "files": [
         {
+            "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/copilot-instructions.md",
+            "targetFile": "${target_path}/.github/copilot-instructions.md",
+            "action": "ask to merge"
+        },
+        {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/workflows/CI.yaml",
             "targetFile": "${target_path}/.github/workflows/CI.yaml",
             "action": "ask to merge"
@@ -21,6 +26,16 @@
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/workflows/Release.yaml",
             "targetFile": "${target_path}/.github/workflows/Release.yaml",
+            "action": "ask to merge"
+        },
+        {
+            "sourceFile": "${vm2_repos}/${vm2_sot_shared}/Directory.Build.props",
+            "targetFile": "${target_path}/Directory.Build.props",
+            "action": "ask to merge"
+        },
+        {
+            "sourceFile": "${vm2_repos}/${vm2_sot_shared}/Directory.Packages.props",
+            "targetFile": "${target_path}/Directory.Packages.props",
             "action": "ask to merge"
         },
         {
@@ -54,11 +69,6 @@
             "action": "copy"
         },
         {
-            "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/copilot-instructions.md",
-            "targetFile": "${target_path}/.github/copilot-instructions.md",
-            "action": "copy"
-        },
-        {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.editorconfig",
             "targetFile": "${target_path}/.editorconfig",
             "action": "copy"
@@ -87,16 +97,6 @@
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/coverage.settings.xml",
             "targetFile": "${target_path}/coverage.settings.xml",
             "action": "copy"
-        },
-        {
-            "sourceFile": "${vm2_repos}/${vm2_sot_shared}/Directory.Build.props",
-            "targetFile": "${target_path}/Directory.Build.props",
-            "action": "merge or copy"
-        },
-        {
-            "sourceFile": "${vm2_repos}/${vm2_sot_shared}/Directory.Packages.props",
-            "targetFile": "${target_path}/Directory.Packages.props",
-            "action": "merge or copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/global.json",
