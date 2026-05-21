@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.1-preview.2 - 2026-05-21
+
+### Internal
+
+- update vm2.TestUtilities package version to 1.5.1 and adjust comments for clarity
+
 ## v2.0.1-preview.1 - 2026-05-21
 
 ### Internal
