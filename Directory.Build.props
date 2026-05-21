@@ -277,6 +277,6 @@
         <GenerateDocumentationFile>false</GenerateDocumentationFile>
     </PropertyGroup>
 
-    <!-- Add project-specific properties and packages here -->
+    <!-- Add repo-specific properties and packages here -->
 
 </Project>
