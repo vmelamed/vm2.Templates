@@ -4,6 +4,7 @@
 
 - [vm2.Templates](#vm2templates)
   - [To install a template locally](#to-install-a-template-locally)
+  - [To install a template globally](#to-install-a-template-globally)
   - [vm2 Add New NuGet Package Solution (**`vm2pkg`**)](#vm2-add-new-nuget-package-solution-vm2pkg)
     - [Prerequisites](#prerequisites)
     - [Create a package scaffold](#create-a-package-scaffold)
@@ -18,7 +19,9 @@
 
 This repo contains templates for creating new `dotnet` projects, solutions, etc.
 
-## To install a template locally
+## Install a template
+
+### To install a template locally
 
 ```bash
 dotnet new install .
@@ -29,6 +32,32 @@ or, if there were any changes to an already installed template:
 ```bash
 dotnet new install . --force
 ```
+
+### To install a template globally
+
+```bash
+dotnet new install vm2.Templates --add-source "https://nuget.pkg.github.com/vmelamed/index.json" --interactive
+```
+
+From [GitHub documentation](https://github.com/copilot/c/f6ece879-48e3-4574-8da3-b0fc4185293a):
+
+> If authentication is required, add the GitHub Packages feed to NuGet first, then install from it. In practice that usually means configuring the GitHub Packages NuGet source with your GitHub username and a token that has package read access, then running dotnet new install against that source. The dotnet new docs also note it resolves packages from configured NuGet sources for the current directory, plus any source passed on the command line. (learn.microsoft.com):
+>
+> ```bash
+> dotnet nuget add source "https://nuget.pkg.github.com/vmelamed/index.json" \
+>  --name github \
+>  --username vmelamed \
+>  --password <GITHUB_TOKEN> \
+>  --store-password-in-clear-text
+> ```
+
+Then you can install the templates with:
+
+```bash
+dotnet new install vm2.Templates --nuget-source github
+```
+
+Now you are ready to use the templates with `dotnet new <template-name>`.
 
 ## vm2 Add New NuGet Package Solution (**`vm2pkg`**)
 
@@ -44,8 +73,8 @@ repository with conventional structure, GitHub Actions workflows, and optional c
 
 ```bash
 dotnet new vm2pkg \
-  --name MyPackage \
-  --output $VM2_REPOS/vm2.MyPackage \
+  --name <PACKAGE> \
+  --output $VM2_REPOS/vm2.<PACKAGE> \
   --initialVersion 0.0.0 \
   --repositoryOrg vmelamed \
   --includeTests true \
