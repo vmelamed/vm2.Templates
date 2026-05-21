@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.1-preview.3 - 2026-05-21
+
+### Fixed
+
+- correct wording in conventions document for clarity
+
 ## v2.0.1-preview.2 - 2026-05-21
 
 ### Internal
