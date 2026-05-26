@@ -1,5 +1,16 @@
 # Changelog
 
+## v2.0.3-preview.1 - 2026-05-26
+
+### Fixed
+
+- remove outdated System.CommandLine package version
+
+### Internal
+
+- promote to stable v2.0.2 [skip ci]
+- update changelog for v2.0.2 [skip ci]
+
 ## v2.0.2 - 2026-05-26
 
 See prereleases below.
