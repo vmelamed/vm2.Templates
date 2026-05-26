@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.0.2-preview.2 - 2026-05-26
+
+### Fixed
+
+- disable AoT, refactor Directory.Build.props
+- clarify comment for repo-specific package references in Directory.Build.props
+- update vm2.TestUtilities package version to 1.5.2
+- minimize the package references and structure in Directory.Build.props and Directory.Packages.props
+- add version of MinVer
+
 ## v2.0.2-preview.1 - 2026-05-21
 
 ### Internal
