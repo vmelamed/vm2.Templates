@@ -76,6 +76,25 @@
         <DOTNET_SKIP_FIRST_TIME_EXPERIENCE>true</DOTNET_SKIP_FIRST_TIME_EXPERIENCE>
     </PropertyGroup>
 
+    <!-- ================ Package properties for all vm2 packages ================ -->
+    <PropertyGroup Label="NuGetCommon" Condition="'$(IsProductProject)' == 'true'">
+        <IsPackable>true</IsPackable>
+        <Company>vm</Company>
+        <Product>vm2</Product>
+        <ProductName>vm2 packages and tools</ProductName>
+        <Authors>Val Melamed</Authors>
+        <Copyright>Copyright ©2025 vm</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <RepositoryType>git</RepositoryType>
+        <IncludeSymbols>True</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EnablePackageValidation>true</EnablePackageValidation>
+        <EmbedAllSources>true</EmbedAllSources>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    </PropertyGroup>
+
     <!-- The following group builds the product project(s) as AOT compatible and enforces verification of the dependencies AOT compatibility
          unless the user or the project explicitly defines it as incompatible, e.g. with <IsAotCompatible>false</IsAotCompatible> -->
     <PropertyGroup Label="AoT" Condition="
@@ -96,26 +115,7 @@
         <!-- Add more, repo-specific package references below in the designated placeholder -->
     </ItemGroup>
 
-    <!-- ================ Package properties for all vm2 packages ================ -->
-    <PropertyGroup Label="NuGetCommon" Condition="'$(IsProductProject)' == 'true'">
-        <IsPackable>true</IsPackable>
-        <Company>vm</Company>
-        <Product>vm2</Product>
-        <ProductName>vm2 packages and tools</ProductName>
-        <Authors>Val Melamed</Authors>
-        <Copyright>Copyright ©2025 vm</Copyright>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-        <RepositoryType>git</RepositoryType>
-        <IncludeSymbols>True</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <EnablePackageValidation>true</EnablePackageValidation>
-        <EmbedAllSources>true</EmbedAllSources>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    </PropertyGroup>
-
-    <!-- Print version info after build for all projects -->
+    <!-- Print version info after build for all projects - CI will capture it in the Step Summary -->
     <Target Name="PrintVersion" AfterTargets="Build">
         <Message Importance="high" Text="AssemblyVersion: $(AssemblyVersion)" />
         <Message Importance="high" Text="FileVersion: $(FileVersion)" />
