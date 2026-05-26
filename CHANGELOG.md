@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.4-preview.2 - 2026-05-26
+
+### Internal
+
+- upgrade vm2.TestUtilities to v2.0.0
+
 ## v2.0.4-preview.1 - 2026-05-26
 
 ### Internal
