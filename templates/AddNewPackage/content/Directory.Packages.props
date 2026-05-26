@@ -4,7 +4,6 @@
         <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     </PropertyGroup>
     <ItemGroup>
-        <PackageVersion Include="System.CommandLine" Version="2.0.8" />
         <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.300" />
         <PackageVersion Include="MinVer" Version="7.0.0" />
 
