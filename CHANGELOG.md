@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.0.3-preview.2 - 2026-05-26
+
+### Fixed
+
+- update copyright year in Directory.Build.props
+
+### Internal
+
+- cosmetic change
+
 ## v2.0.3-preview.1 - 2026-05-26
 
 ### Fixed
