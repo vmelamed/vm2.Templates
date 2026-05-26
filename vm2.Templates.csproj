@@ -57,7 +57,7 @@
     <!-- Remove all inherited package references — template packages have no code dependencies -->
     <ItemGroup>
         <PackageReference Remove="@(PackageReference)" />
-        <PackageReference Include="MinVer" PrivateAssets="all" />
+        <PackageReference Include="MinVer" Version="7.0.0" PrivateAssets="all" />
         <Compile Remove="**/*"></Compile>
     </ItemGroup>
 
