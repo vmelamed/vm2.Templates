@@ -83,7 +83,7 @@
         <Product>vm2</Product>
         <ProductName>vm2 packages and tools</ProductName>
         <Authors>Val Melamed</Authors>
-        <Copyright>Copyright ©2025 vm</Copyright>
+        <Copyright>Copyright ©2025-2026 vm</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
