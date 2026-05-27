@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: {{license}}
 
-namespace vm2.MyPackage.Tests;
+namespace vm2.Tests.MyPackage;
 
-public class MyPackageApiTests(ITestOutputHelper outputHelper) : TestBase(outputHelper)
+public class MyPackageTests(ITestOutputHelper outputHelper) : TestBase(outputHelper)
 {
     [Fact]
     public void Echo_returns_value_when_present()

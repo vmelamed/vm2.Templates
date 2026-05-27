@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: {{license}}
 
-namespace vm2.MyPackage.Benchmarks;
+namespace vm2.Benchmarks.MyPackage;
 
 //-:cnd:noEmit
 #if SHORT_RUN
