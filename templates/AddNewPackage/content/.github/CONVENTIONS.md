@@ -262,6 +262,7 @@ The project owner is a non-native English speaker.
   - Package ID: `vm2.<Package>` or `vm2.<Package>.<Feature>`
   - Assembly name: `vm2.<Package>` or `vm2.<Package>.<Feature>`
 - **Always set `<AssemblyName>` explicitly** in every `*.csproj` to avoid accidental drift when project file names change.
+- **Always set `<OutputType>` explicitly** in every `*.csproj` too
 - Set `<RootNamespace>` explicitly in every `*.csproj`.
 - Root namespace policy:
   - For core libraries, prioritize API clarity and discoverability.
