@@ -268,10 +268,10 @@ The project owner is a non-native English speaker.
   - For feature libraries, use a stable hierarchy that mirrors the feature domain.
 - Test naming policy (tests-first):
   - Namespace: `vm2.Tests.<Package>[.<Feature>]`
-  - Assembly: `vm2.<Package>.Tests`
+  - Assembly: `vm2.Tests.<Package>`
 - Benchmark naming policy (benchmarks-first):
   - Namespace: `vm2.Benchmarks.<Package>`
-  - Assembly: `vm2.<Package>.Benchmarks`
+  - Assembly: `vm2.Benchmarks.<Package>`
 - Companion/add-on packages (for optional integrations) must use their own package and assembly identities, for example `vm2.<Package>.<Feature>`.
 - Inside a single repository, do not mix naming strategies. Choose one namespace strategy and apply it consistently to `src/`, `test/`, and `benchmarks/`.
 

@@ -77,7 +77,7 @@ env:
 #if (includeTests)
   TEST_PROJECTS: >-
     [
-    "test/MyPackage.Tests/MyPackage.Tests.csproj"
+    "tests/MyPackage.Tests/MyPackage.Tests.csproj"
     ]
 #endif
   # If not specified or empty, no benchmarks will be built or run.

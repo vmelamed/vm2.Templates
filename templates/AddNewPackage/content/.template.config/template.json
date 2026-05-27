@@ -46,6 +46,7 @@
                     "exclude": [
                         "licenses/**",
                         "diff-shared.config.json",
+                        "**/packages.lock.json",
                         "**/bin/**",
                         "**/obj/**"
                     ]
