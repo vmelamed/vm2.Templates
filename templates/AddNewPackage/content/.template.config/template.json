@@ -45,7 +45,9 @@
                 {
                     "exclude": [
                         "licenses/**",
-                        "diff-shared.config.json"
+                        "diff-shared.config.json",
+                        "**/bin/**",
+                        "**/obj/**"
                     ]
                 },
                 {

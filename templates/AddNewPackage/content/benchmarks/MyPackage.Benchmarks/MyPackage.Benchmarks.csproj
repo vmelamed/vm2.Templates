@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <RootNamespace>vm2.MyPackage.Benchmarks</RootNamespace>
+        <RootNamespace>vm2.Benchmarks.MyPackage</RootNamespace>
+        <AssemblyName>vm2.MyPackage.Benchmarks</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>

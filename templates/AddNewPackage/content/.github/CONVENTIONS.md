@@ -257,6 +257,23 @@ The project owner is a non-native English speaker.
 - Events: past tense — `OrderPlacedEvent`.
 - Commands: imperative — `PlaceOrderCommand`.
 - Handlers: `...Handler` suffix.
+- Prefer **domain-first public API type names** without `Type` suffixes unless required to avoid language-level symbol conflicts.
+- Prefer **package-first artifact identity** for NuGet packages and assemblies:
+  - Package ID: `vm2.<Package>` or `vm2.<Package>.<Feature>`
+  - Assembly name: `vm2.<Package>` or `vm2.<Package>.<Feature>`
+- **Always set `<AssemblyName>` explicitly** in every `*.csproj` to avoid accidental drift when project file names change.
+- Set `<RootNamespace>` explicitly in every `*.csproj`.
+- Root namespace policy:
+  - For core libraries, prioritize API clarity and discoverability.
+  - For feature libraries, use a stable hierarchy that mirrors the feature domain.
+- Test naming policy (tests-first):
+  - Namespace: `vm2.Tests.<Package>[.<Feature>]`
+  - Assembly: `vm2.<Package>.Tests`
+- Benchmark naming policy (benchmarks-first):
+  - Namespace: `vm2.Benchmarks.<Package>`
+  - Assembly: `vm2.<Package>.Benchmarks`
+- Companion/add-on packages (for optional integrations) must use their own package and assembly identities, for example `vm2.<Package>.<Feature>`.
+- Inside a single repository, do not mix naming strategies. Choose one namespace strategy and apply it consistently to `src/`, `test/`, and `benchmarks/`.
 
 ## Git and PR Hygiene
 
