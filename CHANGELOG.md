@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.0.0-preview.3 - 2026-05-28
+
+### Fixed
+
+- correct path format for BUILD_PROJECTS in CI workflow
+
 ## v3.0.0-preview.2 - 2026-05-28
 
 ### Fixed
