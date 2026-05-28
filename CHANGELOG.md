@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.0.0-preview.4 - 2026-05-28
+
+### Fixed
+
+- update line endings and add AOT and trimming guidelines in project files
+
 ## v3.0.0-preview.3 - 2026-05-28
 
 ### Fixed
