@@ -270,9 +270,11 @@ The project owner is a non-native English speaker.
 - Test naming policy (tests-first):
   - Namespace: `vm2.Tests.<Package>[.<Feature>]`
   - Assembly: `vm2.Tests.<Package>`
+  - Always specify `<OutputType>Exe</OutputType>` in test project files to make it clear to the CI scripts what type of file to run for benchmarks, and to avoid drift when project file names change.
 - Benchmark naming policy (benchmarks-first):
   - Namespace: `vm2.Benchmarks.<Package>`
-  - Assembly: `vm2.Benchmarks.<Package>`
+  - Assembly: **keep the default** - the name of the project file without the extension, e.g. `Benchmarks.Ulid` for `Benchmarks.Ulid.csproj`, to avoid drift when project file names change. This is BenchmarkDotNet's required convention and it works well with the generated artifacts and reports, e.g. `Benchmarks.Ulid.Artifacts` folder, `Benchmarks.Ulid-report-github.md` report file, etc.
+  - Always specify **`<OutputType>Exe</OutputType>`** in benchmark project files to make it clear to the CI scripts what type of file to run for benchmarks, and to avoid drift when project file names change.
 - Companion/add-on packages (for optional integrations) must use their own package and assembly identities, for example `vm2.<Package>.<Feature>`.
 - Inside a single repository, do not mix naming strategies. Choose one namespace strategy and apply it consistently to `src/`, `test/`, and `benchmarks/`.
 
