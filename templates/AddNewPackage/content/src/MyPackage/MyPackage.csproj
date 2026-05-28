@@ -10,7 +10,7 @@
         <Title>vm2 MyPackage</Title>
         <Description>vm2 MyPackage package skeleton.</Description>
         <PackageTags>vm2 MyPackage library template</PackageTags>
-        <PackageProjectUrl>https://github.com/{{repositoryOrg}}/blob/main/src/vm2.MyPackage</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/{{repositoryOrg}}/vm2.MyPackage/blob/main/src/vm2.MyPackage</PackageProjectUrl>
         <RepositoryUrl>https://github.com/{{repositoryOrg}}/vm2.MyPackage</RepositoryUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
