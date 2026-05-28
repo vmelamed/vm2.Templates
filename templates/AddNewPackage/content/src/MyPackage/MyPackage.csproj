@@ -3,7 +3,6 @@
     <PropertyGroup>
         <OutputType>Library</OutputType>
         <RootNamespace>vm2.MyPackage</RootNamespace>
-        <AssemblyName>vm2.MyPackage</AssemblyName>
     </PropertyGroup>
 
     <PropertyGroup Label="NuGet">
