@@ -3,7 +3,6 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <RootNamespace>vm2.Tests.MyPackage</RootNamespace>
-        <AssemblyName>vm2.MyPackage.Tests</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
