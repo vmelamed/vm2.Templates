@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.0.0-preview.1 - 2026-05-28
+
+### Internal
+
+- **BREAKING:** follow conventions for project names, directories, namespaces, assembly names
+- **BREAKING:** changed the conventions: assembly name should match the namespace. Renamed the test folder tests for consistency with namespaces, assemblies, benchmarks folder and examples folder
+- simplify IsProductProject condition in Directory.Build.props
+- explicitly set OutputType in project files for consistency
+- update test and benchmark project files to follow naming conventions and improve clarity
+- update project file to remove explicit AssemblyName for consistency with conventions
+
 ## v2.0.4-preview.3 - 2026-05-26
 
 ### Internal
