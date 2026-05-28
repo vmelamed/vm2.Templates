@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.0.0-preview.2 - 2026-05-28
+
+### Fixed
+
+- correct PackageProjectUrl and rename test folder to tests for consistency
+
 ## v3.0.0-preview.1 - 2026-05-28
 
 ### Internal
