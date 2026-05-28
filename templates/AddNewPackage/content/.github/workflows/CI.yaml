@@ -68,7 +68,7 @@ env:
   # buildable project(s) or solution(s).
   BUILD_PROJECTS: >-
     [
-    "./vm2.MyPackage.slnx"
+    "vm2.MyPackage.slnx"
     ]
   # If not specified or empty, no tests will be built or run. Not having tests is not typical and not desirable, but possible.
   # For example projects that contain only the code of the deliverables, e.g. projects in early stages of development, or DevOps
