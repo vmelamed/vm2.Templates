@@ -1,5 +1,13 @@
 # Changelog
 
+## v3.0.1-preview.1 - 2026-05-29
+
+### Internal
+
+- promote to stable v3.0.0 [skip ci]
+- update changelog for v3.0.0 [skip ci]
+- update vm2.TestUtilities to Version 2.0.1
+
 ## v3.0.0 - 2026-05-29
 
 See prereleases below.
