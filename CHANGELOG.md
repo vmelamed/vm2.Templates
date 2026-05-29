@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.0.0-preview.5 - 2026-05-29
+
+### Internal
+
+- change "test/" to "tests/"
+
 ## v3.0.0-preview.4 - 2026-05-28
 
 ### Fixed
