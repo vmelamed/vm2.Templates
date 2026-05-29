@@ -105,12 +105,8 @@
 
     <!-- ================ Common Package References for All projects ================ -->
     <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub">
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
-        <PackageReference Include="MinVer">
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
+        <PackageReference Include="MinVer" PrivateAssets="all" />
         <!-- Add more, repo-specific package references below in the designated placeholder -->
     </ItemGroup>
 
