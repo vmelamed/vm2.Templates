@@ -52,7 +52,7 @@ Key design decisions:
   │       ├── MyPackage.csproj
   │       ├── MyPackage.Api.cs
   │       └── usings.cs
-  ├── test/                     # Test projects (highly recommended)
+  ├── tests/                    # Test projects (highly recommended)
   │   └── vm2.<name>.Tests/
   │       ├── MyPackage.Tests.csproj
   │       ├── MyPackageApiTests.cs
@@ -82,10 +82,10 @@ Key design decisions:
 dotnet build vm2.MyPackage.slnx
 
 # Run all tests (MTP v2 — each project is a compiled executable)
-dotnet test --project test/MyPackage.Tests/MyPackage.Tests.csproj
+dotnet test --project tests/MyPackage.Tests/MyPackage.Tests.csproj
 
 # Run a single test by name (MTP v2 filter syntax)
-dotnet test --project test/MyPackage.Tests/MyPackage.Tests.csproj --filter "MethodName_WhenCondition_ShouldOutcome"
+dotnet test --project tests/MyPackage.Tests/MyPackage.Tests.csproj --filter "MethodName_WhenCondition_ShouldOutcome"
 
 # Pack NuGet package
 dotnet pack vm2.MyPackage.slnx --configuration Release

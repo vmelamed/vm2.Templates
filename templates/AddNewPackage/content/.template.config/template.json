@@ -81,7 +81,7 @@
                 {
                     "condition": "!(includeTests)",
                     "exclude": [
-                        "test/**"
+                        "tests/**"
                     ]
                 },
                 {
@@ -215,7 +215,7 @@
         },
         {
             "condition": "(includeTests)",
-            "path": "test/MyPackage.Tests/MyPackage.Tests.csproj"
+            "path": "tests/MyPackage.Tests/MyPackage.Tests.csproj"
         },
         {
             "condition": "(includeBenchmarks)",

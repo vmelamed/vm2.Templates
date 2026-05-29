@@ -143,7 +143,7 @@ public, requires authentication).
   │       ├── MyPackage.csproj
   │       ├── MyPackage.Api.cs
   |       └── usings.cs
-  ├── test/                     # Test projects (highly recommended)
+  ├── tests/                    # Test projects (highly recommended)
   │   └── vm2.<name>.Tests/
   │       ├── MyPackage.Tests.csproj
   │       ├── MyPackageApiTests.cs
@@ -189,7 +189,7 @@ public, requires authentication).
 
 ---
 
-- tests under `test/<name>.Tests/` (xUnit + FluentAssertions + MTP + coverage)
+- tests under `tests/<name>.Tests/` (xUnit + FluentAssertions + MTP + coverage)
   - MTP v1 when built and run inside Visual Studio Test Explorer
   - MTP v2 when run via `dotnet run` CLI, or run the test executable, or in Visual Studio Code Test Explorer
 - optional benchmarks project under `benchmarks/<name>.Benchmarks/` using BenchmarkDotNet
