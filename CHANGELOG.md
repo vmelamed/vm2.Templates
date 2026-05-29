@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.0.0-preview.8 - 2026-05-29
+
+### Internal
+
+- simplified Directory.Build.props in the template
+
 ## v3.0.0-preview.7 - 2026-05-29
 
 ### Internal
