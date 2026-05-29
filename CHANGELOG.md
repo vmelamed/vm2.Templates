@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.0.0-preview.6 - 2026-05-29
+
+### Internal
+
+- simplify vm2.Templates.csproj by making Directory.Build.props inclusive for template projects too
+
 ## v3.0.0-preview.5 - 2026-05-29
 
 ### Internal
