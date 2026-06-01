@@ -1,5 +1,14 @@
 # Changelog
 
+## v3.0.2-preview.1 - 2026-06-01
+
+### Internal
+
+- promote to stable v3.0.1 [skip ci]
+- update changelog for v3.0.1 [skip ci]
+- update .gitattributes comments for clarity on line endings [skip ci]
+- update project configurations and conventions for Visual Studio compatibility
+
 ## v3.0.1 - 2026-05-29
 
 See prereleases below.
