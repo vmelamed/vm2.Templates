@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.0.2-preview.2 - 2026-06-01
+
+### Internal
+
+- enhance Copilot instructions for clarity on shared conventions
+
 ## v3.0.2-preview.1 - 2026-06-01
 
 ### Internal
