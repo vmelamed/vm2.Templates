@@ -59,6 +59,7 @@ dotnet new install vm2.Templates --nuget-source github
 ```
 
 If you see a message similar to:
+
 ```text
 The following template packages will be installed:
    /home/valo/repos/vm2/vm2.Templates
