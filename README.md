@@ -58,6 +58,30 @@ Then you can install the templates with:
 dotnet new install vm2.Templates --nuget-source github
 ```
 
+If you see a message similar to:
+```text
+The following template packages will be installed:
+   /home/valo/repos/vm2/vm2.Templates
+
+Warning:
+The following templates use the same identity 'vm2.Templates.AddNewPackage':
+  * 'vm2 NuGet Package Solution with GitHub Repository, Actions' from 'vm2.templates@X.Y.Z'
+  * 'vm2 NuGet Package Solution with GitHub Repository, Actions' from '/home/valo/repos/vm2/vm2.Templates'
+The template from 'vm2 NuGet Package Solution with GitHub Repository, Actions' will be used. To resolve this conflict, uninstall the conflicting template packages.
+Success: /home/valo/repos/vm2/vm2.Templates installed the following templates:
+Template Name                                               Short Name  Language  Tags
+----------------------------------------------------------  ----------  --------  --------------------------------------------------
+vm2 NuGet Package Solution with GitHub Repository, Actions  vm2pkg      [C#]      vm2/NuGet/Package/Repository/GitHub/GitHub Actions
+```
+
+> [!IMPORTANT]
+> You may first uninstall the previously installed template and then install the new one with:
+>
+> ```bash
+> dotnet new uninstall vm2.Templates
+> dotnet new install vm2.Templates --nuget-source github
+> ```
+
 Now you are ready to use the templates with `dotnet new <template-name>`.
 
 ## vm2 Add New NuGet Package Solution (**`vm2pkg`**)
