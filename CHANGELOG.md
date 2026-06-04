@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.0.3-preview.2 - 2026-06-04
+
+### Internal
+
+- add a blank line to avoid MD031 in README
+
 ## v3.0.3-preview.1 - 2026-06-04
 
 ### Internal
