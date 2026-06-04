@@ -1,5 +1,13 @@
 # Changelog
 
+## v3.0.3-preview.1 - 2026-06-04
+
+### Internal
+
+- promote to stable v3.0.2 [skip ci]
+- update changelog for v3.0.2 [skip ci]
+- update README with uninstall and install instructions to avoid template conflicts
+
 ## v3.0.2 - 2026-06-04
 
 See prereleases below.
