@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.0.2-preview.4 - 2026-06-04
+
+### Fixed
+
+- streamline the dev. environment for multi-OS/multi-IDE and for consistent configuration of AI
+
 ## v3.0.2-preview.3 - 2026-06-04
 
 ### Fixed
