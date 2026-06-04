@@ -222,7 +222,6 @@ The project owner is a non-native English speaker.
 - Naming:
   - Sync:  `MethodName_WhenCondition_ShouldOutcome`
   - Async: `MethodName_WhenCondition_ShouldOutcome_Async`
-- When modifying test project settings in this repo, preserve the Visual Studio workaround for `DisableTestingPlatformServerCapability` because enabling it unconditionally causes the test icons in the Test Explorer to flicker in Visual Studio (hinting at some infinite loop). Unless you know for sure that the problem has been fixed. This is a workaround for VS 2026: Test Explorer continuously re-evaluates projects with TestingPlatformServer/TestContainer capabilities, causing an infinite project reload loop (Solution Explorer flickering).  Disabling the server capability stops the loop.  Tests still runs from CLI and VS Code Build+Run (Ctrl+R,A).
 - Arrange / Act / Assert with clear blank-line separation
 - One logical assertion per test (chained FluentAssertions counts as one)
 - No testing of implementation details; mock only observable behavior
