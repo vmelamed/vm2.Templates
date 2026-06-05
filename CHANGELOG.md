@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.0.5-preview.1 - 2026-06-05
+
+### Fixed
+
+- update commit prefix for git-cliff to include 'tests' and adjust documentation
+
+### Internal
+
+- promote to stable v3.0.4 [skip ci]
+- update changelog for v3.0.4 [skip ci]
+
 ## v3.0.4 - 2026-06-05
 
 See prereleases below.
