@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.0.6-preview.1 - 2026-06-05
+
+### Fixed
+
+- remove trailing newline from file header template in .editorconfig
+
+### Internal
+
+- promote to stable v3.0.5 [skip ci]
+- update changelog for v3.0.5 [skip ci]
+
 ## v3.0.5 - 2026-06-05
 
 See prereleases below.
