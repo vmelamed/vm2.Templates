@@ -43,7 +43,7 @@ All notable changes to this project will be documented in this file.
 > **Internal**
 >
 > - add internal changes
-> - commit prefix for git-cliff: `refactor:`, `doc:`, `docs:`, `style:`, `test:`, `chore:`, `ci:`, `build:`
+> - commit prefix for git-cliff: `refactor:`, `doc:`, `docs:`, `style:`, `test:`, `tests:`, `chore:`, `ci:`, `build:`
 >
 
 ## References
