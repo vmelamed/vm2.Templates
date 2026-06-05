@@ -1,5 +1,17 @@
 # Changelog
 
+## v3.0.4-preview.1 - 2026-06-05
+
+### Fixed
+
+- remove trailing newline from file header template in .editorconfig
+
+### Internal
+
+- promote to stable v3.0.3 [skip ci]
+- update changelog for v3.0.3 [skip ci]
+- add guideline for using [GeneratedRegex(...)] in .NET 8+ code
+
 ## v3.0.3 - 2026-06-04
 
 See prereleases below.
