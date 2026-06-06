@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.0.7-preview.1 - 2026-06-06
+
+### Fixed
+
+- update SPDX license identifier and copyright year in template files
+
+### Internal
+
+- promote to stable v3.0.6 [skip ci]
+- update changelog for v3.0.6 [skip ci]
+
 ## v3.0.6 - 2026-06-05
 
 See prereleases below.
