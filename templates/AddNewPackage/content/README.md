@@ -15,26 +15,26 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
   - from **CLI**, if it is not built yet (builds on MTP v2):
 
     ```bash
-    dotnet run --project tests/MyPackage.Tests/MyPackage.Tests.csproj`
+    dotnet run --project tests/MyPackage.Tests/MyPackage.Tests.csproj
     ```
 
   - from **CLI**, if it is already built in **CLI** or **VSCode** (MTP v2):
     - any OS or shell:
 
       ```bash
-      dotnet test tests/MyPackage.Tests/bin/Debug/net10.0/MyPackage.Tests.dll`
+      dotnet test tests/MyPackage.Tests/bin/Debug/net10.0/MyPackage.Tests.dll
       ```
 
     - on Windows **CLI** (already built in **CLI** or **VSCode** - on MTP v2):
 
       ```batch
-      tests/MyPackage.Tests/bin/Debug/net10.0/MyPackage.Tests.exe`
+      tests/MyPackage.Tests/bin/Debug/net10.0/MyPackage.Tests.exe
       ```
 
     - on Linux or MacOS **CLI** (already built in **CLI** or **VSCode** - on MTP v2):
 
       ```bash
-      tests/MyPackage.Tests/bin/Debug/net10.0/MyPackage.Tests`
+      tests/MyPackage.Tests/bin/Debug/net10.0/MyPackage.Tests
       ```
 
   - from Visual Studio:
