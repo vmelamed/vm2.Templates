@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.1.0-preview.1 - 2026-06-07
+
+### Added
+
+- surface GC-collection threshold vars in CI template
+
 ## v3.0.7-preview.4 - 2026-06-06
 
 ### Internal
