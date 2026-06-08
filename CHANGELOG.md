@@ -26,16 +26,19 @@ See prereleases below.
 ### Internal
 
 DevOps changes only.
+
 ## v3.0.7-preview.3 - 2026-06-06
 
 ### Internal
 
 DevOps changes only.
+
 ## v3.0.7-preview.2 - 2026-06-06
 
 ### Internal
 
 DevOps changes only.
+
 ## v3.0.7-preview.1 - 2026-06-06
 
 ### Fixed
@@ -342,6 +345,7 @@ See prereleases below.
 ### Internal
 
 DevOps changes only.
+
 ## v2.0.0-preview.5 - 2026-05-19
 
 ### Internal
