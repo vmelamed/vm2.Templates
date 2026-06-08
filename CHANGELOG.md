@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.1.1-preview.3 - 2026-06-08
+
+### Internal
+
+- update vm2.TestUtilities to version 2.1.0
+
 ## v3.1.1-preview.2 - 2026-06-08
 
 ### Internal
