@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.1.1-preview.2 - 2026-06-08
+
+### Internal
+
+- clean up changelog formatting in cliff.prerelease.toml
+
 ## v3.1.1-preview.1 - 2026-06-08
 
 ### Added
