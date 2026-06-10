@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.1.2-preview.2 - 2026-06-10
+
+### Internal
+
+- update Microsoft.NET.ILLink.Tasks version to 10.0.9 in packages.lock.json
+
 ## v3.1.2-preview.1 - 2026-06-10
 
 ### Fixed
