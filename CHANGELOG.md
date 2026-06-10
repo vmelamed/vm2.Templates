@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.1.2-preview.1 - 2026-06-10
+
+### Fixed
+
+- correct variable naming in EditorConfig and update .gitignore for BenchmarkArtifacts
+
+### Internal
+
+- promote to stable v3.1.1 [skip ci]
+- update changelog for v3.1.1 [skip ci]
+
 ## v3.1.1 - 2026-06-08
 
 See prereleases below.
