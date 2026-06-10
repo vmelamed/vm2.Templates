@@ -1,5 +1,13 @@
 # Changelog
 
+## v3.1.3-preview.1 - 2026-06-10
+
+### Internal
+
+- promote to stable v3.1.2 [skip ci]
+- update changelog for v3.1.2 [skip ci]
+- update uninstall and install command for vm2.Templates in README
+
 ## v3.1.2 - 2026-06-10
 
 See prereleases below.
