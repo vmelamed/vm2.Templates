@@ -79,8 +79,7 @@ vm2 NuGet Package Solution with GitHub Repository, Actions  vm2pkg      [C#]    
 > You may first uninstall the previously installed template and then install the new one with:
 >
 > ```bash
-> dotnet new uninstall vm2.Templates
-> dotnet new install vm2.Templates --nuget-source github
+> dotnet new uninstall vm2.Templates  &&  dotnet new install vm2.Templates --nuget-source github
 > ```
 
 Now you are ready to use the templates with `dotnet new <template-name>`.
