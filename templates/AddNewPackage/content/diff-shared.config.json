@@ -59,6 +59,11 @@
             "action": "copy"
         },
         {
+            "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/workflows/RebuildBenchHistory.yaml",
+            "targetFile": "${target_path}/.github/workflows/RebuildBenchHistory.yaml",
+            "action": "copy"
+        },
+        {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/dependabot.yml",
             "targetFile": "${target_path}/.github/dependabot.yml",
             "action": "copy"
