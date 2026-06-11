@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.3.0-preview.1 - 2026-06-11
+
+### Added
+
+- add upgrade reminder step to GitHub Actions workflow
+
+### Internal
+
+- promote to stable v3.2.0 [skip ci]
+- update changelog for v3.2.0 [skip ci]
+
 ## v3.2.0 - 2026-06-11
 
 See prereleases below.
