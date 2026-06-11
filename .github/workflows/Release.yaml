@@ -118,3 +118,23 @@ jobs:
       reason: ${{ needs.get-params.outputs.reason }}
       nuget-server: ${{ needs.get-params.outputs.nuget-server }}
       save-package-artifacts: ${{ fromJson(needs.get-params.outputs.save-package-artifacts) }}
+
+  remind-changelog:
+    name: Upgrade reminder to GitHub Actions Annotations
+    runs-on: ubuntu-latest
+    needs:
+      - release
+    steps:
+      - name: Upgrade reminder
+        shell: bash
+        run: |
+          {
+            echo "## Upgrade Reminder"
+            echo
+            echo "> [!IMPORTANT]"
+            echo "> Released new version of the AddNewPackage dotnet templates. Upgrade with:"
+            echo "> ```bash"`
+            echo "> dotnet new uninstall vm2.Templates &&"
+            echo "> dotnet new install vm2.Templates --nuget-source github"
+            echo "> ```"
+          } >> "$GITHUB_STEP_SUMMARY"
