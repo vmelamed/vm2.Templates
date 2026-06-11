@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.2.0-preview.1 - 2026-06-11
+
+### Added
+
+- add RebuildBenchmarkHistory workflow and update diff-shared.config.json
+
 ## v3.1.3-preview.2 - 2026-06-10
 
 ### Internal
