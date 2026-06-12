@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.3.2-preview.1 - 2026-06-12
+
+### Fixed
+
+- correct bash code block formatting in release notes
+
 ## v3.3.1 - 2026-06-12
 
 See prereleases below.
