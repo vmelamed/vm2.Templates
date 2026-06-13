@@ -62,7 +62,61 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
 - License: {{license}}
 - Repository: <https://github.com/{{repositoryOrg}}/vm2.MyPackage>
 
-## Structure
+## Repository Layout
+
+  ```text
+  vm2.<name>/
+  ├── .github/
+  │   ├── dependabot.yml *      # dependabot configuration (see note below)
+  │   ├── CONVENTIONS.md *      # Claude conventions for contributing to the repo
+  │   ├── copilot-instructions.md
+  │   ├── PULL_REQUEST_TEMPLATE.md *
+  │   └── workflows/            # GitHub Actions workflows
+  │       ├── AutoMerge.yaml *
+  │       ├── ClearCache.yaml *
+  │       ├── CI.yaml **
+  │       ├── Prerelease.yaml **
+  │       └── Release.yaml **
+  ├── benchmarks/               # Benchmark projects (recommended)
+  │   └── vm2.<name>.Benchmarks/
+  │       ├── EchoBenchmarks.cs
+  │       ├── vm2.<name>.Benchmarks.cs
+  │       ├── Program.cs
+  │       └── usings.cs
+  ├── changelog/                # git-cliff toml files for updating the Changelog from commit messages
+  │   ├── cliff-prerelease.toml *
+  │   └── cliff-release.toml *
+  ├── docs/                     # Extra documentation - in addition to the README.md in the repo root (optional)
+  │   └── README.md
+  ├── examples/                 # Example program(s) (one file program(s) or project(s) - optional)
+  │   └── Program.cs
+  ├── src/                      # Source code
+  │   └── vm2.<name>/
+  │       ├── MyPackage.csproj
+  │       ├── MyPackage.Api.cs
+  │       └── usings.cs
+  ├── tests/                    # Test projects (highly recommended)
+  │   └── vm2.<name>.Tests/
+  │       ├── MyPackage.Tests.csproj
+  │       ├── MyPackageApiTests.cs
+  │       └── usings.cs
+  ├── .editorconfig *
+  ├── .gitattributes *
+  ├── .gitmessage *
+  ├── .gitignore *
+  ├── CLAUDE.md
+  ├── codecov.yml *
+  ├── coverage.settings.xml *
+  ├── Directory.Build.props **
+  ├── Directory.Packages.props **
+  ├── global.json *
+  ├── LICENSE *
+  ├── NuGet.config *
+  ├── README.md
+  ├── testconfig.json *
+  ├── vm2.MyPackage.slnx
+  └── CHANGELOG.md
+  ```
 
 - .github/workflows: CI, prerelease, release, clear-cache.
 - src/MyPackage: the library source code
@@ -75,34 +129,90 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
 
 ## Next steps
 
-- create GitHub repository using the generated bootstrap script: `scripts/repo-setup.sh`
-- Update README, CHANGELOG, and package metadata.
-- Set secrets and variables for workflows:
-  - Set required secrets in the new GitHub repo:
-    - `CODECOV_TOKEN`
-    - `BENCHER_API_TOKEN`
-    - `NUGET_API_KEY` must be issued by the selected `NUGET_SERVER` (below)
-  - Set required variables:
-    - `DOTNET_VERSION`: `10.0.x`: the .NET SDK version to use
-    - `CONFIGURATION`: `Release`: the build configuration to use (e.g., Release or Debug)
-    - `NUGET_SERVER`: `github`: the NuGet server to publish to (supported values: 'github', 'nuget', or custom URI)
-    - `MINVERTAGPREFIX`: `v`: Prefix for git tags to be recognized by MinVer
-    - `MINVERDEFAULTPRERELEASEIDENTIFIERS`: `preview.0`: Prefix for the prerelease tag, e.g. 'preview.0', 'alpha', 'beta', 'rc', etc.
-    - `SAVE_PACKAGE_ARTIFACTS`: `false`: Whether to save package artifacts after build/publish
-    - `MIN_COVERAGE_PCT`: `80`%: Minimum code coverage percentage required
-    - `MAX_REGRESSION_PCT`: `20`%: Maximum allowed regression percentage
-    - `RESET_BENCHMARK_THRESHOLDS`: `false`: Whether to reset Bencher thresholds
-  - Set debug flags (variables):
-    - `ACTIONS_RUNNER_DEBUG`: `false`: Whether to enable GitHub Actions runner debug logging
-    - `ACTIONS_STEP_DEBUG`: `false`: Whether to enable GitHub Actions step debug logging
+> [!TIP]
+> Feel free to remove this section before release.
 
-- Protect the `main` branch by enabling required checks and requiring pull requests. Suggested check names:
-  - `build` (job id from CI workflow "CI: Build, Test, Benchmark")
-  - `test` (job id from CI workflow "CI: Build, Test, Benchmark")
-  - `benchmark` (job id from CI workflow "CI: Build, Test, Benchmark")
-- In GitHub repo settings, enable Actions PR automation:
-  - `Settings` -> `Actions` -> `General` -> `Workflow permissions`
-  - enable `Allow GitHub Actions to create and approve pull requests`
-  - required for prerelease changelog PR creation.
-- Changelog: prerelease workflow appends a prerelease section; release workflow adds a stable header with "See prereleases
-  below." (prerelease sections stay intact).
+Create GitHub repository using the generated bootstrap script: `$VM2_REPOS/vm2.DevOps/scripts/bash/repo-setup.sh`. It will:
+- Update README, CHANGELOG, and package metadata.
+- Use the repository setup script `scripts/repo-setup.sh` to initialize the repository as follows:
+  - create a local Git  repository and make the initial commit
+  - set local Git configuration settings:
+    - core.hooksPath                       = `$VM2_REPOS/vm2.DevOps/scripts/githooks`
+    - commit.template                      = `.gitmessage`
+    - merge.ff                             = `only`
+    - **pull.rebase                          = `true`**
+    - fetch.prune                          = `true`
+    - push.autoSetupRemote                 = `true`
+    - rerere.enabled                       = `true`
+    - rerere.autoUpdate                    = `true`
+    - rebase.autoStash                     = `true`
+    - merge.conflictstyle                  = `zdiff3`
+    - push.useForceIfIncludes              = `true`
+    - tag.sort                             = `version:refname`
+    - merge.nugetlock.name                 = `NuGet lockfile - take the incoming side and regenerate`
+    - merge.nugetlock.driver               = `cp -f %B %A && echo "vm2: %P auto-resolved (took the incoming side) - regenerate with: dotnet restore --force-evaluate" >&2`
+  - create a remote repository on GitHub and link it to the local repository
+  - push the initial commit to the remote repository on GitHub
+  - set repository settings:
+    - **Default branch                       = `main`**
+    - Has wiki                             = `false`
+    - Has issues                           = `true`
+    - Has projects                         = `false`
+    - **Has pull requests                    = `true`**
+    - Pull request creation policy         = `all`
+    - Allow merge commit                   = `false`
+    - Allow squash merge                   = `false`
+    - **Allow rebase merge                   = `true`**
+    - Allow auto merge                     = `true`
+    - Delete branch on merge               = `true`
+    - Visibility                           = `public`
+    - Actions permissions:
+      - Can approve pull request reviews   = true
+      - Default workflow permissions       = read
+  - protect the `main` branch by enabling required checks and requiring pull requests:
+    - Enforcement                          = `active`
+    - Repository admin bypass              = present
+    - Deletion                             = present
+    - Required linear history              = present
+    - Pull request                         = present
+    - Required approving review count      = present
+    - Dismiss stale reviews on push        = present
+    - Require code owner review            = present
+    - Require last push approval           = present
+    - Required review thread resolution    = present
+    - Required reviewers                   = present
+    - Allowed merge methods                = present
+    - Required status checks               = present
+    - Do not enforce on create             = present
+    - Strict required status checks policy = present
+    - Non fast forward                     = present
+    - Required status checks list:
+      - **Postrun-CI                           = present** (combines the results from build, test, benchmark, test package)
+  - **interactively** set required variables for workflows:
+    - CONFIGURATION                        = `Release`
+    - DOTNET_VERSION                       = `10.0.x`
+    - MAX_GEN1_COLLECTS                    = `2`
+    - MAX_GEN2_COLLECTS                    = `1`
+    - MAX_REGRESSION_PCT                   = `20`
+    - MIN_COVERAGE_PCT                     = `80`
+    - MINVERDEFAULTPRERELEASEIDENTIFIERS   = `preview.0`
+    - MINVERTAGPREFIX                      = `v`
+    - NUGET_SERVER                         = `github` (can be also `nuget`)
+    - RESET_BENCHMARK_THRESHOLDS           = `false`
+    - SAVE_PACKAGE_ARTIFACTS               = `false`
+    - VERBOSE                              = `false` (use for workflow debugging)
+    - ACTIONS_RUNNER_DEBUG                 = `false`
+    - ACTIONS_STEP_DEBUG                   = `false`
+  - **interactively** set required secrets for workflows (prepare the secrets in advance):
+    - BENCH_DISPATCH_PAT                   = [secret]
+    - BENCHER_API_TOKEN                    = [secret]
+    - CODECOV_TOKEN                        = [secret]
+    - NUGET_API_KEY                        = [secret]
+    - RELEASE_PAT                          = [secret]
+    - REPORTGENERATOR_LICENSE              = [secret]
+    - Dependabot Secrets:
+      - GH_PACKAGES_TOKEN                    = [secret]
+- Changelog: prerelease workflow appends a prerelease section; release workflow adds a stable header with "See prereleases below." (prerelease sections stay intact).
+
+> [!NOTE]
+> The above settings and configurations may change over time and should be reviewed periodically to ensure they align with the desired workflow and security practices. The source of truth is the script `setup-repo.sh`. It is idempotent and can be run multiple times without causing unintended side effects. Also, can be run with option `--audit` to review the current settings and configurations against the defaults without making any changes.

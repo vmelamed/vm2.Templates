@@ -14,11 +14,6 @@
             "action": "ask to merge"
         },
         {
-            "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.vscode/settings.json",
-            "targetFile": "${target_path}/.vscode/settings.json",
-            "action": "ask to merge"
-        },
-        {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/workflows/CI.yaml",
             "targetFile": "${target_path}/.github/workflows/CI.yaml",
             "action": "ask to merge"
