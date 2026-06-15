@@ -1,5 +1,23 @@
 # Changelog
 
+## v3.3.3-preview.1 - 2026-06-15
+
+### Fixed
+
+- add .claude/ to .gitignore
+
+### Internal
+
+- promote to stable v3.3.2 [skip ci]
+- update changelog for v3.3.2 [skip ci]
+- diff-shared sync, no code changes [skip ci]
+- sync, no code changes [skip ci]
+- enhance documentation and repository layout
+- update README.md as well as the AI docs
+- correct filename of RefreshLockFiles.yaml
+- rename RefreshLockfiles.yaml workflow
+- add RefreshLockFiles.yaml workflow
+
 ## v3.3.2 - 2026-06-12
 
 See prereleases below.
