@@ -1,5 +1,13 @@
 # Changelog
 
+## v3.3.4-preview.1 - 2026-06-15
+
+### Internal
+
+- promote to stable v3.3.3 [skip ci]
+- update changelog for v3.3.3 [skip ci]
+- update Copilot instructions and add Claude AI local settings
+
 ## v3.3.3 - 2026-06-15
 
 See prereleases below.
