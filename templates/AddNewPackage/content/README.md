@@ -80,32 +80,32 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
   ├── benchmarks/               # Benchmark projects (recommended)
   │   └── vm2.<name>.Benchmarks/
   │       ├── EchoBenchmarks.cs
-  │       ├── vm2.<name>.Benchmarks.cs
+  │       ├── <name>.Benchmarks.csproj
   │       ├── Program.cs
   │       └── usings.cs
   ├── changelog/                # git-cliff toml files for updating the Changelog from commit messages
-  │   ├── cliff-prerelease.toml *
-  │   └── cliff-release.toml *
+  │   ├── cliff.prerelease.toml *
+  │   └── cliff.release.toml *
   ├── docs/                     # Extra documentation - in addition to the README.md in the repo root (optional)
   │   └── README.md
   ├── examples/                 # Example program(s) (one file program(s) or project(s) - optional)
   │   └── Program.cs
   ├── src/                      # Source code
-  │   └── vm2.<name>/
-  │       ├── MyPackage.csproj
-  │       ├── MyPackage.Api.cs
+  │   └── <name>/
+  │       ├── <name>.csproj
+  │       ├── <name>.Api.cs
   │       └── usings.cs
   ├── tests/                    # Test projects (highly recommended)
-  │   └── vm2.<name>.Tests/
-  │       ├── MyPackage.Tests.csproj
-  │       ├── MyPackageApiTests.cs
+  │   └── <name>.Tests/
+  │       ├── <name>.Tests.csproj
+  │       ├── <name>ApiTests.cs
   │       └── usings.cs
   ├── .editorconfig *
   ├── .gitattributes *
   ├── .gitmessage *
   ├── .gitignore *
   ├── CLAUDE.md
-  ├── codecov.yml *
+  ├── codecov.yaml *
   ├── coverage.settings.xml *
   ├── Directory.Build.props **
   ├── Directory.Packages.props **
@@ -132,9 +132,9 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
 > [!TIP]
 > Feel free to remove this section before release.
 
-Create GitHub repository using the generated bootstrap script: `$VM2_REPOS/vm2.DevOps/scripts/bash/repo-setup.sh`. It will:
+Create GitHub repository using the generated bootstrap script: `$VM2_REPOS/vm2.DevOps/scripts/bash/setup-repo.sh`. It will:
 - Update README, CHANGELOG, and package metadata.
-- Use the repository setup script `scripts/repo-setup.sh` to initialize the repository as follows:
+- Use the repository setup script `scripts/setup-repo.sh` to initialize the repository as follows:
   - create a local Git  repository and make the initial commit
   - set local Git configuration settings:
     - core.hooksPath                       = `$VM2_REPOS/vm2.DevOps/scripts/githooks`
