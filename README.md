@@ -2,18 +2,17 @@
 
 <!-- TOC tocDepth:2..3 chapterDepth:2..6 -->
 
-- [vm2.Templates](#vm2templates)
-  - [Install a template](#install-a-template)
-    - [To install a template locally from the source code in the current directory](#to-install-a-template-locally-from-the-source-code-in-the-current-directory)
-    - [To install a template globally from a NuGet feed](#to-install-a-template-globally-from-a-nuget-feed)
-  - [vm2 Add New NuGet Package Solution (**`vm2pkg`**)](#vm2-add-new-nuget-package-solution-vm2pkg)
-    - [Prerequisites](#prerequisites)
-    - [Create a package scaffold](#create-a-package-scaffold)
-    - [Template parameters (key ones)](#template-parameters-key-ones)
-    - [What gets generated](#what-gets-generated)
-    - [After adding a package project use `setup-repo.sh`](#after-adding-a-package-project-use-setup-reposh)
-    - [This Repo Layout](#this-repo-layout)
-    - [Development Notes](#development-notes)
+- [Install a template](#install-a-template)
+  - [To install a template locally from the source code in the current directory](#to-install-a-template-locally-from-the-source-code-in-the-current-directory)
+  - [To install a template globally from a NuGet feed](#to-install-a-template-globally-from-a-nuget-feed)
+- [vm2 Add New NuGet Package Solution (**`vm2pkg`**)](#vm2-add-new-nuget-package-solution-vm2pkg)
+  - [Prerequisites](#prerequisites)
+  - [Create a package scaffold](#create-a-package-scaffold)
+  - [Template parameters (key ones)](#template-parameters-key-ones)
+  - [What gets generated](#what-gets-generated)
+  - [After adding a package project use `setup-repo.sh`](#after-adding-a-package-project-use-setup-reposh)
+  - [This Repo Layout](#this-repo-layout)
+  - [Development Notes](#development-notes)
 
 <!-- /TOC -->
 
@@ -59,7 +58,7 @@ Then you can install the templates with:
 dotnet new install vm2.Templates --nuget-source github
 ```
 
-In subsequent installs, if you may have a local or a previous version of a global installation of the template, then you may see a message similar to:
+In subsequent installs, if you have a local or a previous version of a global installation of the template, then you may see a message similar to:
 
 ```text
 The following template packages will be installed:
@@ -110,7 +109,7 @@ dotnet new vm2pkg \
   --license MIT
 ```
 
-Then run the generated `scripts/repo-setup.sh` to create and push the GitHub repo (uses `gh repo create`, default visibility
+Then run the generated `scripts/setup-repo.sh` to create and push the GitHub repo (uses `gh repo create`, default visibility
 public, requires authentication).
 
 ### Template parameters (key ones)
@@ -160,8 +159,8 @@ public, requires authentication).
   │       ├── Program.cs
   │       └── usings.cs
   ├── changelog/                # git-cliff toml files for updating the Changelog from commit messages
-  │   ├── cliff-prerelease.toml *
-  │   └── cliff-release.toml *
+  │   ├── cliff.prerelease.toml *
+  │   └── cliff.release.toml *
   ├── docs/                     # Extra package documentation - in addition to the README.md in the repo root (optional)
   │   └── README.md
   ├── examples/                 # Example program(s) (one file program(s) or project(s) - optional)
@@ -182,7 +181,7 @@ public, requires authentication).
   ├── .gitmessage *
   ├── CHANGELOG.md
   ├── CLAUDE.md
-  ├── codecov.yml *
+  ├── codecov.yaml *
   ├── coverage.settings.xml *
   ├── Directory.Build.props **
   ├── Directory.Packages.props **
@@ -201,7 +200,7 @@ public, requires authentication).
 > the `diff-shared.sh` script - a configurable tool that is used to diff, and copy or merge content from the source SoT files \
 > in the `vm2.Templates` project to one or more target repos, like the newly created `vm2.<name>` repo. The files marked with
 > - **\*** indicates files that by default are copied from the template content folder without modification, e.g.
->      `.editorconfig`, `codecov.yml`, `global.json`, etc.
+>      `.editorconfig`, `codecov.yaml`, `global.json`, etc.
 > - **\*\*** indicate files that are diff-ed and then copied to (if missing) or merged with the existing file in the target
 > repo, e.g.
       `Directory.Build.props` and `Directory.Packages.props`, which contain a lot of shared content but also have repo-specific content (e.g. package references, project references, etc.) that needs to be preserved.
@@ -221,9 +220,9 @@ public, requires authentication).
 
 ### After adding a package project use `setup-repo.sh`
 
-Create GitHub repository using the generated bootstrap script: `$VM2_REPOS/vm2.DevOps/scripts/bash/repo-setup.sh`. It will:
+Create GitHub repository using the generated bootstrap script: `$VM2_REPOS/vm2.DevOps/scripts/bash/setup-repo.sh`. It will:
 - Update README, CHANGELOG, and package metadata.
-- Use the repository setup script `scripts/repo-setup.sh` to initialize the repository as follows:
+- Use the repository setup script `scripts/setup-repo.sh` to initialize the repository as follows:
   - create a local Git  repository and make the initial commit
   - set local Git configuration settings:
     - core.hooksPath                       = `$VM2_REPOS/vm2.DevOps/scripts/githooks`
