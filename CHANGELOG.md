@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.3.4-preview.2 - 2026-06-17
+
+### Internal
+
+- update README and CLAUDE files for improved clarity and structure
+
 ## v3.3.4-preview.1 - 2026-06-15
 
 ### Internal
