@@ -2,17 +2,18 @@
 
 <!-- TOC tocDepth:2..3 chapterDepth:2..6 -->
 
-- [Install a template](#install-a-template)
-  - [To install a template locally from the source code in the current directory](#to-install-a-template-locally-from-the-source-code-in-the-current-directory)
-  - [To install a template globally from a NuGet feed](#to-install-a-template-globally-from-a-nuget-feed)
-- [vm2 Add New NuGet Package Solution (**`vm2pkg`**)](#vm2-add-new-nuget-package-solution-vm2pkg)
-  - [Prerequisites](#prerequisites)
-  - [Create a package scaffold](#create-a-package-scaffold)
-  - [Template parameters (key ones)](#template-parameters-key-ones)
-  - [What gets generated](#what-gets-generated)
-  - [After adding a package project use `setup-repo.sh`](#after-adding-a-package-project-use-setup-reposh)
-  - [This Repo Layout](#this-repo-layout)
-  - [Development Notes](#development-notes)
+- [vm2.Templates](#vm2templates)
+  - [Install a template](#install-a-template)
+    - [To install a template locally from the source code in the current directory](#to-install-a-template-locally-from-the-source-code-in-the-current-directory)
+    - [To install a template globally from a NuGet feed](#to-install-a-template-globally-from-a-nuget-feed)
+  - [vm2 Add New NuGet Package Solution (**`vm2pkg`**)](#vm2-add-new-nuget-package-solution-vm2pkg)
+    - [Prerequisites](#prerequisites)
+    - [Create a package scaffolding](#create-a-package-scaffolding)
+    - [Template parameters (key ones)](#template-parameters-key-ones)
+    - [What gets generated](#what-gets-generated)
+    - [After adding a package project use `setup-repo.sh`](#after-adding-a-package-project-use-setup-reposh)
+    - [This Repo Layout](#this-repo-layout)
+    - [Development Notes](#development-notes)
 
 <!-- /TOC -->
 
@@ -82,7 +83,7 @@ vm2 NuGet Package Solution with GitHub Repository, Actions  vm2pkg      [C#]    
 > dotnet new uninstall vm2.Templates  &&  dotnet new install vm2.Templates --nuget-source github
 > ```
 
-Now you are ready to use the templates with `dotnet new <template-name>`.
+Now you are ready to use the templates with `dotnet new vm2pkg <package-project-name>`.
 
 ## vm2 Add New NuGet Package Solution (**`vm2pkg`**)
 
@@ -94,7 +95,7 @@ repository with conventional structure, GitHub Actions workflows, and optional c
 - .NET SDK 10.0.x
 - `gh` CLI (used by the generated bootstrap script)
 
-### Create a package scaffold
+### Create a package scaffolding
 
 ```bash
 dotnet new vm2pkg \

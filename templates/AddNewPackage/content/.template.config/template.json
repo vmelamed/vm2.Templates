@@ -19,6 +19,12 @@
         "type": "project"
     },
     "shortName": "vm2pkg",
+    "sourceName": "MyPackage",
+    // *TODO*  the solution file and other artifacts have vm2. hardcoded as a prefix: vm2.MyPackage.slnx, vm2.MyPackage.csproj,
+    // etc. When a user passes --name vm2.test1, MyPackage → vm2.test1 everywhere, so vm2.MyPackage → vm2.vm2.test1.
+    // We get a double prefix. For now the solution is to pass `--name MyPackage --output vm2.MyPackage`.
+    // Ideally the template should be smart enough to detect and avoid double prefixing.
+    "preferNameDirectory": true,
     "postActions": [
         {
             "id": "run-setup-repo-again",
@@ -202,13 +208,8 @@
     //     }
     // ],
     //
-    // OUTPUT MANAGEMENT - specify the primary outputs of the template, which are the files that will be generated and can be used for post-processing actions. You can also specify custom output modifiers here if needed.
-    "sourceName": "MyPackage",
-    // *TODO*  the solution file and other artifacts have vm2. hardcoded as a prefix: vm2.MyPackage.slnx, vm2.MyPackage.csproj,
-    // etc. When a user passes --name vm2.test1, MyPackage → vm2.test1 everywhere, so vm2.MyPackage → vm2.vm2.test1.
-    // We get a double prefix. For now the solution is to pass `--name MyPackage --output vm2.MyPackage`.
-    // Ideally the template should be smart enough to detect and avoid double prefixing.
-    "preferNameDirectory": true,
+    // OUTPUT MANAGEMENT - specify the primary outputs of the template, which are the files that will be generated and can be
+    // used for post-processing actions. You can also specify custom output modifiers here if needed.
     "primaryOutputs": [
         {
             "path": "src/MyPackage/MyPackage.csproj"

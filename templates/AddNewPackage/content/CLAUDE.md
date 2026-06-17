@@ -8,7 +8,7 @@
 
 - Repo: <https://github.com/{{repositoryOrg}}/vm2.MyPackage>
 - NuGet: <https://www.nuget.org/packages/vm2.MyPackage/>
-- Status: *TODO* — e.g., In design / Unpublished / Published, stable
+- Status: *TODO* — in design / Unpublished / Published, stable
 - Target: .NET 10.0+
 
 ## What This Package Does
@@ -25,10 +25,14 @@ Key design decisions:
 # Build
 dotnet build vm2.MyPackage.slnx
 
-# Run all tests (MTP v2 — each project is a compiled executable)
+# Run tests (xUnit v3, MTP v2 — each project is a compiled executable)
 dotnet test --project tests/MyPackage.Tests/MyPackage.Tests.csproj
 
-# Run a single test by name (MTP v2 filter syntax)
+# Run test executables (xUnit v3, MTP v2 — each project is a compiled to an executable) on Linux:
+tests/MyPackage/bin/Debug/net10.0/MyPackage.Tests # or
+tests/MyPackage/bin/Debug/net10.0/MyPackage.Tests.exe #  on Windows
+
+# Run a single test by method name (xUnit v3, MTP v2 filter syntax)
 dotnet test --project tests/MyPackage.Tests/MyPackage.Tests.csproj --filter "MethodName_WhenCondition_ShouldOutcome"
 
 # Pack NuGet package
