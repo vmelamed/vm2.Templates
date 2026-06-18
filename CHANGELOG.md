@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.3.4-preview.3 - 2026-06-18
+
+### Internal
+
+- update CLAUDE.md to enhance table of contents and structure
+
 ## v3.3.4-preview.2 - 2026-06-17
 
 ### Internal
