@@ -1,5 +1,18 @@
 # vm2.MyPackage — Claude Context
 
+<!-- TOC tocDepth:2..3 chapterDepth:2..6 -->
+
+- [vm2.MyPackage — Claude Context](#vm2mypackage--claude-context)
+  - [Package Identity](#package-identity)
+  - [What This Package Does](#what-this-package-does)
+  - [Common Local Commands](#common-local-commands)
+  - [Performance Characteristics](#performance-characteristics)
+  - [Known Trade-offs and Design Notes](#known-trade-offs-and-design-notes)
+  - [Active Work / Known Issues](#active-work--known-issues)
+  - [Prompting Notes for This Package](#prompting-notes-for-this-package)
+
+<!-- /TOC -->
+
 @~/.claude/CLAUDE.md
 @~/repos/vm2/CLAUDE.md
 @.github/CONVENTIONS.md
