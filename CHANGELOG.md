@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.3.4-preview.5 - 2026-06-19
+
+### Internal
+
+- sync CONVENTIONS.md; add benchmarks command lines
+
 ## v3.3.4-preview.4 - 2026-06-18
 
 ### Fixed
