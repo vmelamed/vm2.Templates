@@ -40,6 +40,11 @@ dotnet pack vm2.MyPackage.slnx --configuration Release
 
 # Run benchmarks (Release only)
 dotnet run --project benchmarks/MyPackage.Benchmarks --configuration Release -- --filter "*"
+
+# If the benchmark tests are already built, you can run the compiled executable directly:
+benchmarks/MyPackage.Benchmarks/bin/Release/net10.0/MyPackage.Benchmarks --help
+benchmarks/MyPackage.Benchmarks/bin/Release/net10.0/MyPackage.Benchmarks --filter "*" # on Linux
+benchmarks/MyPackage.Benchmarks/bin/Release/net10.0/MyPackage.Benchmarks.exe --filter "*" # on Windows
 ```
 
 Tests use MTP v2 (Microsoft Testing Platform v2) with xUnit v3 — they compile to standalone executables.
