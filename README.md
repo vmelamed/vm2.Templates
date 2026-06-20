@@ -47,16 +47,16 @@ E.g.:
 
 > ```bash
 > dotnet nuget add source "https://nuget.pkg.github.com/vmelamed/index.json" \
->  --name github \
+>  --name github.vm2 \
 >  --username vmelamed \
->  --password <GITHUB_TOKEN> \
->  --store-password-in-clear-text
+>  --store-password-in-clear-text \
+>  --password <GITHUB_TOKEN>
 > ```
 
 Then you can install the templates with:
 
 ```bash
-dotnet new install vm2.Templates --nuget-source github
+dotnet new install vm2.Templates --nuget-source github.vm2
 ```
 
 In subsequent installs, if you have a local or a previous version of a global installation of the template, then you may see a message similar to:
@@ -80,7 +80,7 @@ vm2 NuGet Package Solution with GitHub Repository, Actions  vm2pkg      [C#]    
 > You may first uninstall the previous version of the template and then install the new one with:
 >
 > ```bash
-> dotnet new uninstall vm2.Templates  &&  dotnet new install vm2.Templates --nuget-source github
+> dotnet new uninstall vm2.Templates  &&  dotnet new install vm2.Templates --nuget-source github.vm2
 > ```
 
 Now you are ready to use the templates with `dotnet new vm2pkg <package-project-name>`.
