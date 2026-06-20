@@ -135,6 +135,6 @@ jobs:
             echo "> Released new version of the AddNewPackage dotnet templates. Upgrade with:"
             echo "> \`\`\`bash"
             echo "> dotnet new uninstall vm2.Templates &&"
-            echo "> dotnet new install vm2.Templates --nuget-source github"
+            echo "> dotnet new install vm2.Templates --nuget-source github.vm2"
             echo "> \`\`\`"
           } >> "$GITHUB_STEP_SUMMARY"
