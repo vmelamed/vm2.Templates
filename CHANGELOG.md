@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.3.5-preview.1 - 2026-06-20
+
+### Fixed
+
+- update NuGet source name in installation instructions
+
+### Internal
+
+- promote to stable v3.3.4 [skip ci]
+- update changelog for v3.3.4 [skip ci]
+
 ## v3.3.4 - 2026-06-20
 
 See prereleases below.
