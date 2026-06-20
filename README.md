@@ -77,7 +77,7 @@ vm2 NuGet Package Solution with GitHub Repository, Actions  vm2pkg      [C#]    
 ```
 
 > [!IMPORTANT]
-> You may first uninstall the previous version of the template and then install the new one with:
+> You may want to first uninstall the previous version of the template and then install the new one with:
 >
 > ```bash
 > dotnet new uninstall vm2.Templates  &&  dotnet new install vm2.Templates --nuget-source github.vm2
