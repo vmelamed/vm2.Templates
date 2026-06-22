@@ -1,5 +1,20 @@
 # Changelog
 
+## v3.3.6-preview.1 - 2026-06-22
+
+### Fixed
+
+- update NuGet source name in release instructions [skip ci]
+- clarify instructions for uninstalling previous template version [skip ci]
+- update conventions for async handling and error management [skip ci]
+
+### Internal
+
+- update changelog for v3.3.5 [skip ci]
+- update workflow names and descriptions for clarity; add common package references and usings
+- update cache clearing workflows and add Microsoft.Extensions.TimeProvider.Testing package
+- simplify pull request template by removing checklist and adding additional notes section
+
 ## v3.3.5 - 2026-06-20
 
 See prereleases below.
