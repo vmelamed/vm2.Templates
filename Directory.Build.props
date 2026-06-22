@@ -189,7 +189,7 @@
 
     <!-- Common usings for the test projects: -->
     <ItemGroup Condition="$(IsTestProject) == 'true'">
-        <Using Include="Microsoft.Extensions.Time.Testing" />
+        <Using Include="Microsoft.Extensions.TimeProvider.Testing" />
         <Using Include="Xunit" />
         <Using Include="FluentAssertions" />
         <Using Include="NSubstitute" />
