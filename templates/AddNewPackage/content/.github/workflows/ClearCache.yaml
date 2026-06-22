@@ -2,7 +2,7 @@ name: Clear Caches
 
 # Workflow for manually triggering clearing of caches.
 # This is useful when dependabot updates dependencies but the contents of the cache conflicts with the updates,
-# esp. in packages.lock.json files
+# e.g., in packages.lock.json files
 
 on:
   workflow_dispatch:
