@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.3.6-preview.2 - 2026-06-22
+
+### Internal
+
+- update actions/checkout to v7 in workflow files
+
 ## v3.3.6-preview.1 - 2026-06-22
 
 ### Fixed
