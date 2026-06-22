@@ -118,6 +118,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Using Include="System.Collections" />
         <Using Include="System.Collections.Concurrent" />
         <Using Include="System.Collections.Immutable" />
         <Using Include="System.Collections.Frozen" />
@@ -173,9 +174,9 @@
 
     <ItemGroup Condition="$(IsTestProject) == 'true'">
         <!-- Use MTP v2 for all environments -->
+        <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" />
         <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" />
         <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
-        <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" />
         <PackageReference Include="xunit.v3.mtp-v2" />
         <PackageReference Include="FluentAssertions" />
         <PackageReference Include="NSubstitute" />
@@ -189,7 +190,7 @@
 
     <!-- Common usings for the test projects: -->
     <ItemGroup Condition="$(IsTestProject) == 'true'">
-        <Using Include="Microsoft.Extensions.TimeProvider.Testing" />
+        <Using Include="Microsoft.Extensions.Time.Testing" />
         <Using Include="Xunit" />
         <Using Include="FluentAssertions" />
         <Using Include="NSubstitute" />
@@ -273,7 +274,6 @@
     <ItemGroup Condition="$(IsInBenchmarksFolder) == 'true'">
         <Using Include="BenchmarkDotNet" />
         <Using Include="BenchmarkDotNet.Attributes" />
-        <Using Include="BenchmarkDotNet.Annotations" />
         <Using Include="BenchmarkDotNet.Configs" />
         <Using Include="BenchmarkDotNet.Jobs" />
         <Using Include="BenchmarkDotNet.Order" />
@@ -293,7 +293,6 @@
 
     <!-- ADD REPO-SPECIFIC PACKAGE REFERENCES AND USINGS BELOW -->
     <ItemGroup>
-        <!-- ADD REPO-SPECIFIC PACKAGE REFERENCES HERE -->
     </ItemGroup>
 
 </Project>
