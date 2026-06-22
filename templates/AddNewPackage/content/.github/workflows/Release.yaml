@@ -1,6 +1,10 @@
+name: Publish Release NuGet Package
+
+# This workflow handles the publishing of NuGet stable releases. It is only **triggered manually** via the workflow_dispatch
+# event from the **main branch**.
+
 # Comments marked with *TODO* are the customization points where you should adjust the text of this workflow template to the
 # needs of your concrete repo.
-name: Publish NuGet Stable Release
 
 on:
   # we release from main only, on manual trigger only
