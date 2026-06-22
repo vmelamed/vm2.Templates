@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.3.6-preview.3 - 2026-06-22
+
+### Internal
+
+- update test project usings to use Microsoft.Extensions.TimeProvider.Testing
+
 ## v3.3.6-preview.2 - 2026-06-22
 
 ### Internal
