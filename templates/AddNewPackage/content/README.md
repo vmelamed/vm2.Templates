@@ -129,9 +129,6 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
 
 ## Next steps
 
-> [!TIP]
-> Feel free to remove this section before release.
-
 Create GitHub repository using the generated bootstrap script: `$VM2_REPOS/vm2.DevOps/scripts/bash/setup-repo.sh`. It will:
 - Update README, CHANGELOG, and package metadata.
 - Use the repository setup script `scripts/setup-repo.sh` to initialize the repository as follows:

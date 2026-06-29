@@ -140,25 +140,24 @@ public, requires authentication).
   ```text
   vm2.<name>/
   ├── .github/
-  │   ├── dependabot.yml *      # dependabot configuration (see note below)
   │   ├── CONVENTIONS.md *      # Claude conventions for contributing to the repo
-  │   ├── copilot-instructions.md
   │   ├── PULL_REQUEST_TEMPLATE.md *
+  │   ├── copilot-instructions.md
+  │   ├── dependabot.yml *      # dependabot configuration (see note below)
   │   └── workflows/            # GitHub Actions workflows
   │       ├── AutoMerge.yaml *
-  │       ├── ClearCache.yaml *
-  │       ├── RefreshLockFiles.yaml *
-  │       ├── AutoMerge.yaml *
-  │       ├── RebuildBenchHistory.yaml *
   │       ├── CI.yaml **
+  │       ├── ClearCache.yaml *
   │       ├── Prerelease.yaml **
+  │       ├── RebuildBenchHistory.yaml *
+  │       ├── RefreshLockFiles.yaml *
   │       └── Release.yaml **
   ├── benchmarks/               # Benchmark projects (recommended)
   │   └── <name>.Benchmarks/
-  │       ├── EchoBenchmarks.cs
   │       ├── <name>.Benchmarks.csproj
-  │       ├── Program.cs
-  │       └── usings.cs
+  │       ├── usings.cs
+  │       ├── EchoBenchmarks.cs
+  │       └── Program.cs
   ├── changelog/                # git-cliff toml files for updating the Changelog from commit messages
   │   ├── cliff.prerelease.toml *
   │   └── cliff.release.toml *
@@ -182,14 +181,14 @@ public, requires authentication).
   ├── .gitmessage *
   ├── CHANGELOG.md
   ├── CLAUDE.md
-  ├── codecov.yaml *
-  ├── coverage.settings.xml *
   ├── Directory.Build.props **
   ├── Directory.Packages.props **
-  ├── global.json *
   ├── LICENSE *
   ├── NuGet.config *
   ├── README.md
+  ├── codecov.yaml *
+  ├── coverage.settings.xml *
+  ├── global.json *
   ├── testconfig.json *
   └── vm2.<name>.slnx
   ```
