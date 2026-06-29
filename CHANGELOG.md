@@ -1,5 +1,15 @@
 # Changelog
 
+## v3.3.7-preview.1 - 2026-06-29
+
+### Internal
+
+- promote to stable v3.3.6 [skip ci]
+- update changelog for v3.3.6 [skip ci]
+- update conventions for implicit usings in .github/CONVENTIONS.md [skip ci]
+- update conventions for implicit usings in .github/CONVENTIONS.md [skip ci]
+- change `.github/copilot-instructions.md` to refer to both `CONVENTIONS.md` AND to `../CLAUDE.md` [skip ci]
+
 ## v3.3.6 - 2026-06-22
 
 See prereleases below.
