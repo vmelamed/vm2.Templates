@@ -1,5 +1,13 @@
 # Changelog
 
+## v3.3.8-preview.1 - 2026-06-29
+
+### Internal
+
+- promote to stable v3.3.7 [skip ci]
+- update changelog for v3.3.7 [skip ci]
+- minor changes in README.md
+
 ## v3.3.7 - 2026-06-29
 
 See prereleases below.
