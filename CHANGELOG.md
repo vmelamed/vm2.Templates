@@ -1,5 +1,9 @@
 # Changelog
 
+## v4.0.0 - 2026-07-03
+
+See prereleases below.
+
 ## v4.0.0-preview.1 - 2026-07-03
 
 ### Internal
