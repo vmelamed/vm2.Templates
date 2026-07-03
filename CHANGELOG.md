@@ -1,5 +1,13 @@
 # Changelog
 
+## v4.0.0-preview.1 - 2026-07-03
+
+### Internal
+
+- promote to stable v3.3.8 [skip ci]
+- update changelog for v3.3.8 [skip ci]
+- **BREAKING:** update template metadata and classifications in template.json
+
 ## v3.3.8 - 2026-06-29
 
 See prereleases below.
