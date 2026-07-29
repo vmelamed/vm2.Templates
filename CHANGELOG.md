@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.0.1-preview.2 - 2026-07-29
+
+### Internal
+
+- update Copilot instructions header to reflect correct package name
+
 ## v4.0.1-preview.1 - 2026-07-29
 
 ### Internal
