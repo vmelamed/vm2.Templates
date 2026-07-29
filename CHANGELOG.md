@@ -1,5 +1,21 @@
 # Changelog
 
+## v4.0.1-preview.1 - 2026-07-29
+
+### Internal
+
+- promote to stable v4.0.0 [skip ci]
+- update changelog for v4.0.0 [skip ci]
+- enhance conventions for instance and extension methods [skip ci]
+- update conventions to include interface honesty and AI co-authorship guidelines [skip ci]
+- update conventions to include interface honesty and AI co-authorship guidelines [skip ci]
+- update conventions to clarify exception handling and testing requirements for value types and monadic types [skip ci]
+- update conventions and package versions for consistency and clarity [skip ci]
+- update package versions for Microsoft.SourceLink.GitHub, Microsoft.Extensions.DependencyInjection, and Microsoft.Extensions.Logging.Abstractions for consistency
+- update package versions for consistency across project and templates [skip ci]
+- update System.CommandLine to 2.0.10, Microsoft.Testing.Extensions.CodeCoverage to 18.9.0, and NSubstitute to 6.0.0 for consistency [skip ci]
+- update package versions for consistency across Directory.Packages.props and lock files
+
 ## v4.0.0 - 2026-07-03
 
 See prereleases below.
