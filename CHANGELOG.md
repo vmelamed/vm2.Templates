@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.0.1-preview.4 - 2026-07-31
+
+### Internal
+
+- update NuGet username in workflows and bump vm2.TestUtilities version to 2.1.4
+
 ## v4.0.1-preview.3 - 2026-07-29
 
 ### Internal
