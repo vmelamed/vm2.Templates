@@ -1,5 +1,13 @@
 # Changelog
 
+## v4.0.2-preview.1 - 2026-08-02
+
+### Internal
+
+- promote to stable v4.0.1 [skip ci]
+- update changelog for v4.0.1 [skip ci]
+- remove unused package-projects-len output from workflows
+
 ## v4.0.1 - 2026-07-31
 
 See prereleases below.
