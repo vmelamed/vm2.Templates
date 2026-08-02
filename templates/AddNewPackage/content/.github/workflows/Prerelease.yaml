@@ -41,11 +41,11 @@ env:
     "src/MyPackage/MyPackage.csproj"
     ]
   # *TODO*: Ensure the NUGET_API_KEY secret is issued by the server AND the user name is selected:
-  #   - 'nuget' - NuGet.org/valo@vtmelamed.com
+  #   - 'nuget' - NuGet.org/vmelamed
   #   - 'github' - GitHub Packages/vmelamed
   #   - others - URI/credentials
   NUGET_SERVER: ${{ vars.NUGET_SERVER || 'nuget' }}
-  NUGET_USERNAME: ${{ vars.NUGET_USERNAME || 'valo@vtmelamed.com' }}
+  NUGET_USERNAME: ${{ vars.NUGET_USERNAME || 'vmelamed' }}
   # *TODO* Semicolon-separated preprocessor symbols to pass to the compiler.
   PREPROCESSOR_SYMBOLS: ""
   CONFIGURATION: ${{ vars.CONFIGURATION || 'Release' }} # The build configuration: Debug, Release, etc.
