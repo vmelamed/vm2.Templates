@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 Val Melamed
+
 name: "CI: Build, Test, Benchmark, Pack"
 
 # Continuous Integration (CI) workflow for building, testing, benchmarking, and packaging the projects in the repo.
@@ -62,7 +65,7 @@ env:
     "ubuntu-latest"
     ]
   PREPROCESSOR_SYMBOLS: ""
-  DOTNET_VERSION: ${{ vars.DOTNET_VERSION || '10.0.x' }}
+  FRAMEWORK: ${{ vars.FRAMEWORK || '10.0.x' }}
   CONFIGURATION: ${{ vars.CONFIGURATION || 'Release' }}
   MIN_COVERAGE_PCT: ${{ vars.MIN_COVERAGE_PCT || 80 }}
   MAX_REGRESSION_PCT: ${{ vars.MAX_REGRESSION_PCT || 20 }}
@@ -86,7 +89,7 @@ jobs:
       benchmark-projects: ${{ steps.gather-params.outputs.benchmark-projects }}
       package-projects: ${{ steps.gather-params.outputs.package-projects }}
       runners-os: ${{ steps.gather-params.outputs.runners-os }}
-      dotnet-version: ${{ steps.gather-params.outputs.dotnet-version }}
+      target-framework: ${{ steps.gather-params.outputs.target-framework }}
       configuration: ${{ steps.gather-params.outputs.configuration }}
       preprocessor-symbols: ${{ steps.gather-params.outputs.preprocessor-symbols }}
       min-coverage-pct: ${{ steps.gather-params.outputs.min-coverage-pct }}
@@ -111,7 +114,7 @@ jobs:
           package-projects: ${{ env.PACKAGE_PROJECTS }}
           runners-os: ${{ env.RUNNERS_OS }}
           preprocessor-symbols: ${{ env.PREPROCESSOR_SYMBOLS }}
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          target-framework: ${{ env.FRAMEWORK }}
           configuration: ${{ env.CONFIGURATION }}
           min-coverage-pct: ${{ env.MIN_COVERAGE_PCT }}
           max-regression-pct: ${{ env.MAX_REGRESSION_PCT }}
@@ -149,7 +152,7 @@ jobs:
       benchmark-projects: ${{ needs.prerun-ci.outputs.benchmark-projects }}
       package-projects: ${{ needs.prerun-ci.outputs.package-projects }}
       runners-os: ${{ needs.prerun-ci.outputs.runners-os }}
-      dotnet-version: ${{ needs.prerun-ci.outputs.dotnet-version }}
+      target-framework: ${{ needs.prerun-ci.outputs.target-framework }}
       configuration: ${{ needs.prerun-ci.outputs.configuration }}
       preprocessor-symbols: ${{ needs.prerun-ci.outputs.preprocessor-symbols }}
       min-coverage-pct: ${{ fromJSON(needs.prerun-ci.outputs.min-coverage-pct) }}
@@ -181,14 +184,14 @@ jobs:
         shell: bash
         run: |
           {
-              if [[ "${{ needs.prerun-ci.result }}" == "failure" || "${{ needs.prerun-ci.result }}" == "cancelled" ]]; then
+              if [[ '${{ needs.prerun-ci.result }}' == "failure" || '${{ needs.prerun-ci.result }}' == "cancelled" ]]; then
                   echo "❌  ERROR: Arguments gathering and preparation failed"
                   exit 1
               fi
-              if [[ "${{ needs.run-ci.result }}" == "skipped" ]]; then
+              if [[ '${{ needs.run-ci.result }}' == "skipped" ]]; then
                   echo "⚠️  WARNING: CI was skipped (push to non-main branch with open PR). Prerelease will not be triggered."
                   echo "              CI skipped (prerun-ci: ${{ needs.prerun-ci.result }}, run-ci: skipped)"
-              elif [[ "${{ needs.run-ci.result }}" == "failure" || "${{ needs.run-ci.result }}" == "cancelled" ]]; then
+              elif [[ '${{ needs.run-ci.result }}' == "failure" || '${{ needs.run-ci.result }}' == "cancelled" ]]; then
                   echo "❌  ERROR: CI pipeline ${{ needs.run-ci.result }}"
                   exit 1
               else
@@ -197,15 +200,15 @@ jobs:
 
               exit_code=0
 
-              if [[ "${{ needs.prerun-ci.outputs.skip-benchmarks }}" == "true" ]]; then
+              if [[ '${{ needs.prerun-ci.outputs.skip-benchmarks }}' == "true" ]]; then
                   echo "⚠️  WARNING: Benchmarks were skipped. The CI workflow is marked as failed, but it was intentional to save time. Use this option only for testing non-benchmark CI jobs faster."
                   exit_code=1
               fi
-              if [[ "${{ needs.prerun-ci.outputs.skip-tests }}" == "true" ]]; then
+              if [[ '${{ needs.prerun-ci.outputs.skip-tests }}' == "true" ]]; then
                   echo "⚠️  WARNING: Tests were skipped. The CI workflow is marked as failed, but it was intentional to save time. Use this option only for testing non-test CI jobs faster."
                   exit_code=1
               fi
-              if [[ "${{ needs.prerun-ci.outputs.skip-packages }}" == "true" ]]; then
+              if [[ '${{ needs.prerun-ci.outputs.skip-packages }}' == "true" ]]; then
                   echo "⚠️  WARNING: Building packages was skipped. The CI workflow is marked as failed, but it was intentional to save time. Use this option only for testing non-package CI jobs faster."
                   exit_code=1
               fi

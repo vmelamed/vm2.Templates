@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 Val Melamed
+
 name: Publish Release NuGet Package
 
 # This workflow handles the publishing of NuGet stable releases. It is only **triggered manually** via the workflow_dispatch
@@ -22,7 +25,7 @@ env:
   NUGET_USERNAME: ${{ vars.NUGET_USERNAME || 'vmelamed' }}
   PREPROCESSOR_SYMBOLS: ""
   CONFIGURATION: ${{ vars.CONFIGURATION || 'Release' }} # The build configuration: Debug, Release, etc.
-  DOTNET_VERSION: ${{ vars.DOTNET_VERSION || '10.0.x' }} # The .NET SDK version to use.
+  FRAMEWORK: ${{ vars.FRAMEWORK || '10.0.x' }} # The .NET SDK version to use.
   MINVERTAGPREFIX: ${{ vars.MINVERTAGPREFIX || 'v' }} # The MinVer tag prefix.
   MINVERDEFAULTPRERELEASEIDENTIFIERS: ${{ vars.MINVERDEFAULTPRERELEASEIDENTIFIERS || 'preview.0' }} # The MinVer default pre-release identifiers.
   SAVE_PACKAGE_ARTIFACTS: ${{ vars.SAVE_PACKAGE_ARTIFACTS || false }} # Set the variable to "true" to save package artifacts.
@@ -34,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'workflow_dispatch' && github.ref_name == 'main' }} # Only allow manual releases from the main branch, as a safety measure against accidental releases from PRs or other branches.
     outputs:
-      dotnet-version: ${{ steps.gather-params.outputs.dotnet-version }}
+      target-framework: ${{ steps.gather-params.outputs.target-framework }}
       package-projects: ${{ steps.gather-params.outputs.package-projects }}
       preprocessor-symbols: ${{ steps.gather-params.outputs.preprocessor-symbols }}
       minver-tag-prefix: ${{ steps.gather-params.outputs.minver-tag-prefix }}
@@ -63,8 +66,8 @@ jobs:
         run: |
           source $DEVOPS_LIB_DIR/gh_core.sh
 
-          dotnet_version='${{ env.DOTNET_VERSION }}'
-          package_projects=$(is_safe_json_array '${{ env.PACKAGE_PROJECTS }}' '[]' is_safe_existing_file)
+          framework='${{ env.FRAMEWORK }}'
+          package_projects=$(validate_json_array '${{ env.PACKAGE_PROJECTS }}' '[]' is_safe_existing_file)
           package_projects_len=$(jq 'length // 0' <<< "$package_projects")
           preprocessor_symbols='${{ env.PREPROCESSOR_SYMBOLS }}'
           minver_tag_prefix='${{ env.MINVERTAGPREFIX }}'
@@ -85,7 +88,7 @@ jobs:
           args_to_github_output \
               package_projects \
               package_projects_len \
-              dotnet_version \
+              framework \
               preprocessor_symbols \
               minver_tag_prefix \
               minver_prerelease_id \
@@ -117,7 +120,7 @@ jobs:
       packages: write # Required to add stable NuGet packages
       id-token: write # Required for authentication with the NuGet server
     with:
-      dotnet-version: ${{ needs.get-params.outputs.dotnet-version }}
+      target-framework: ${{ needs.get-params.outputs.target-framework }}
       package-projects: ${{ needs.get-params.outputs.package-projects }}
       preprocessor-symbols: ${{ needs.get-params.outputs.preprocessor-symbols }}
       minver-tag-prefix: ${{ needs.get-params.outputs.minver-tag-prefix }}

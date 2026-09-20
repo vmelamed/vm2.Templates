@@ -4,22 +4,25 @@
 #
 # [optional footer(s)]
 #
-# ┌── Types: ────────────────────────────────────────────────┐
-# │   feat      New feature                    (minor bump)  │
-# │   fix       Bug fix                        (patch bump)  │
-# │   perf      Performance improvement                      │
-# │   security  Security fix or hardening                    │
-# │   refactor  Code restructuring (no behavior change)      │
-# │   doc(s)    Documentation only                           │
-# │   style     Formatting, whitespace (no code change)      │
-# │   test(s)   Adding or updating tests                     │
-# │   chore     Build, CI, tooling, dependencies             │
-# │   revert    Revert a previous commit                     │
-# │   remove    Remove feature or code                       │
-# │   build     Build system changes (skipped in changelog)  │
-# │   ci        CI configuration (skipped in changelog)      │
-# │   devops    DevOps changes (synonym for ci)              │
-# └──────────────────────────────────────────────────────────┘
+# ┌───────────────────────────────────────────────────────────────────────────┐
+# │   Type:     Use when:                                           Bump:     │
+# ├───────────────────────────────────────────────────────────────────────────┤
+# │   !         Backwards incompatibility                           major     │
+# │   feat      New feature                                         minor     │
+# │   fix       Bug fix                                             patch     │
+# │   perf      Performance improvement                             patch     │
+# │   security  Security fix or hardening                           patch     │
+# │   doc(s)    Documentation only                                  patch     │
+# |   deps      Dependencies changes                                patch     │
+# │   revert    Revert a previous commit                            patch?    │
+# │   remove    Remove feature or code                              patch?    │
+# │   refactor  Code restructuring - no behavior change!            patch?    │
+# │   style     Formatting, whitespaces, etc. - no code change!     n/a       │
+# │   test(s)   Adding or updating unit, integration, perf. tests   n/a       │
+# │   ci        Build and CI/CD related changes                     n/a       │
+# │   chore     Insignificant build, tooling, config., etc.         n/a       │
+# │             producing identical artifacts                                 │
+# └───────────────────────────────────────────────────────────────────────────┘
 #
 # Breaking changes: add ! after the type/scope:
 #   refactor!: rewrite matching engine
@@ -29,9 +32,12 @@
 #   Fixes #123
 #   Closes #123
 #   Refs #456
+#   Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
 #
 # Examples:
 #   feat(glob): add character class negation [^abc]
 #   fix: prevent stack overflow on deeply nested patterns
 #   chore: update BenchmarkDotNet to x.y.z
 #   docs: add DEVELOPER_WORKFLOW.md
+#
+# KEEP IN SYNC WITH vm2.DevOps/scripts/bash/lib/_constants.sh!

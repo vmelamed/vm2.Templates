@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 Val Melamed
+
 name: "Rebuild Benchmark History"
 
 # Manually triggered (UI/mobile) per-repo entry point. Re-records this repo's benchmark history to Bencher.dev by running
