@@ -40,10 +40,15 @@ All notable changes to this project will be documented in this file.
 > - add removed/obsolete items
 > - commit prefix for git-cliff: `revert:` or `remove:`
 >
+> **Documentation**
+>
+> - changes to documentation
+> - commit prefix for git-cliff: `docs:`, `doc:`
+>
 > **Internal**
 >
 > - add internal changes
-> - commit prefix for git-cliff: `refactor:`, `doc:`, `docs:`, `style:`, `test:`, `tests:`, `chore:`, `ci:`, `build:`
+> - commit prefix for git-cliff: `refactor:`, `style:`, `test:`, `tests:`, `chore:`, `ci:`, `build:`
 >
 
 ## References
