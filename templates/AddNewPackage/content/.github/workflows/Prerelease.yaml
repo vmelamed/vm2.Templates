@@ -114,28 +114,32 @@ jobs:
               reason='${{ inputs.reason }}'
           fi
 
-          dump_vars \
-              --force \
-              --quiet \
-              --markdown \
-              --header "Job get-params outputs:" \
-              package_projects \
-              preprocessor_symbols \
-              minver_tag_prefix \
-              minver_prerelease_id \
-              reason \
-              nuget_server \
-              nuget_username | to_summary
+          declare -a args=(
+              --force
+              --quiet
+              --markdown
+              --header "Job get-params outputs:"
+              package_projects
+              preprocessor_symbols
+              minver_tag_prefix
+              minver_prerelease_id
+              reason
+              nuget_server
+              nuget_username
+          )
+          dump_vars "${args[@]}" | to_summary
 
           # Set the outputs:
-          args_to_github_output \
-              package_projects \
-              preprocessor_symbols \
-              minver_tag_prefix \
-              minver_prerelease_id \
-              reason \
-              nuget_server \
+          args=(
+              package_projects
+              preprocessor_symbols
+              minver_tag_prefix
+              minver_prerelease_id
+              reason
+              nuget_server
               nuget_username
+          )
+          args_to_github_output "${args[@]}"
 
   log-trigger:
     name: Log manual trigger reason
