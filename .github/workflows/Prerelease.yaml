@@ -168,7 +168,7 @@ jobs:
 
   publish-prerelease:
     name: Publish NuGet prerelease packages
-
+    needs:
       - get-params
       - build-prerelease
     runs-on: ubuntu-latest
