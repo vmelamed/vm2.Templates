@@ -121,7 +121,6 @@ env:
     ]
   # Preprocessor symbols separated by semicolon, space, or comma. E.g. "SHORT_RUN;FEATURE_A;FEATURE_B" or "SHORT_RUN FEATURE_A FEATURE_B" or "SHORT_RUN,FEATURE_A,FEATURE_B".
   # *TODO* Space, comma, or semicolon-separated preprocessor symbols to pass to the compiler.
-  PREPROCESSOR_SYMBOLS: ""
   MIN_COVERAGE_PCT: ${{ vars.MIN_COVERAGE_PCT || 80 }}
   MAX_REGRESSION_PCT: ${{ vars.MAX_REGRESSION_PCT || 20 }}
   # NOTE: Absolute (static) GC-collection caps per 1000 operations. Unlike MAX_REGRESSION_PCT (a relative %), these are absolute
@@ -176,7 +175,7 @@ jobs:
           benchmark-projects: ${{ env.BENCHMARK_PROJECTS }}
           package-projects: ${{ env.PACKAGE_PROJECTS }}
           runners-os: ${{ env.RUNNERS_OS }}
-          preprocessor-symbols: ${{ env.PREPROCESSOR_SYMBOLS }}
+          preprocessor-symbols:
           min-coverage-pct: ${{ env.MIN_COVERAGE_PCT }}
           max-regression-pct: ${{ env.MAX_REGRESSION_PCT }}
           max-gen1-collects: ${{ env.MAX_GEN1_COLLECTS }}
