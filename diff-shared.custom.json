@@ -1,13 +1,7 @@
 {
-    "diff": {
-        "tool": "delta",
-        "command": "delta --side-by-side --line-numbers --paging never \"$LOCAL\" \"$REMOTE\""
-    },
-    "merge": {
-        "tool": "code",
-        "command": "code --new-window --wait --diff \"$REMOTE\" \"$LOCAL\" \"$REMOTE\" \"$LOCAL\""
-    },
+    "$schema": "diff-shared.custom.schema.json",
     "action_overrides": {
+        "RebuildBenchHistory.yaml": "ignore",
         "codecov.yaml": "ignore",
         "coverage.settings.xml": "ignore",
         "testconfig.json": "ignore"
