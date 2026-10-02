@@ -1,4 +1,5 @@
 <Project>
+    <!-- <<<=== begin shared content -->
     <!-- ====== The following properties detect a project's role based on its directory path and naming conventions. ======= -->
     <PropertyGroup>
         <!-- Initial default values for project role detection -->
@@ -103,12 +104,6 @@
 
     <PropertyGroup Label="ArtifactsLayout">
         <UseArtifactsOutput>true</UseArtifactsOutput>
-        <!-- <ArtifactsPath Condition="
-        '$(ArtifactsPath)' == '' AND '$(ARTIFACTS_DIR)' != ''
-        ">$([MSBuild]::NormalizePath('$(RepoRoot)', '$(ARTIFACTS_DIR)'))</ArtifactsPath> -->
-        <!-- <ArtifactsPath Condition="
-        '$(ArtifactsPath)' == '' AND '$(ARTIFACTS_DIR)' == ''
-        ">$([MSBuild]::NormalizePath('$(RepoRoot)', 'artifacts'))</ArtifactsPath> -->
     </PropertyGroup>
 
     <!-- The following group builds the product project(s) as AOT compatible and enforces verification of the dependencies AOT compatibility -->
@@ -349,9 +344,9 @@
         <IsPackable>false</IsPackable>
         <!-- Example projects settings -->
     </PropertyGroup>
+    <!-- ===>>> end shared content -->
 
-    <!-- ADD REPO-SPECIFIC PACKAGE REFERENCES AND USINGS BELOW -->
-    <ItemGroup>
+    <ItemGroup Label="Repository Specific">
     </ItemGroup>
 
 </Project>

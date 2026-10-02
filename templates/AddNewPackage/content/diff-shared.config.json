@@ -1,4 +1,5 @@
 {
+    "$schema": "diff-shared.config.schema.json",
     "diff": {
         "tool": "delta",
         "command": "delta --side-by-side --line-numbers --paging never \"$LOCAL\" \"$REMOTE\""
@@ -10,127 +11,132 @@
     "files": [
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/copilot-instructions.md",
-            "targetFile": "${target_file_path}/.github/copilot-instructions.md",
-            "action": "ask to merge"
+            "targetFile": "${target_repo_path}/.github/copilot-instructions.md",
+            "action": "copy shared"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/CONVENTIONS.md",
-            "targetFile": "${target_file_path}/.github/CONVENTIONS.md",
+            "targetFile": "${target_repo_path}/.github/CONVENTIONS.md",
             "action": "copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/PULL_REQUEST_TEMPLATE.md",
-            "targetFile": "${target_file_path}/.github/PULL_REQUEST_TEMPLATE.md",
+            "targetFile": "${target_repo_path}/.github/PULL_REQUEST_TEMPLATE.md",
             "action": "copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/dependabot.yml",
-            "targetFile": "${target_file_path}/.github/dependabot.yml",
+            "targetFile": "${target_repo_path}/.github/dependabot.yml",
             "action": "copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/workflows/CI.yaml",
-            "targetFile": "${target_file_path}/.github/workflows/CI.yaml",
-            "action": "ask to merge"
+            "targetFile": "${target_repo_path}/.github/workflows/CI.yaml",
+            "action": "copy shared"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/workflows/Prerelease.yaml",
-            "targetFile": "${target_file_path}/.github/workflows/Prerelease.yaml",
-            "action": "ask to merge"
+            "targetFile": "${target_repo_path}/.github/workflows/Prerelease.yaml",
+            "action": "copy shared"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/workflows/Release.yaml",
-            "targetFile": "${target_file_path}/.github/workflows/Release.yaml",
-            "action": "ask to merge"
+            "targetFile": "${target_repo_path}/.github/workflows/Release.yaml",
+            "action": "copy shared"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/workflows/ClearCache.yaml",
-            "targetFile": "${target_file_path}/.github/workflows/ClearCache.yaml",
-            "action": "ask to merge"
+            "targetFile": "${target_repo_path}/.github/workflows/ClearCache.yaml",
+            "action": "copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/workflows/RefreshLockFiles.yaml",
-            "targetFile": "${target_file_path}/.github/workflows/RefreshLockFiles.yaml",
-            "action": "ask to merge"
+            "targetFile": "${target_repo_path}/.github/workflows/RefreshLockFiles.yaml",
+            "action": "copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/workflows/AutoMerge.yaml",
-            "targetFile": "${target_file_path}/.github/workflows/AutoMerge.yaml",
-            "action": "ask to merge"
+            "targetFile": "${target_repo_path}/.github/workflows/AutoMerge.yaml",
+            "action": "copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/workflows/RebuildBenchHistory.yaml",
-            "targetFile": "${target_file_path}/.github/workflows/RebuildBenchHistory.yaml",
-            "action": "ask to merge"
+            "targetFile": "${target_repo_path}/.github/workflows/RebuildBenchHistory.yaml",
+            "action": "copy"
+        },
+        {
+            "sourceFile": "${vm2_repos}/vm2.DevOps/scripts/bash/src/diff-shared.custom.schema.json",
+            "targetFile": "${target_repo_path}/diff-shared.custom.schema.json",
+            "action": "ask to copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/Directory.Solution.props",
-            "targetFile": "${target_file_path}/Directory.Solution.props",
+            "targetFile": "${target_repo_path}/Directory.Solution.props",
             "action": "copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/Directory.Build.props",
-            "targetFile": "${target_file_path}/Directory.Build.props",
-            "action": "ask to merge"
+            "targetFile": "${target_repo_path}/Directory.Build.props",
+            "action": "copy shared"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/Directory.Packages.props",
-            "targetFile": "${target_file_path}/Directory.Packages.props",
-            "action": "ask to merge"
+            "targetFile": "${target_repo_path}/Directory.Packages.props",
+            "action": "copy shared"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.editorconfig",
-            "targetFile": "${target_file_path}/.editorconfig",
+            "targetFile": "${target_repo_path}/.editorconfig",
             "action": "merge or copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.gitattributes",
-            "targetFile": "${target_file_path}/.gitattributes",
+            "targetFile": "${target_repo_path}/.gitattributes",
             "action": "merge or copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.gitignore",
-            "targetFile": "${target_file_path}/.gitignore",
+            "targetFile": "${target_repo_path}/.gitignore",
             "action": "merge or copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/codecov.yaml",
-            "targetFile": "${target_file_path}/codecov.yaml",
+            "targetFile": "${target_repo_path}/codecov.yaml",
             "action": "copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/coverage.settings.xml",
-            "targetFile": "${target_file_path}/coverage.settings.xml",
+            "targetFile": "${target_repo_path}/coverage.settings.xml",
             "action": "copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/global.json",
-            "targetFile": "${target_file_path}/global.json",
+            "targetFile": "${target_repo_path}/global.json",
             "action": "merge or copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/LICENSE",
-            "targetFile": "${target_file_path}/LICENSE",
+            "targetFile": "${target_repo_path}/LICENSE",
             "action": "copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/NuGet.config",
-            "targetFile": "${target_file_path}/NuGet.config",
+            "targetFile": "${target_repo_path}/NuGet.config",
             "action": "copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/testconfig.json",
-            "targetFile": "${target_file_path}/testconfig.json",
+            "targetFile": "${target_repo_path}/testconfig.json",
             "action": "copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/changelog/cliff.prerelease.toml",
-            "targetFile": "${target_file_path}/changelog/cliff.prerelease.toml",
+            "targetFile": "${target_repo_path}/changelog/cliff.prerelease.toml",
             "action": "copy"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/changelog/cliff.release-header.toml",
-            "targetFile": "${target_file_path}/changelog/cliff.release-header.toml",
+            "targetFile": "${target_repo_path}/changelog/cliff.release-header.toml",
             "action": "copy"
         }
     ]

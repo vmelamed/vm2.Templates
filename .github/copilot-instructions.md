@@ -1,5 +1,7 @@
 # Copilot Instructions for vm2.Templates
 
+<!-- <<<=== begin shared content -->
+
 ## Shared Conventions
 
 Copilot MUST read and follow [CONVENTIONS.md](CONVENTIONS.md)
@@ -11,3 +13,5 @@ Copilot MUST also read and follow [CLAUDE.md](../CLAUDE.md) before suggesting or
 ## Copilot-specific Instructions
 
 Place here any instructions specific to Copilot that are not already covered in the shared conventions or context above.
+
+<!-- ===>>> end shared content -->
