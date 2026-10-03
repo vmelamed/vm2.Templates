@@ -33,9 +33,9 @@ env:
   PREPROCESSOR_SYMBOLS: ""
   # *TODO*: The NuGet server to use for publishing the packages.
   NUGET_SERVER: ${{ vars.NUGET_SERVER || 'nuget' }}
-  # *TODO*: The NuGet server may use the credentials vars.NUGET_USER_NAME and secrets.NUGET_API_KEY. The NuGet server
-  #   - 'nuget' is NuGet.org with NUGET_USER_NAME=valo. It uses trusted publishing and DOES NOT NEED secrets.NUGET_API_KEY.
-  #   - 'github' - GitHub Packages NEEDS neither NUGET_USER_NAME nor NUGET_API_KEY:
+  # *TODO*: The NuGet server may use the credentials vars.NUGET_USERNAME and secrets.NUGET_API_KEY. The NuGet server
+  #   - 'nuget' is NuGet.org with NUGETUSER_NAME=valo. It uses trusted publishing and DOES NOT NEED secrets.NUGET_API_KEY.
+  #   - 'github' - GitHub Packages NEEDS neither NUGET_USERNAME nor NUGET_API_KEY:
   #   - other servers - specified by URI, the credentials are server-specific.
   NUGET_USERNAME: ${{ vars.NUGET_USERNAME || 'valo' }}
   MINVERTAGPREFIX: ${{ vars.MINVERTAGPREFIX || 'v' }}                           # The MinVer tag prefix.
@@ -223,7 +223,7 @@ jobs:
                   server_url=$NUGET_SERVER
                   # for this unknown custom URL, we assume that
                   #  - the server URL is the same as the server name
-                  #  - the the $NUGET_API_KEY is expected to be provided via secrets.NUGET_API_KEY as is
+                  #  - the $NUGET_API_KEY is expected to be provided via secrets.NUGET_API_KEY as is
                   ;;
 
               * ) exit_with_error -ec "$err_argument_value" -ns "Unsupported NuGet server: $NUGET_SERVER. Supported values: 'nuget', 'github', 'custom URL'."
