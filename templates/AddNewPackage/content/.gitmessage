@@ -14,7 +14,7 @@
 # │   perf      Performance improvement                             patch     │
 # │   security  Security fix or hardening                           patch     │
 # │   doc(s)    Documentation only                                  patch     │
-# |   deps      Dependencies changes                                patch     │
+# │   deps      Dependency changes                                  patch     │
 # │   revert    Revert a previous commit                            patch?    │
 # │   remove    Remove feature or code                              patch?    │
 # │   refactor  Code restructuring - no behavior change!            patch?    │
