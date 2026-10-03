@@ -1,5 +1,25 @@
 # Changelog
 
+## v4.1.0-preview.1 - 2026-10-03
+
+### Added
+
+- Update GitHub Actions workflows for NuGet package release
+
+### Fixed
+
+- change the MinVerDefaultPreReleaseIdentifiers to preview.0; separate artifacts output layout settings with a comment
+- update nuget_username handling to support default value; add comments for custom URL assumptions
+- add message that outputs the value of the property  IncludeSymbols
+
+### Internal
+
+- drop UTF-8 BOM from *.cs files; standardize on charset = utf-8
+- streamline argument handling in dump_vars and args_to_github_output functions in workflows
+- Refactor GitHub Actions workflows and configuration files for improved NuGet publishing
+- Update CI and Prerelease workflows to remove unused preprocessor symbols and add job dependencies
+- update vm2.TestUtilities package version to 2.1.6
+
 ## v4.0.2-preview.2 - 2026-08-02
 
 ### Internal
