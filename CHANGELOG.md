@@ -1,5 +1,12 @@
 # Changelog
 
+## v4.1.0-preview.2 - 2026-10-03
+
+### Internal
+
+- remove RebuildBenchHistory workflow file
+- correct typo in NuGet server documentation
+
 ## v4.1.0-preview.1 - 2026-10-03
 
 ### Added
