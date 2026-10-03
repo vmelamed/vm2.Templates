@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.1.0-preview.3 - 2026-10-03
+
+### Internal
+
+- update conventions for resource identifiers to emphasize URN usage and security considerations
+
 ## v4.1.0-preview.2 - 2026-10-03
 
 ### Internal
