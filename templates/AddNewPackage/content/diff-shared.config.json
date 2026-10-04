@@ -22,7 +22,7 @@
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/PULL_REQUEST_TEMPLATE.md",
             "targetFile": "${target_repo_path}/.github/PULL_REQUEST_TEMPLATE.md",
-            "action": "copy"
+            "action": "ask to merge"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.github/dependabot.yml",

@@ -1,6 +1,7 @@
 {
     "$schema": "diff-shared.custom.schema.json",
     "action_overrides": {
+        "PULL_REQUEST_TEMPLATE.md": "ignore",
         "RebuildBenchHistory.yaml": "ignore",
         "codecov.yaml": "ignore",
         "coverage.settings.xml": "ignore",
