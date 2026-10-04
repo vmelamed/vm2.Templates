@@ -1,5 +1,12 @@
 # Changelog
 
+## v4.1.0-preview.5 - 2026-10-04
+
+### Added
+
+- add --gh-escape option to dump_vars functions in workflows
+- make preprocessor-symbols input optional in CI workflows
+
 ## v4.1.0-preview.4 - 2026-10-03
 
 ### Internal
