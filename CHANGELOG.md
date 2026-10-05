@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.1.0-preview.9 - 2026-10-05
+
+### Fixed
+
+- remove unnecessary gh_escape from workflow parameters
+
 ## v4.1.0-preview.8 - 2026-10-05
 
 ### Fixed
