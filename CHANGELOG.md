@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.1.0-preview.8 - 2026-10-05
+
+### Fixed
+
+- remove unnecessary gh_escape
+
 ## v4.1.0-preview.7 - 2026-10-04
 
 ### Internal
