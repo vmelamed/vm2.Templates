@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.1.0-preview.10 - 2026-10-06
+
+### Removed
+
+- xunit.v3.runner.inproc from D.P.p. in the SoT
+
 ## v4.1.0-preview.9 - 2026-10-05
 
 ### Fixed
