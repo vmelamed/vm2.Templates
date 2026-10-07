@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.1.0-preview.11 - 2026-10-07
+
+### Internal
+
+- update NuGet package versions in Directory.Packages.props
+
 ## v4.1.0-preview.10 - 2026-10-06
 
 ### Removed
