@@ -2,18 +2,17 @@
 
 <!-- TOC tocDepth:2..3 chapterDepth:2..6 -->
 
-- [vm2.Templates](#vm2templates)
-  - [Install a template](#install-a-template)
-    - [To install a template locally from the source code in the current directory](#to-install-a-template-locally-from-the-source-code-in-the-current-directory)
-    - [To install a template globally from a NuGet feed](#to-install-a-template-globally-from-a-nuget-feed)
-  - [vm2 Add New NuGet Package Solution (**`vm2pkg`**)](#vm2-add-new-nuget-package-solution-vm2pkg)
-    - [Prerequisites](#prerequisites)
-    - [Create a package scaffolding](#create-a-package-scaffolding)
-    - [Template parameters (key ones)](#template-parameters-key-ones)
-    - [What gets generated](#what-gets-generated)
-    - [After adding a package project use `setup-repo.sh`](#after-adding-a-package-project-use-setup-reposh)
-    - [This Repo Layout](#this-repo-layout)
-    - [Development Notes](#development-notes)
+- [Install a template](#install-a-template)
+  - [To install a template locally from the source code in the current directory](#to-install-a-template-locally-from-the-source-code-in-the-current-directory)
+  - [To install a template globally from a NuGet feed](#to-install-a-template-globally-from-a-nuget-feed)
+- [vm2 Add New NuGet Package Solution (**`vm2pkg`**)](#vm2-add-new-nuget-package-solution-vm2pkg)
+  - [Prerequisites](#prerequisites)
+  - [Create a package scaffolding](#create-a-package-scaffolding)
+  - [When the post-actions are skipped or fail](#when-the-post-actions-are-skipped-or-fail)
+  - [Template parameters (key ones)](#template-parameters-key-ones)
+  - [What gets generated](#what-gets-generated)
+  - [This Repo Layout](#this-repo-layout)
+  - [Development Notes](#development-notes)
 
 <!-- /TOC -->
 
@@ -92,8 +91,11 @@ repository with conventional structure, GitHub Actions workflows, and optional c
 
 ### Prerequisites
 
+- Linux, or WSL on Windows: the vm2.DevOps tooling is bash-only. On Windows, install WSL and work inside it (clone the
+  repositories into the WSL file system, not under `/mnt/c`, where git and `dotnet` are much slower).
 - .NET SDK 10.0.x
-- `gh` CLI (used by the generated bootstrap script)
+- `gh` CLI (used by `setup-repo.sh`)
+- vm2.DevOps and vm2.Templates cloned into `$VM2_REPOS`, both up to date with `origin/main`
 
 ### Create a package scaffolding
 
@@ -110,8 +112,42 @@ dotnet new vm2pkg \
   --license MIT
 ```
 
-Then run the generated `scripts/setup-repo.sh` to create and push the GitHub repo (uses `gh repo create`, default visibility
-public, requires authentication).
+After the files are generated, the template's post-actions offer to run vm2.DevOps's `setup-repo.sh` (creates and configures
+the GitHub repository with `gh repo create`, default visibility public, requires authentication) and then `diff-shared.sh`
+(syncs the shared files with the latest SoT). `dotnet new` asks before running each script (see `--allow-scripts`); if
+you decline, or a step fails, it prints the command to run by hand. On a Windows host the scripts are never run: the
+post-actions print the commands to run from WSL instead.
+
+### When the post-actions are skipped or fail
+
+The post-actions can legitimately stop short of finishing the setup. Nothing is lost: run the two scripts yourself,
+in the same order, from a Linux or WSL terminal.
+
+| What you see                                                                               | Why                                                                                                 | What to do                                                                                                  |
+| :----------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------- |
+| `Windows host detected: continue in WSL`                                                   | `dotnet new` ran on Windows; the scripts are bash-only, so they are skipped by design               | Run the commands below in WSL                                                                               |
+| `Execution of 'Run script' post action is not allowed`                                     | You declined the prompt, or passed `--allow-scripts no`                                             | Run the commands below                                                                                      |
+| A script step fails at once, without any prompt                                            | No terminal on stdin (e.g. stdin redirected, or `dotnet new` started by a tool rather than a shell) | Run the commands below in a terminal                                                                        |
+| `No such file or directory` for a path starting with `/vm2.DevOps/`                        | `VM2_REPOS` is not set, or not exported, in the shell that ran `dotnet new`                         | `export VM2_REPOS=<the directory that contains all vm2 repositories>` (e.g. in `~/.bashrc`), then run below |
+| `... of the repository 'vm2.DevOps' (or 'vm2.Templates') does not appear in a clean state` | That repository is not on `main`, has uncommitted changes, or is behind `origin/main`               | `git switch main && git pull` in it (commit or stash first); then run below                                 |
+| `gh` authentication errors                                                                 | The GitHub CLI is not logged in                                                                     | `gh auth login`; then run below                                                                             |
+
+```bash
+# from a Linux or WSL terminal, with VM2_REPOS exported and pointing to the directory that contains all vm2 repositories
+cd "$VM2_REPOS/vm2.<PACKAGE>"
+"$VM2_REPOS/vm2.DevOps/scripts/bash/src/setup-repo.sh" --interactive-vars --interactive-secrets
+"$VM2_REPOS/vm2.DevOps/scripts/bash/src/diff-shared.sh"
+```
+
+Both scripts are safe to run again: `setup-repo.sh` is idempotent (run it with `--audit` to compare the repository's
+settings with the defaults without changing anything), and `diff-shared.sh` only compares and then copies or merges what
+differs. The new repository must live directly under `$VM2_REPOS` (see `--output` above), where the scripts look for it.
+For what `setup-repo.sh` configures, see its `--help` and
+[vm2.DevOps/docs/CONFIGURATION.md](https://github.com/vmelamed/vm2.DevOps/blob/main/docs/CONFIGURATION.md).
+
+> [!NOTE]
+> When any post-action is declined or fails, `dotnet new` exits with code `104` even though the files were generated
+> successfully. Scripts that call `dotnet new vm2pkg` should treat `104` as "files created, finish the setup by hand".
 
 ### Template parameters (key ones)
 
@@ -217,93 +253,6 @@ public, requires authentication).
 - tests under `tests/<name>.Tests/`: xUnit + FluentAssertions + MTP + coverage + MTP v2
 - optional benchmarks project under `benchmarks/<name>.Benchmarks/` using BenchmarkDotNet
 - optional console example single file program: `examples/Program.cs/`
-
-### After adding a package project use `setup-repo.sh`
-
-Create GitHub repository using the generated bootstrap script: `$VM2_REPOS/vm2.DevOps/scripts/bash/setup-repo.sh`. It will:
-- Update README, CHANGELOG, and package metadata.
-- Use the repository setup script `scripts/setup-repo.sh` to initialize the repository as follows:
-  - create a local Git  repository and make the initial commit
-  - set local Git configuration settings:
-    - core.hooksPath                       = `$VM2_REPOS/vm2.DevOps/scripts/githooks`
-    - commit.template                      = `.gitmessage`
-    - merge.ff                             = `only`
-    - **pull.rebase                          = `true`**
-    - fetch.prune                          = `true`
-    - push.autoSetupRemote                 = `true`
-    - rerere.enabled                       = `true`
-    - rerere.autoUpdate                    = `true`
-    - rebase.autoStash                     = `true`
-    - merge.conflictstyle                  = `zdiff3`
-    - push.useForceIfIncludes              = `true`
-    - tag.sort                             = `version:refname`
-    - merge.nugetlock.name                 = `NuGet lockfile - take the incoming side and regenerate`
-    - merge.nugetlock.driver               = `cp -f %B %A && echo "vm2: %P auto-resolved (took the incoming side) - regenerate with: dotnet restore --force-evaluate" >&2`
-  - create a remote repository on GitHub and link it to the local repository
-  - push the initial commit to the remote repository on GitHub
-  - set repository settings:
-    - **Default branch                       = `main`**
-    - Has wiki                             = `false`
-    - Has issues                           = `true`
-    - Has projects                         = `false`
-    - **Has pull requests                    = `true`**
-    - Pull request creation policy         = `all`
-    - Allow merge commit                   = `false`
-    - Allow squash merge                   = `false`
-    - **Allow rebase merge                   = `true`**
-    - Allow auto merge                     = `true`
-    - Delete branch on merge               = `true`
-    - Visibility                           = `public`
-    - Actions permissions:
-      - Can approve pull request reviews   = true
-      - Default workflow permissions       = read
-  - protect the `main` branch by enabling required checks and requiring pull requests:
-    - Enforcement                          = `active`
-    - Repository admin bypass              = present
-    - Deletion                             = present
-    - Required linear history              = present
-    - Pull request                         = present
-    - Required approving review count      = present
-    - Dismiss stale reviews on push        = present
-    - Require code owner review            = present
-    - Require last push approval           = present
-    - Required review thread resolution    = present
-    - Required reviewers                   = present
-    - Allowed merge methods                = present
-    - Required status checks               = present
-    - Do not enforce on create             = present
-    - Strict required status checks policy = present
-    - Non fast forward                     = present
-    - Required status checks list:
-      - **Postrun-CI                           = present** (combines the results from build, test, benchmark, test package)
-  - **interactively** set required variables for workflows:
-    - CONFIGURATION                        = `Release`
-    - DOTNET_VERSION                       = `10.0.x`
-    - MAX_GEN1_COLLECTS                    = `2`
-    - MAX_GEN2_COLLECTS                    = `1`
-    - MAX_REGRESSION_PCT                   = `20`
-    - MIN_COVERAGE_PCT                     = `80`
-    - MINVERDEFAULTPRERELEASEIDENTIFIERS   = `preview.0`
-    - MINVERTAGPREFIX                      = `v`
-    - NUGET_SERVER                         = `github` (can be also `nuget`)
-    - RESET_BENCHMARK_THRESHOLDS           = `false`
-    - SAVE_PACKAGE_ARTIFACTS               = `false`
-    - VERBOSE                              = `false` (use for workflow debugging)
-    - ACTIONS_RUNNER_DEBUG                 = `false`
-    - ACTIONS_STEP_DEBUG                   = `false`
-  - **interactively** set required secrets for workflows (prepare the secrets in advance):
-    - BENCH_DISPATCH_PAT                   = [secret]
-    - BENCHER_API_TOKEN                    = [secret]
-    - CODECOV_TOKEN                        = [secret]
-    - NUGET_API_KEY                        = [secret]
-    - RELEASE_PAT                          = [secret]
-    - REPORTGENERATOR_LICENSE              = [secret]
-    - Dependabot Secrets:
-      - GH_PACKAGES_TOKEN                    = [secret]
-- Changelog: prerelease workflow appends a prerelease section; release workflow adds a stable header with "See prereleases below." (prerelease sections stay intact).
-
-> [!NOTE]
-> The above settings and configurations **may change** over time and should be reviewed periodically to ensure they align with the desired workflow and security practices. The source of truth is the up-to-date script `setup-repo.sh`. It is idempotent and can be run multiple times without causing unintended side effects. Also, can be run with option `--audit` to review the current settings and configurations against the defaults without making any changes.
 
 ### This Repo Layout
 
