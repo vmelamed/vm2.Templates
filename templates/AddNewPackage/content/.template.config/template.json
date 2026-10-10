@@ -21,11 +21,21 @@
         "language": "C#",
         "type": "project"
     },
-    // One "Display manual instructions" post-action (AC1156F7-...) per setup step: 'manualInstructions' picks only ONE
-    // of its entries (by condition), so it cannot split long text -- several post-actions can. Each prints its
-    // description, its instructions, and (when 'args' is defined) the "Actual command" line, ready to copy.
-    // Keep the texts short and point to vm2.DevOps/docs/CONFIGURATION.md instead of listing the secrets here: a copied
-    // list drifts (it already did once).
+    // One post-action per setup step: 'manualInstructions' picks only ONE of its entries (by condition), so it cannot
+    // split long text -- several post-actions can. Keep the texts short and point to vm2.DevOps/docs/CONFIGURATION.md
+    // instead of listing the secrets here: a copied list drifts (it already did once).
+    //
+    // 'prerequisites' only displays (AC1156F7-...). The other steps RUN their script ("Run script", 3A7C4B45-...):
+    //   - 'dotnet new' asks for consent first (or honors --allow-scripts yes|no|prompt).
+    //   - The executable is started without a shell, so '$VM2_REPOS' would not be expanded: run it via 'bash -c'.
+    //     Keep the -c string free of inner quotes -- it passes through JSON, .NET argument splitting, and bash.
+    //   - Output is NOT redirected, so the scripts' interactive prompts are visible.
+    //   - '[ -t 0 ]' refuses to run without a terminal (e.g. stdin closed): the step fails instead, and 'dotnet new'
+    //     prints its manualInstructions -- which therefore spell out the full command to run by hand.
+    //   - The working directory is the root of the generated content, i.e. the new repository.
+    //   - continueOnError: a declined or failed step must not hide the steps after it.
+    // --repo-name is omitted on purpose: post-action args get no 'sourceName' substitution, and setup-repo.sh suggests
+    // the directory's name by itself.
     "postActions": [
         {
             "id": "prerequisites",
@@ -40,29 +50,35 @@
         {
             "id": "setup-repo",
             "description": "Create and configure the GitHub repository",
-            "actionId": "AC1156F7-BB77-4DB8-B28F-24EEBCCA1E5C",
+            "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+            "continueOnError": true,
             "manualInstructions": [
                 {
-                    "text": "Run setup-repo.sh in the new repository: it creates the local and remote repositories, applies the vm2 settings, permissions, and branch rules, and sets the variables and secrets. See vm2.DevOps/docs/CONFIGURATION.md for every secret; create a new CODECOV_TOKEN for this repository only."
+                    "text": "From the new repository's directory, run: $VM2_REPOS/vm2.DevOps/scripts/bash/src/setup-repo.sh --interactive-vars --interactive-secrets -- it creates the local and remote repositories, applies the vm2 settings, permissions, and branch rules, and sets the variables and secrets. See vm2.DevOps/docs/CONFIGURATION.md for every secret; create a new CODECOV_TOKEN for this repository only."
                 }
             ],
             "args": {
-                "executable": "$VM2_REPOS/vm2.DevOps/scripts/bash/src/setup-repo.sh",
-                "args": "--repo-name vm2.MyPackage --interactive-vars --interactive-secrets"
+                "executable": "bash",
+                "args": "-c \"[ -t 0 ] && exec $VM2_REPOS/vm2.DevOps/scripts/bash/src/setup-repo.sh --interactive-vars --interactive-secrets --current-branch\"",
+                "redirectStandardOutput": false,
+                "redirectStandardError": false
             }
         },
         {
             "id": "diff-shared",
             "description": "Sync the shared files with the latest SoT",
-            "actionId": "AC1156F7-BB77-4DB8-B28F-24EEBCCA1E5C",
+            "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+            "continueOnError": true,
             "manualInstructions": [
                 {
-                    "text": "The template may be older than vm2.Templates on main: compare and update the shared files from the new repository's directory."
+                    "text": "The template may be older than vm2.Templates on main. From the new repository's directory, run: $VM2_REPOS/vm2.DevOps/scripts/bash/src/diff-shared.sh"
                 }
             ],
             "args": {
-                "executable": "$VM2_REPOS/vm2.DevOps/scripts/bash/src/diff-shared.sh",
-                "args": ""
+                "executable": "bash",
+                "args": "-c \"[ -t 0 ] && exec $VM2_REPOS/vm2.DevOps/scripts/bash/src/diff-shared.sh --current-branch\"",
+                "redirectStandardOutput": false,
+                "redirectStandardError": false
             }
         }
     ],
