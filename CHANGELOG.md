@@ -1,5 +1,9 @@
 # Changelog
 
+## v4.1.0 - 2026-10-10
+
+See prereleases below.
+
 ## v4.1.0-preview.13 - 2026-10-10
 
 ### Added
