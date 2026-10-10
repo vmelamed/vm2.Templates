@@ -1,5 +1,20 @@
 # Changelog
 
+## v4.1.0-preview.13 - 2026-10-10
+
+### Added
+
+- enhance post-actions with detailed manual instructions for repository setup
+- add setup-repo.sh and diff-shared.sh as post-actions
+
+### Internal
+
+- removed README instructions for repository setup
+
+### Removed
+
+- --current-branch
+
 ## v4.1.0-preview.12 - 2026-10-07
 
 ### Internal
