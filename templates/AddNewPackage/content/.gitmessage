@@ -3,7 +3,9 @@
 # [optional body]
 #
 # [optional footer(s)]
-# Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+#
+
+Co-Authored-By: Claude <noreply@anthropic.com>
 #
 # ┌───────────────────────────────────────────────────────────────────────────┐
 # │   Type:     Use when:                                           Bump:     │
@@ -33,7 +35,7 @@
 #   Fixes #123
 #   Closes #123
 #   Refs #456
-#   Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+#   Co-Authored-By: Claude <noreply@anthropic.com>
 #
 # Examples:
 #   feat(glob): add character class negation [^abc]

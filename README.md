@@ -2,17 +2,18 @@
 
 <!-- TOC tocDepth:2..3 chapterDepth:2..6 -->
 
-- [Install a template](#install-a-template)
-  - [To install a template locally from the source code in the current directory](#to-install-a-template-locally-from-the-source-code-in-the-current-directory)
-  - [To install a template globally from a NuGet feed](#to-install-a-template-globally-from-a-nuget-feed)
-- [vm2 Add New NuGet Package Solution (**`vm2pkg`**)](#vm2-add-new-nuget-package-solution-vm2pkg)
-  - [Prerequisites](#prerequisites)
-  - [Create a package scaffolding](#create-a-package-scaffolding)
-  - [When the post-actions are skipped or fail](#when-the-post-actions-are-skipped-or-fail)
-  - [Template parameters (key ones)](#template-parameters-key-ones)
-  - [What gets generated](#what-gets-generated)
-  - [This Repo Layout](#this-repo-layout)
-  - [Development Notes](#development-notes)
+- [vm2.Templates](#vm2templates)
+  - [Install a template](#install-a-template)
+    - [To install a template locally from the source code in the current directory](#to-install-a-template-locally-from-the-source-code-in-the-current-directory)
+    - [To install a template globally from a NuGet feed](#to-install-a-template-globally-from-a-nuget-feed)
+  - [vm2 Add New NuGet Package Solution (**`vm2pkg`**)](#vm2-add-new-nuget-package-solution-vm2pkg)
+    - [Prerequisites](#prerequisites)
+    - [Create a package scaffolding](#create-a-package-scaffolding)
+    - [When the post-actions are skipped or fail](#when-the-post-actions-are-skipped-or-fail)
+    - [Template parameters (key ones)](#template-parameters-key-ones)
+    - [What gets generated](#what-gets-generated)
+    - [This Repo Layout](#this-repo-layout)
+    - [Development Notes](#development-notes)
 
 <!-- /TOC -->
 
@@ -54,9 +55,11 @@ E.g.:
 
 Then you can install the templates with:
 
-```bash
-dotnet new install vm2.Templates --nuget-source github.vm2
-```
+> [!IMPORTANT]
+>
+> ```bash
+> dotnet new install vm2.Templates --nuget-source github.vm2
+> ```
 
 In subsequent installs, if you have a local or a previous version of a global installation of the template, then you may see a message similar to:
 
@@ -80,6 +83,28 @@ vm2 NuGet Package Solution with GitHub Repository, Actions  vm2pkg      [C#]    
 >
 > ```bash
 > dotnet new uninstall vm2.Templates  &&  dotnet new install vm2.Templates --nuget-source github.vm2
+> ```
+
+If you want to see what version of the template is currently installed, you can run:
+
+> [!IMPORTANT]
+>
+> ```bash
+> dotnet new details vm2.Templates
+> ```
+>
+> You will see the details of the currently installed version of the template, similar to:
+>
+> ```text
+> vm2.templates
+>    Package version: 4.2.0
+>    Details: Scaffold vm2 NuGet package solutions with GitHub repository and Actions.
+>    Source Feed: github.vm2 [https://nuget.pkg.github.com/vmelamed/index.json]
+>    Authors:
+>       Val Melamed
+>    License Metadata:
+>       License Url: https://licenses.nuget.org/MIT
+>       Repository Url: https://github.com/vmelamed/vm2.Templates
 > ```
 
 Now you are ready to use the templates with `dotnet new vm2pkg <package-project-name>`.
@@ -235,6 +260,7 @@ For what `setup-repo.sh` configures, see its `--help` and
 > in the `vm2` workspace. To propagate and or update the shared content from this folder to one or more repos in this workspace, use
 > the `diff-shared.sh` script - a configurable tool that is used to diff, and copy or merge content from the source SoT files \
 > in the `vm2.Templates` project to one or more target repos, like the newly created `vm2.<name>` repo. The files marked with
+>
 > - **\*** indicates files that by default are copied from the template content folder without modification, e.g.
 >      `.editorconfig`, `codecov.yaml`, `global.json`, etc.
 > - **\*\*** indicate files that are diff-ed and then copied to (if missing) or merged with the existing file in the target
