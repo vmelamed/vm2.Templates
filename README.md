@@ -85,17 +85,26 @@ vm2 NuGet Package Solution with GitHub Repository, Actions  vm2pkg      [C#]    
 > dotnet new uninstall vm2.Templates  &&  dotnet new install vm2.Templates --nuget-source github.vm2
 > ```
 
-If you want to see what version of the template is currently installed, you can run:
+You may want to compare the installed version with the latest available version of the template out there by running the following two commands:
 
 > [!IMPORTANT]
 >
 > ```bash
-> dotnet new details vm2.Templates
+> dotnet new list "vm2 NuGet Package Solution" # lookup the installed version of the template
+> dotnet new details vm2.Templates # search for the latest available package version
 > ```
 >
-> You will see the details of the currently installed version of the template, similar to:
+> You will see the details of the currently installed and the currently available version of the template, similar to:
 >
 > ```text
+> ❯ dotnet new list vm2pkg # using the short name of the template
+> These templates matched your input: 'vm2pkg'
+>
+> Template Name               Short Name  Language  Tags
+> --------------------------  ----------  --------  -----------
+> vm2 NuGet Package Solution  vm2pkg      [C#]      vm2/Package
+>
+> ❯ dotnet new details vm2.Templates
 > vm2.templates
 >    Package version: 4.2.0
 >    Details: Scaffold vm2 NuGet package solutions with GitHub repository and Actions.
@@ -103,8 +112,9 @@ If you want to see what version of the template is currently installed, you can 
 >    Authors:
 >       Val Melamed
 >    License Metadata:
->       License Url: https://licenses.nuget.org/MIT
->       Repository Url: https://github.com/vmelamed/vm2.Templates
+>       License Url: <https://licenses.nuget.org/MIT>
+>       Repository Url: <https://github.com/vmelamed/vm2.Templates>
+>
 > ```
 
 Now you are ready to use the templates with `dotnet new vm2pkg <package-project-name>`.
