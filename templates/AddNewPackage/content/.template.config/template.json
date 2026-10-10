@@ -59,7 +59,7 @@
             ],
             "args": {
                 "executable": "bash",
-                "args": "-c \"[ -t 0 ] && exec $VM2_REPOS/vm2.DevOps/scripts/bash/src/setup-repo.sh --interactive-vars --interactive-secrets --current-branch\"",
+                "args": "-c \"[ -t 0 ] && exec $VM2_REPOS/vm2.DevOps/scripts/bash/src/setup-repo.sh --interactive-vars --interactive-secrets\"",
                 "redirectStandardOutput": false,
                 "redirectStandardError": false
             }
@@ -76,7 +76,7 @@
             ],
             "args": {
                 "executable": "bash",
-                "args": "-c \"[ -t 0 ] && exec $VM2_REPOS/vm2.DevOps/scripts/bash/src/diff-shared.sh --current-branch\"",
+                "args": "-c \"[ -t 0 ] && exec $VM2_REPOS/vm2.DevOps/scripts/bash/src/diff-shared.sh\"",
                 "redirectStandardOutput": false,
                 "redirectStandardError": false
             }
