@@ -1,5 +1,12 @@
 # Changelog
 
+## v4.2.1-preview.2 - 2026-10-12
+
+### Internal
+
+- extend CONVENTIONS.md with missing repositories and $VM2_REPOS rules
+- extend CONVENTIONS.md with missing repositories and $VM2_REPOS rules
+
 ## v4.2.1-preview.1 - 2026-10-12
 
 ### Fixed
