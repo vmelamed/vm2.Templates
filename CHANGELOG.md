@@ -1,5 +1,16 @@
 # Changelog
 
+## v4.2.1-preview.1 - 2026-10-12
+
+### Fixed
+
+- address Copilot comments
+
+### Internal
+
+- promote to stable v4.2.0 [skip ci]
+- update changelog for v4.2.0 [skip ci]
+
 ## v4.2.0 - 2026-10-10
 
 See prereleases below.
