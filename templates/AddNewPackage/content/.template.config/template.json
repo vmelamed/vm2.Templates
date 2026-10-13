@@ -34,8 +34,6 @@
     //     prints its manualInstructions -- which therefore spell out the full command to run by hand.
     //   - The working directory is the root of the generated content, i.e. the new repository.
     //   - continueOnError: a declined or failed step must not hide the steps after it.
-    // --repo-name is omitted on purpose: post-action args get no 'sourceName' substitution, and setup-repo.sh suggests
-    // the directory's name by itself.
     //
     // Platform: the vm2.DevOps tooling is bash-only -- Linux, or WSL on Windows. The script steps are skipped on a Windows
     // host ('hostOS' == "Windows_NT", bound to %OS%): which 'bash' Windows would find (WSL's launcher, Git Bash, or none)
