@@ -1,5 +1,14 @@
 # Changelog
 
+## v4.2.1-preview.3 - 2026-10-15
+
+### Internal
+
+- removed a parameter that does not exist any more from the documenting comment
+- update NuGet package versions in Directory.Packages.props
+- upgrade .NET SDK to 10.0.402
+- update lock files
+
 ## v4.2.1-preview.2 - 2026-10-12
 
 ### Internal
