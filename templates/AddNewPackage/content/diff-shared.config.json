@@ -77,12 +77,12 @@
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/Directory.Build.props",
             "targetFile": "${target_repo_path}/Directory.Build.props",
-            "action": "copy shared"
+            "action": "ask to copy shared"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/Directory.Packages.props",
             "targetFile": "${target_repo_path}/Directory.Packages.props",
-            "action": "copy shared"
+            "action": "ask to copy shared"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/.editorconfig",
