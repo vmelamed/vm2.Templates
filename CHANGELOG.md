@@ -1,5 +1,12 @@
 # Changelog
 
+## v4.2.1-preview.7 - 2026-10-25
+
+### Fixed
+
+- remove labels
+- leftover remove remove_traps
+
 ## v4.2.1-preview.6 - 2026-10-22
 
 ### Fixed
