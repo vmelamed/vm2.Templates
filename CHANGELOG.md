@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.2.1-preview.8 - 2026-10-25
+
+### Fixed
+
+- the canonical CI.yaml: the gate job is now named ${{ github.event_name == 'push' && 'Postrun-CI (push)' || 'Postrun-CI' }}, with a comment explaining why renaming is the only fix
+
 ## v4.2.1-preview.7 - 2026-10-25
 
 ### Fixed
