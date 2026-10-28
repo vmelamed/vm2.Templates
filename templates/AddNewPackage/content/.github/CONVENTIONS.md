@@ -161,7 +161,7 @@ repo's bash library documentation, rather than being duplicated here for every C
   access to private state (no widening the public surface just to feed a helper), it is discoverable on `.` without an
   import, and the type's behavior stays cohesive in one file. Reach for an **extension method** when, and only when:
   - the receiver is a type you **do not own** (`Task<T>`, `IEnumerable<T>`, `Func<>`, `Nullable<T>`, a third-party type)
-    — you *cannot* add an instance method, so lifting/adapting it (`.MapAsync`, `.Traverse`, `.ToResult`) must be an
+    — you *cannot* add an instance method, so lifting/adapting it (`.MapAsync`, `.Traverse`, `.ToResult`) MUST be an
     extension. This is why LINQ and most FP combinators over BCL types are extensions;
   - the operation is defined over a **pattern across several types** rather than one type (`Traverse`, `Sequence`,
     `Apply`), so no single type is its home.
@@ -186,7 +186,7 @@ repo's bash library documentation, rather than being duplicated here for every C
 - **Dependency injection** over service locator
 - Use `System.TimeProvider` (.NET 8+) for time abstraction; `FakeTimeProvider` in tests — **never** a homegrown `IClock`
 - Guard clauses at method entry (throw early; no nested pyramids)
-- All public interfaces must validate their input parameters and throw appropriate exceptions (e.g., `ArgumentNullException`, `ArgumentException`) for invalid arguments even if nullable references are enabled
+- All public interfaces MUST validate their input parameters and throw appropriate exceptions (e.g., `ArgumentNullException`, `ArgumentException`) for invalid arguments even if nullable references are enabled
 - Pattern matching (`is`, `switch` expressions) over `if`/`else` chains when semantically clearer
 - No curly braces for single-line blocks unless they improve readability
 - `#region` / `#endregion` acceptable for logical grouping in larger files and for interface implementations
@@ -266,12 +266,15 @@ exceptions, and never references `vm2.Functional`; `TryDo` is for consumers who 
 - Compose fallible steps with combinators (`Bind`, `Map`, `Ensure`, `Tap`, `Match`). The upstream-failure short-circuit
   MUST live in the combinators, written once; business functions take the **unwrapped** value and return `Result<T>`,
   and MUST NOT re-check upstream failure. `Match` is the only place a pipeline leaves the rails.
-- Invariant validation MUST accumulate **all** failures into one aggregate `Error` (applicative), not just the first.
-- An `Error.Code`, when present, is a **stable, external contract** for consumers that cannot see the CLR type (API
-  clients, localization, telemetry). Namespace it as `<resource>.<kind>` (e.g. `order.not_found`, `file.not_found`) and
-  match its granularity to how consumers branch. Derive it from a stable **domain term**, NEVER from the CLR type name;
-  omit it entirely for purely internal errors (discriminate by type instead). For coarse in-process handling shared
-  across several codes, use a marker interface (e.g. `INotFoundError`) alongside the specific `Code`.
+- Invariant validation MUST accumulate **all** failures into one `AggregateError` (applicative), not just the first.
+- The property `Error.Code`, when present, is a **stable, external contract** for consumers that cannot see the CLR type (API
+  clients, localization, telemetry). It SHOULD be namespaces as `<resource>.<kind>` (e.g. `order.not_found`, `file.not_found`)
+  and match its granularity to how consumers branch. Derive its value from a stable **domain term**, NEVER from the CLR type name.
+  name. Each code's value SHOULD be defined as a `public const string` (e.g.,
+  `public const string ErrorCode = "order.not_found";`) and pass that constant to the base constructor, so consumers can match
+  on it in `switch` patterns without repeating the literal; a type with several codes exposes one constant per code. You MAY
+  omit it entirely for purely internal errors (discriminate by type instead). For coarse in-process handling shared across
+  several codes, you MAY  also use a marker interface (e.g. `INotFoundError`) alongside the specific `Code`.
 
 ### API surface vs. inner workings
 
@@ -366,7 +369,7 @@ exceptions, and never references `vm2.Functional`; `TryDo` is for consumers who 
   serialization format, an encryption key, an organizational resource, etc. (e.g. `urn:schemas-vm-com:Linq-Expressions-Serialization-Json`).
   A URN names the resource without implying it can be retrieved over the network, which a URL does. Storage keys are a
   separate choice: a database key is usually a ULID or GUID, and the URN can serve as the external, human-meaningful identity.
-- **Identifiers of shared, registered dialects keep their official form.** A JSON Schema's `$schema` must be the
+- **Identifiers of shared, registered dialects keep their official form.** A JSON Schema's `$schema` MUST be the
   registered meta-schema URI (e.g. `https://json-schema.org/draft/2020-12/schema`), because validators match that exact
   string. Replacing it with a repository URN would prevent the dialect from being recognized.
 - **Fetchability is a security decision, not a naming one.** Some schema and XML tooling automatically dereferences a
@@ -430,7 +433,7 @@ rationale in README/CHANGELOG/PR.
 - Line length: 128 characters maximum
 - XML tags on their own lines unless the entire XML element fits on one line
 - **Cite specifications** (POSIX, RFC, SemVer, ULID spec, etc.) with title and URL
-- **README code examples must be self-contained and runnable**: include all `using` directives, declare all variables,
+- **README code examples MUST be self-contained and runnable**: include all `using` directives, declare all variables,
   avoid unexplained placeholders. A reader must be able to paste the example and have it compile
 - Standard references block:
 
