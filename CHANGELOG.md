@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.2.1-preview.9 - 2026-10-28
+
+### Internal
+
+- add text that proposes that most Error.Codes are defined in `public const string ErrorCode = "..."`
+
 ## v4.2.1-preview.8 - 2026-10-28
 
 ### Fixed
