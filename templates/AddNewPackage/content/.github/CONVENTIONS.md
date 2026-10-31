@@ -1,5 +1,7 @@
 # vm2 Shared Conventions
 
+<!-- length-review: keep together -- one shared conventions file, synced verbatim to every repo -->
+
 <!-- TOC tocDepth:2..4 chapterDepth:2..6 -->
 
 - [vm2 Shared Conventions](#vm2-shared-conventions)
@@ -149,6 +151,9 @@ The vm2.DevOps tools assume one shared workstation layout:
   waiting for AOT to need it.
 - **`Configuration` defaults to `Release` and is defined in `Directory.Build.props`.** Workflow logic **MUST NOT** branch on or
   override `Configuration`. There is currently no scenario that justifies CI choosing anything else.
+- **Warnings are errors.** `Directory.Build.props` sets `TreatWarningsAsErrors=true` and `AnalysisLevel=latest`. Fix a warning
+  rather than suppress it; a suppression **MUST** state its justification (`[SuppressMessage(..., Justification = "...")]`, or a
+  comment next to the `#pragma` or the `.editorconfig` entry).
 - **Keep the number of CI-driven preprocessor symbols to a minimum.** Today there is one symbol: `SHORT_RUN`, which is
   auto-defined by `Directory.Build.props` for local benchmark builds and added explicitly in CI only for a `push` to a non-main
   branch with no open PR yet (a faster, less comprehensive benchmark run; the PR-triggered run does the full one). It is also
@@ -259,6 +264,9 @@ There are also a few rules for the following elements that cannot be defined in 
 - Thread a `CancellationToken ct` through all async call chains
 - **No fire-and-forget** except documented background operations with proper error handling and logging
 - Use `ValueTask` only when allocation reduction is measurable (hot paths, cached results)
+- Library code **SHOULD** use `ConfigureAwait(false)` on every `await`. Without it, a consumer with a `SynchronizationContext`
+  (WPF, WinForms, legacy ASP.NET) that blocks on the returned task can deadlock. Application and test code need not.
+  (Analyzer `CA2007` can enforce it; with warnings as errors, scope it to product projects only.)
 - Use **async-only for I/O-bound surfaces.** Where an operation is genuinely I/O-bound, expose **only** the async form — no
   synchronous twin. The only way to offer a sync twin over an async internal is sync-over-async (`.Result` /
   `.GetAwaiter().GetResult()`), which risks thread-pool starvation and deadlocks; refusing the sync twin is refusing to
@@ -300,7 +308,8 @@ failure **MAY** be trivially recoverable and still be an exception, because it w
   polymorphic class hierarchy matched (via `switch`) at the boundary — the ROP analogue of a `catch` series.
 - Compose fallible steps with combinators (`Bind`, `Map`, `Ensure`, `Tap`, `Match`). The upstream-failure short-circuit
   **MUST** live in the combinators, written once; business functions take the **unwrapped** value and return `Result<T>`, and
-  **MUST NOT** re-check upstream failure. `Match` is the only place a pipeline leaves the rails.
+  **MUST NOT** re-check upstream failure. Inside a pipeline, `Match` is the only place where it leaves the rails. Adapter
+  layers at the API boundary (the `bool TryDo` and `Do` forms below) **MAY** read `IsSuccess`/`Value` directly.
 - Invariant validation **MUST** accumulate **all** failures into one `AggregateError` (applicative), not just the first.
 - The property `Error.Code`, when present, is a **stable, external contract** for consumers that cannot see the CLR type (API
   clients, localization, telemetry). It **SHOULD** be namespaced as `<resource>.<kind>` (e.g. `order.not_found`,
@@ -373,9 +382,9 @@ overload that returns `Result<T>`):
         var value = Do(...);
         ...
     }
-    catch (AbcException e) { /* handle */ }
-    catch (XyzException e) { /* handle */ }
-    catch (CatchAllException e) { /* handle */ }
+    catch (AbcException) { /* handle */ }
+    catch (XyzException) { /* handle */ }
+    catch (CatchAllException) { /* handle */ }
     ```
 
 Concrete instances: `Validate` / `TryValidate`, `Find` / `TryFind`, `Get` / `TryGet`. The layered forms make the functional
@@ -405,6 +414,14 @@ dependency **opt-in**:
 - A type on a **published** API surface is a binary-compatibility commitment. A `vm2.Functional` type **MUST** be stabilized
   (shape locked, edge cases such as the `default(Result<T>)` state decided, tests in place) **before** it appears on a
   published stable signature.
+  <!-- TODO: enforce the commitment. `EnablePackageValidation` is on, but without `PackageValidationBaselineVersion` it only
+  checks consistency between the TFMs of the current package, never against the last published version. Options: set the
+  baseline, and/or `Microsoft.CodeAnalysis.PublicApiAnalyzers` (PublicAPI.Shipped.txt / PublicAPI.Unshipped.txt).
+  Preferred: `pack.sh` derives the baseline at pack time, never committed: the last stable version that the feed actually
+  serves (`dotnet package search <id> --exact-match`; or `git describe` from `HEAD^` as a fallback), passed as
+  `-p:PackageValidationBaselineVersion=...`, and omitted when nothing is published yet. Run it in `_pack.yaml` too, so a
+  breaking PR fails in CI; an intentional break commits a `CompatibilitySuppressions.xml`. Details: vm2.DevOps
+  scratch-todo.md, item O. Decide in a separate PR, then replace this TODO with one rule. -->
 - Async surfaces are `ValueTask<Result<T>>` / `Task<Result<T>>`; the async combinator family (`BindAsync`, `MapAsync`,
   `EnsureAsync`) **MUST** be provided so the double-wrapped result composes without hand-unwrapping.
 
