@@ -1,5 +1,21 @@
 # Changelog
 
+## v4.2.1-preview.10 - 2026-11-14
+
+### Fixed
+
+- update packages
+- variable references in Bash 5.3
+
+### Internal
+
+- fixes and updates of CONVENTIONS.md
+- add missing rules
+- diff-shared
+- add new rule
+- upgrade .NET SDK to 10.0.404
+- document the new .NET SDK strategy (dotnet-install.sh vs apt, global.json) in CONVENTIONS.md (ready for diff-shared)
+
 ## v4.2.1-preview.9 - 2026-10-28
 
 ### Internal
