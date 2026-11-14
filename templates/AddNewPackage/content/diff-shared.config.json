@@ -112,7 +112,7 @@
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/global.json",
             "targetFile": "${target_repo_path}/global.json",
-            "action": "merge or copy"
+            "action": "ask to merge"
         },
         {
             "sourceFile": "${vm2_repos}/${vm2_sot_shared}/LICENSE",
