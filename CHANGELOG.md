@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.2.1-preview.11 - 2026-11-16
+
+### Fixed
+
+- Bash 5.3 fixes
+
 ## v4.2.1-preview.10 - 2026-11-14
 
 ### Fixed
